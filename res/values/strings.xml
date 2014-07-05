@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Bingung</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="login">Login</string>
+    <string name="registrasi">Register</string>
+    <string name="mail"> Email</string>
+    <string name="password"> Password</string>
+    <string name="full_name"> Full Name</string>
+    <string name="add_photo">Add Photo</string>
+    <string name="makanan">Makanan</string>
+    <string name="jalan">Jalan-jalan</string>
+    <string name="hiburan">Hiburan</string>
+    <string name="hotel">Hotel</string>
+    <string name="bisnis">Bisnis</string>
+    <string name="lain">Lain</string>
+    <string name="klasifikasi">Klasifikasi</string>
+    <string name="timeline">Timeline</string>
+    <string name="kosong">No Post/Tidak ada kiriman</string>
+    
+    <string name="drawer_open">Slider Menu Opened</string>
+    <string name="drawer_close">Slider Menu Closed</string>
+     
+    <!-- Nav Drawer Menu Items -->
+    <string-array name="nav_drawer_items">
+        <item >Klasifikasi</item>
+        <item >Profile</item>
+        <item >Logout</item>
+    </string-array>
+     
+    <!-- Nav Drawer List Item Icons -->
+    <!-- Keep them in order as the titles are in -->
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_action_person</item>
+        <item>@drawable/ic_action_new_picture</item>
+    </array>
+     
+    <!-- Content Description -->
+    <string name="desc_list_item_icon">Item Icon</string>
+
+</resources>

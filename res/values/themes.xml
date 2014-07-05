@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- the theme applied to the application or activity -->
+    <style name="CustomActionBarTheme"
+           parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:actionBarStyle" tools:targetApi="11">@style/MyActionBar</item>
+
+        <!-- Support library compatibility -->
+        <item name="actionBarStyle">@style/MyActionBar</item>
+    </style>
+
+    <!-- ActionBar styles -->
+    <style name="MyActionBar"
+           parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@drawable/actionbar</item>
+
+        <!-- Support library compatibility -->
+        <item name="background">@drawable/actionbar</item>
+    </style>
+    
+    <!-- the theme applied to the timeline activity -->
+    <style name="CustomActionBarThemeTimeline"
+           parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:actionBarStyle" tools:targetApi="11">@style/MyActionBarTimeline</item>
+
+        <!-- Support library compatibility -->
+        <item name="actionBarStyle">@style/MyActionBarTimeline</item>
+        
+        <item name="android:actionBarTabStyle" tools:targetApi="11">@style/MyActionBarTabs</item>
+
+        <item name="actionBarTabStyle">@style/MyActionBarTabs</item>
+    </style>
+
+    <!-- ActionBar styles -->
+    <style name="MyActionBarTimeline"
+           parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@drawable/header_timeline</item>
+
+        <!-- Support library compatibility -->
+        <item name="background">@drawable/header_timeline</item>
+    </style>
+    
+    <!-- ActionBar tabs styles -->
+    <style name="MyActionBarTabs"
+           parent="@style/Widget.AppCompat.ActionBar.TabView">
+        <!-- tab indicator -->
+        <item name="android:background">@drawable/action_tab_indicator</item>
+
+        <!-- Support library compatibility -->
+        <item name="background">@drawable/action_tab_indicator</item>
+    </style>
+</resources>
