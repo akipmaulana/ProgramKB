@@ -19,6 +19,9 @@
     <string name="klasifikasi">Klasifikasi</string>
     <string name="timeline">Timeline</string>
     <string name="kosong">No Post/Tidak ada kiriman</string>
+    <string name="titik2">:</string>
+    <string name="nama_">Nama</string>
+    <string name="lokasi_">Lokasi</string>
     
     <string name="drawer_open">Slider Menu Opened</string>
     <string name="drawer_close">Slider Menu Closed</string>

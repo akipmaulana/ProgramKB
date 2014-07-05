@@ -8,5 +8,6 @@
     <dimen name="radius_scroll">8dp</dimen>
     <dimen name="width_scroll">4dp</dimen>
     <dimen name="padding_scroll">0.5dp</dimen>
+    <dimen name="image_width">64dp</dimen>
 
 </resources>

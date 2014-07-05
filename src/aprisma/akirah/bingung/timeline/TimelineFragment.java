@@ -1,5 +1,7 @@
 package aprisma.akirah.bingung.timeline;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -57,9 +59,14 @@ public class TimelineFragment extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setListAdapter(new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, 
-                new String[] {"aKIP","AFAS","asd","aKIP","AFAS","asd","aKIP","AFAS","asd","aKIP","AFAS","asd","aKIP","AFAS","asd","aKIP","AFAS","asd","aKIP","AFAS","asd","aKIP","AFAS","asd"}));
+        
+        ArrayList<TimelineList> timeline_list = new ArrayList<TimelineList>();
+        for (int i=0;i<5;i++){
+        	timeline_list.add(new TimelineList());
+        }
+        
+        setListAdapter(new ArrayAdapter<TimelineList>(getActivity(),
+                android.R.layout.simple_list_item_1, timeline_list));
     }
 
     @Override

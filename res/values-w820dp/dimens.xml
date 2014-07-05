@@ -11,5 +11,6 @@
     <dimen name="radius_scroll">32dp</dimen>
     <dimen name="width_scroll">16dp</dimen>
     <dimen name="padding_scroll">2dp</dimen>
+    <dimen name="image_width">256dp</dimen>
 
 </resources>
