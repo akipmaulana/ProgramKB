@@ -1,24 +1,47 @@
 package aprisma.akirah.bingung.timeline;
 
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import aprisma.akirah.bingung.R;
+public class TimelineList{
 
-public class TimelineList extends Fragment{
+	private int imageku;
+	private String namaku;
+	private String deskripsiku;
+	private String rataku;
+	private String viewku;
+	
+	
+	public TimelineList(int imageku, String namaku, String deskripsiku, String rataku, String viewku) {
+		this.imageku = imageku;
+		this.namaku = namaku;
+		this.deskripsiku = deskripsiku;
+		this.rataku = rataku;
+		this.viewku = viewku;
+	}
 
-	public TimelineList() {
-		// TODO Auto-generated constructor stub
+
+	public int getImageku() {
+		return imageku;
+	}
+
+
+	public String getNamaku() {
+		return namaku;
+	}
+
+
+	public String getDeskripsiku() {
+		return deskripsiku;
+	}
+
+
+	public String getRataku() {
+		return rataku;
+	}
+
+
+	public String getViewku() {
+		return viewku;
 	}
 	
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.timeline_list, container, false);
-		return rootView;
-	}
-
+	
 }

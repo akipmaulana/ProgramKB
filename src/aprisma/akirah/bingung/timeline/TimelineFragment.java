@@ -1,13 +1,10 @@
 package aprisma.akirah.bingung.timeline;
 
-import java.util.ArrayList;
-
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,24 +57,31 @@ public class TimelineFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         
-        ArrayList<TimelineList> timeline_list = new ArrayList<TimelineList>();
-        for (int i=0;i<5;i++){
-        	timeline_list.add(new TimelineList());
-        }
         
-        setListAdapter(new ArrayAdapter<TimelineList>(getActivity(),
-                android.R.layout.simple_list_item_1, timeline_list));
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Toast.makeText(getActivity(), "Item clicked: " + id, Toast.LENGTH_SHORT).show();
+    	
+    	String namaku = ((TextView) v.findViewById(R.id.namaku)).getText().toString();
+        Toast.makeText(getActivity(), "Item clicked: " + namaku, Toast.LENGTH_SHORT).show();
     }
     
     /*
      * Method untuk set listener pada view custom yang clickable atau editable
      */
     private void setListenerCustom(View vi){
+    	
+    	TimelineList[] list_line = new TimelineList[Klasifikasi.GET_KLASIFIKASI.size()];
+        for (int i=0;i<Klasifikasi.GET_KLASIFIKASI.size();i++){
+        	list_line[i]=new TimelineList(
+        			R.id.imageku, Klasifikasi.GET_KLASIFIKASI.get(mNum), "farah", "Akirah", "Munyu");
+        }
+        
+        TimelineListAdapter adapter = new TimelineListAdapter(getActivity(), R.layout.timeline_list, list_line);
+        
+        setListAdapter(adapter);
+    	
     	TextView tv = (TextView) vi.findViewById(R.id.text);
         tv.setText("Fragment #" + Klasifikasi.GET_KLASIFIKASI.get(mNum));
         tv.setOnClickListener(new View.OnClickListener() {

@@ -51,6 +51,11 @@ public class Klasifikasi extends Fragment {
 		GET_KLASIFIKASI.add("Farah");
 		GET_KLASIFIKASI.add("Akirah");
 		GET_KLASIFIKASI.add("Puppy");
+		GET_KLASIFIKASI.add("Pimmy");
+		GET_KLASIFIKASI.add("Minyi");
+		GET_KLASIFIKASI.add("Pinoy");
+		GET_KLASIFIKASI.add("Mumuy");
+		GET_KLASIFIKASI.add("Munyun");
 		GET_KLASIFIKASI.add("Lainnya");
 	}
 	
