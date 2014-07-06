@@ -2,8 +2,6 @@ package aprisma.akirah.bingung;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -22,7 +20,7 @@ public class RegistrasiActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.registrasi_activity);
 		
-		getActionBar().setBackgroundDrawable(new ColorDrawable(0xffa02065));
+		getActionBar().hide();
 	}
 	
 	@Override
@@ -37,13 +35,5 @@ public class RegistrasiActivity extends Activity {
 	 */
 	public void Registrasi(View view){
 		Toast.makeText(this, "Login", Toast.LENGTH_SHORT).show();
-	}
-	
-	/*
-	 * Button Action Registrasi
-	 */
-	public void LoginNav(View view){
-		Intent intent = new Intent(this, MainActivity.class);
-		startActivity(intent);
 	}
 }

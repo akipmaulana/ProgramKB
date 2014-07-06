@@ -3,11 +3,11 @@ package aprisma.akirah.bingung;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import aprisma.akirah.bingung.slidingmenu.KlasifikasiActivity;
 
@@ -19,7 +19,20 @@ public class MainActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		getActionBar().setBackgroundDrawable(new ColorDrawable(0xffa02065));
+		
+		//Hide Header action bar
+		getActionBar().hide();
+		
+		TextView tvRegist = (TextView) findViewById(R.id.registrasi_link);
+		tvRegist.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(getApplicationContext(), RegistrasiActivity.class);
+				startActivity(intent);
+			}
+		});
 		
 	}
 	
@@ -42,14 +55,6 @@ public class MainActivity extends Activity {
 	public void Login(View view){
 		Toast.makeText(this, "Login", Toast.LENGTH_SHORT).show();
 		Intent intent = new Intent(this, KlasifikasiActivity.class);
-		startActivity(intent);
-	}
-	
-	/*
-	 * Button Action RegistrasiNav
-	 */
-	public void RegistrasiNav(View view){
-		Intent intent = new Intent(this, RegistrasiActivity.class);
 		startActivity(intent);
 	}
 	

@@ -5,10 +5,12 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="login">Login</string>
-    <string name="registrasi">Register</string>
-    <string name="mail"> Email</string>
-    <string name="password"> Password</string>
-    <string name="full_name"> Full Name</string>
+    <string name="registrasi">Registrasi</string>
+    <string name="registrasi_underline"><u>Registrasi</u></string>
+    <string name="tahun">2014</string>
+    <string name="mail">Email</string>
+    <string name="password">Sandi</string>
+    <string name="nama_lengkap">Nama Lengkap</string>
     <string name="add_photo">Add Photo</string>
     <string name="makanan">Makanan</string>
     <string name="jalan">Jalan-jalan</string>

@@ -3,6 +3,8 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="padding_login">32dp</dimen>
+    <dimen name="margin_tahun">96dp</dimen>
     <dimen name="photo_regist">24dp</dimen>
     <dimen name="divider_list">1dp</dimen>
     <dimen name="radius_scroll">8dp</dimen>
