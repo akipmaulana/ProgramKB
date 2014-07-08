@@ -15,5 +15,7 @@
     <dimen name="width_scroll">16dp</dimen>
     <dimen name="padding_scroll">2dp</dimen>
     <dimen name="image_width">256dp</dimen>
+    <dimen name="logo_klasifikasi_width">336dp</dimen>
+    <dimen name="logo_klasifikasi_height">80dp</dimen>
 
 </resources>
