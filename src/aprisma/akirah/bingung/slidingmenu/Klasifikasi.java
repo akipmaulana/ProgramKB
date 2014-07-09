@@ -13,9 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import aprisma.akirah.bingung.R;
 import aprisma.akirah.bingung.timeline.TimelineAcitivity;
 
@@ -24,6 +27,8 @@ public class Klasifikasi extends Fragment {
 
 	public final static String KLASIFIKASI_REQUEST = "klasifikasi_request";
 	public static ArrayList<String> GET_KLASIFIKASI = new ArrayList<String>();
+	private AutoCompleteTextView inputSearch;
+	private ListAdapter adapter;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,7 +44,6 @@ public class Klasifikasi extends Fragment {
 		super.onViewCreated(view, savedInstanceState);
 		setKlasifikasi();
 		setToList();
-
 	}
 
 	/*
@@ -48,6 +52,10 @@ public class Klasifikasi extends Fragment {
 	private void setKlasifikasi() {
 		GET_KLASIFIKASI.clear();
 		GET_KLASIFIKASI.add("Makanan");
+		GET_KLASIFIKASI.add("Makanen");
+		GET_KLASIFIKASI.add("Makanin");
+		GET_KLASIFIKASI.add("Makanun");
+		GET_KLASIFIKASI.add("Makanon");
 		GET_KLASIFIKASI.add("Jalan-jalan");
 		GET_KLASIFIKASI.add("Hiburan");
 		GET_KLASIFIKASI.add("Hotel");
@@ -68,42 +76,56 @@ public class Klasifikasi extends Fragment {
 	 * set klasifikasi ke dalam list view
 	 */
 	private void setToList() {
-		ListAdapter adapter = new ListAdapter(getActivity(), GET_KLASIFIKASI);
+		adapter = new ListAdapter(getActivity(), GET_KLASIFIKASI);
 
 		final ListView listView = (ListView) getActivity().findViewById(
 				R.id.list_klasifikasi);
 		listView.setAdapter(adapter);
 
-		OnItemClickListener listener = new OnItemClickListener() {
+		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-
-				Boolean Found = false;
-				int indexOfsearch = 0;
-				for (String s : GET_KLASIFIKASI) {
-					if (position == indexOfsearch && !Found) {
-						Found = true;
-						Intent intent = new Intent(getActivity(),
-								TimelineAcitivity.class);
-						intent.putExtra(KLASIFIKASI_REQUEST, s);
-						startActivity(intent);
-					}
-					indexOfsearch++;
-				}
-
+				clicked(view, R.id.iniAkuTv);
 			}
-		};
+		});
 
-		listView.setOnItemClickListener(listener);
+		inputSearch = (AutoCompleteTextView) getActivity().findViewById(
+				R.id.inputSearch);
+		
+		ArrayAdapter<String> adapterAuto = new ArrayAdapter<String>(getActivity(),
+				android.R.layout.simple_list_item_1, GET_KLASIFIKASI);
+		
+		inputSearch.setAdapter(adapterAuto);
+		
+		inputSearch.setOnItemClickListener(new OnItemClickListener() {
+	        @Override
+	        public void onItemClick(AdapterView<?> p, View v, int pos, long id) {
+	        	clicked(v, android.R.id.text1);
+	        }
+	    });
 
+	}
+	
+	/*
+	 * When Clicked clasification
+	 */
+	private void clicked(View v, int id){
+		TextView tv = (TextView) v.findViewById(id);
+    	String hasil = tv.getText().toString();
+    	Toast.makeText(getActivity(), hasil, Toast.LENGTH_SHORT).show();
+    	Intent intent = new Intent(getActivity(),
+				TimelineAcitivity.class);
+		intent.putExtra(KLASIFIKASI_REQUEST, hasil);
+		startActivity(intent);
 	}
 
 	/*
 	 * Custom class untuk adapter list view
 	 */
-	private static class ListAdapter extends BaseAdapter {
+	@SuppressLint("DefaultLocale")
+	private static class ListAdapter extends BaseAdapter{
 
 		Context ctx;
 		LayoutInflater lInflater;
@@ -144,13 +166,12 @@ public class Klasifikasi extends Fragment {
 			} else {
 				view.setBackgroundColor(0xFFF3F3F3);
 			}
-			
+
 			TextView tv = (TextView) view.findViewById(R.id.iniAkuTv);
 			tv.setText(data.get(position));
 
 			return view;
 		}
-
 	}
 
 }
