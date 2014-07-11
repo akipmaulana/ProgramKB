@@ -1,5 +1,6 @@
 package aprisma.akirah.bingung.timeline;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import aprisma.akirah.bingung.R;
+import aprisma.akirah.bingung.detail.DetailActivity;
 import aprisma.akirah.bingung.slidingmenu.Klasifikasi;
 
 public class TimelineFragment extends ListFragment {
@@ -65,6 +67,8 @@ public class TimelineFragment extends ListFragment {
     	
     	String namaku = ((TextView) v.findViewById(R.id.namaku)).getText().toString();
         Toast.makeText(getActivity(), "Item clicked: " + namaku, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getActivity(), DetailActivity.class);
+        startActivity(intent);
     }
     
     /*

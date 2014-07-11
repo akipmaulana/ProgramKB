@@ -25,6 +25,13 @@
     <string name="nama_">Nama</string>
     <string name="lokasi_">Lokasi</string>
     <string name="cari">Cari</string>
+    <string name="sample_warung">Warung Pasta</string>
+    <string name="sample_lihat">14</string>
+    <string name="sample_desk"><p>Warung pasta adalah tempat kuliner yang sangat elegan dari sisi pelayanan dan makanan. oh iyaa makanannya juga enak dan terjangkau looohh...</p></string>
+    <string name="lihat">Dilihat</string>
+    <string name="nilai">Nilai</string>
+    <string name="arah">Petunjuk Jalan</string>
+    <string name="deskripsi"><u>Deskripsi </u>:</string>
     
     <string name="drawer_open">Slider Menu Opened</string>
     <string name="drawer_close">Slider Menu Closed</string>

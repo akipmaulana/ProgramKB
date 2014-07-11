@@ -1301,28 +1301,30 @@ containing a value of this type.
         public static final int drawer_shadow=0x7f020073;
         public static final int field=0x7f020074;
         public static final int header=0x7f020075;
-        public static final int header_timeline=0x7f020076;
-        public static final int ic_action_new_picture=0x7f020077;
-        public static final int ic_action_person=0x7f020078;
-        public static final int ic_action_search=0x7f020079;
-        public static final int ic_drawer=0x7f02007a;
-        public static final int ic_launcher=0x7f02007b;
-        public static final int ic_plusone_medium_off_client=0x7f02007c;
-        public static final int ic_plusone_small_off_client=0x7f02007d;
-        public static final int ic_plusone_standard_off_client=0x7f02007e;
-        public static final int ic_plusone_tall_off_client=0x7f02007f;
-        public static final int list_item_bg_normal=0x7f020080;
-        public static final int list_item_bg_pressed=0x7f020081;
-        public static final int list_selector=0x7f020082;
-        public static final int main_login=0x7f020083;
-        public static final int main_registrasi=0x7f020084;
-        public static final int scroll_style=0x7f020085;
-        public static final int tab_selected_example=0x7f020086;
-        public static final int tab_selected_focused_example=0x7f020087;
-        public static final int tab_selected_pressed_example=0x7f020088;
-        public static final int tab_unselected_example=0x7f020089;
-        public static final int tab_unselected_focused_example=0x7f02008a;
-        public static final int tab_unselected_pressed_example=0x7f02008b;
+        public static final int ic_action_directions=0x7f020076;
+        public static final int ic_action_important=0x7f020077;
+        public static final int ic_action_new_picture=0x7f020078;
+        public static final int ic_action_person=0x7f020079;
+        public static final int ic_action_search=0x7f02007a;
+        public static final int ic_drawer=0x7f02007b;
+        public static final int ic_launcher=0x7f02007c;
+        public static final int ic_plusone_medium_off_client=0x7f02007d;
+        public static final int ic_plusone_small_off_client=0x7f02007e;
+        public static final int ic_plusone_standard_off_client=0x7f02007f;
+        public static final int ic_plusone_tall_off_client=0x7f020080;
+        public static final int list_item_bg_normal=0x7f020081;
+        public static final int list_item_bg_pressed=0x7f020082;
+        public static final int list_selector=0x7f020083;
+        public static final int main_login=0x7f020084;
+        public static final int main_registrasi=0x7f020085;
+        public static final int pasta=0x7f020086;
+        public static final int scroll_style=0x7f020087;
+        public static final int tab_selected_example=0x7f020088;
+        public static final int tab_selected_focused_example=0x7f020089;
+        public static final int tab_selected_pressed_example=0x7f02008a;
+        public static final int tab_unselected_example=0x7f02008b;
+        public static final int tab_unselected_focused_example=0x7f02008c;
+        public static final int tab_unselected_pressed_example=0x7f02008d;
     }
     public static final class id {
         public static final int action_bar=0x7f06001f;
@@ -1474,15 +1476,16 @@ containing a value of this type.
         public static final int abc_search_view=0x7f030016;
         public static final int abc_simple_decor=0x7f030017;
         public static final int activity_main=0x7f030018;
-        public static final int drawer_list_item=0x7f030019;
-        public static final int klasifikasi_activity=0x7f03001a;
-        public static final int registrasi_activity=0x7f03001b;
-        public static final int sliding_menu=0x7f03001c;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001d;
-        public static final int timeline_fragment=0x7f03001e;
-        public static final int timeline_layout=0x7f03001f;
-        public static final int timeline_list=0x7f030020;
-        public static final int tv_klasifikasi=0x7f030021;
+        public static final int detail_activity=0x7f030019;
+        public static final int drawer_list_item=0x7f03001a;
+        public static final int klasifikasi_activity=0x7f03001b;
+        public static final int registrasi_activity=0x7f03001c;
+        public static final int sliding_menu=0x7f03001d;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001e;
+        public static final int timeline_fragment=0x7f03001f;
+        public static final int timeline_layout=0x7f030020;
+        public static final int timeline_list=0x7f030021;
+        public static final int tv_klasifikasi=0x7f030022;
     }
     public static final class menu {
         public static final int main=0x7f0d0000;
@@ -1531,6 +1534,7 @@ containing a value of this type.
         public static final int action_settings=0x7f07002a;
         public static final int add_photo=0x7f070032;
         public static final int app_name=0x7f070028;
+        public static final int arah=0x7f070045;
         /**   Title for notification shown when GooglePlayServices needs to be
         enabled for a application to work. [CHAR LIMIT=70] 
          */
@@ -1629,9 +1633,10 @@ containing a value of this type.
         public static final int common_signin_button_text_long=0x7f070013;
         /**  Content Description 
          */
-        public static final int desc_list_item_icon=0x7f070042;
-        public static final int drawer_close=0x7f070041;
-        public static final int drawer_open=0x7f070040;
+        public static final int desc_list_item_icon=0x7f070049;
+        public static final int deskripsi=0x7f070046;
+        public static final int drawer_close=0x7f070048;
+        public static final int drawer_open=0x7f070047;
         public static final int hello_world=0x7f070029;
         public static final int hiburan=0x7f070035;
         public static final int hotel=0x7f070036;
@@ -1639,6 +1644,7 @@ containing a value of this type.
         public static final int klasifikasi=0x7f070039;
         public static final int kosong=0x7f07003b;
         public static final int lain=0x7f070038;
+        public static final int lihat=0x7f070043;
         /**  Location client code resources (prefix with location_client) 
          */
         public static final int location_client_powered_by_google=0x7f07001a;
@@ -1648,9 +1654,13 @@ containing a value of this type.
         public static final int makanan=0x7f070033;
         public static final int nama_=0x7f07003d;
         public static final int nama_lengkap=0x7f070031;
+        public static final int nilai=0x7f070044;
         public static final int password=0x7f070030;
         public static final int registrasi=0x7f07002c;
         public static final int registrasi_underline=0x7f07002d;
+        public static final int sample_desk=0x7f070042;
+        public static final int sample_lihat=0x7f070041;
+        public static final int sample_warung=0x7f070040;
         public static final int tahun=0x7f07002e;
         public static final int timeline=0x7f07003a;
         public static final int titik2=0x7f07003c;
@@ -1693,10 +1703,7 @@ containing a value of this type.
         public static final int MyActionBar=0x7f0b008e;
         /**  ActionBar tabs styles 
          */
-        public static final int MyActionBarTabs=0x7f0b0091;
-        /**  ActionBar styles 
-         */
-        public static final int MyActionBarTimeline=0x7f0b0090;
+        public static final int MyActionBarTabs=0x7f0b0090;
         /**  Mimic text appearance in select_dialog_item.xml 
          */
         public static final int TextAppearance_AppCompat_Base_CompactMenu_Dialog=0x7f0b0063;

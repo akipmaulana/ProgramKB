@@ -54,8 +54,7 @@ public class TimelineAcitivity extends FragmentActivity implements
 		// no hierarchical
 		// parent.
 		actionBar.setDisplayHomeAsUpEnabled(true);
-		
-		//actionBar.setSplitBackgroundDrawable(new ColorDrawable(0xffffffff));
+
 		actionBar.setStackedBackgroundDrawable(new ColorDrawable(0xffa02065));
 
 		// Specify that we will be displaying tabs in the action bar.
