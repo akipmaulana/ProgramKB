@@ -20,7 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import aprisma.akirah.bingung.R;
-import aprisma.akirah.bingung.timeline.TimelineAcitivity;
+import aprisma.akirah.bingung.detail.MapActivity;
 
 @SuppressLint("NewApi")
 public class Klasifikasi extends Fragment {
@@ -116,7 +116,7 @@ public class Klasifikasi extends Fragment {
     	String hasil = tv.getText().toString();
     	Toast.makeText(getActivity(), hasil, Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(getActivity(),
-				TimelineAcitivity.class);
+				MapActivity.class);
 		intent.putExtra(KLASIFIKASI_REQUEST, hasil);
 		startActivity(intent);
 	}

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- the theme applied to the application or activity -->
     <style name="CustomActionBarTheme"
            parent="@style/Theme.AppCompat.Light.DarkActionBar">
@@ -16,6 +16,8 @@
 
         <!-- Support library compatibility -->
         <item name="background">@drawable/actionbar</item>
+        <item name="backgroundSplit">@drawable/actionbar</item>
+        <item name="android:backgroundSplit" tools:targetApi="14">@drawable/actionbar</item>
     </style>
     
     <!-- the theme applied to the timeline activity -->
@@ -40,4 +42,5 @@
         <!-- Support library compatibility -->
         <item name="background">@drawable/action_tab_indicator</item>
     </style>
+    
 </resources>
