@@ -191,5 +191,12 @@ public class TimelineAcitivity extends FragmentActivity implements
 			return Klasifikasi.GET_KLASIFIKASI.get(indeksOfKlasfikasi++);
 		}
 	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
+	}
 
 }

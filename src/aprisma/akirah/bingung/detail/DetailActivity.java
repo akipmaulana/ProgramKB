@@ -33,9 +33,17 @@ public class DetailActivity extends Activity {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			finish();
+			overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
 	}
 
 }

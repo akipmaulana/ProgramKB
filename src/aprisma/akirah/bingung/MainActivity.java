@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 import aprisma.akirah.bingung.slidingmenu.KlasifikasiActivity;
 
 public class MainActivity extends Activity {
@@ -31,6 +30,7 @@ public class MainActivity extends Activity {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(getApplicationContext(), RegistrasiActivity.class);
 				startActivity(intent);
+				overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
 			}
 		});
 		
@@ -43,19 +43,17 @@ public class MainActivity extends Activity {
 	    return super.onCreateOptionsMenu(menu);
 	}
 	
-	@Override
-	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
-	}
-	
 	/*
 	 * Button Action Login
 	 */
 	public void Login(View view){
-		Toast.makeText(this, "Login", Toast.LENGTH_SHORT).show();
 		Intent intent = new Intent(this, KlasifikasiActivity.class);
 		startActivity(intent);
+		overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
 	}
+	
+	@Override
+	public void onBackPressed() {
+	} 
 	
 }

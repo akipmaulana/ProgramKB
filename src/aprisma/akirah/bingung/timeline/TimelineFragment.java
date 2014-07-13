@@ -69,6 +69,7 @@ public class TimelineFragment extends ListFragment {
         Toast.makeText(getActivity(), "Item clicked: " + namaku, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getActivity(), DetailActivity.class);
         startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
     }
     
     /*
@@ -85,15 +86,6 @@ public class TimelineFragment extends ListFragment {
         TimelineListAdapter adapter = new TimelineListAdapter(getActivity(), R.layout.timeline_list, list_line);
         
         setListAdapter(adapter);
-    	
-    	TextView tv = (TextView) vi.findViewById(R.id.text);
-        tv.setText("Fragment #" + Klasifikasi.GET_KLASIFIKASI.get(mNum));
-        tv.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Toast.makeText(getActivity(), Klasifikasi.GET_KLASIFIKASI.get(mNum), Toast.LENGTH_SHORT).show();
-			}
-		});
     }
+    
 }

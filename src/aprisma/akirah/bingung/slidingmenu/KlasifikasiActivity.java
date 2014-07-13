@@ -180,6 +180,7 @@ public class KlasifikasiActivity extends Activity{
         case 2:
         	Intent intent = new Intent(this, MainActivity.class);
         	startActivity(intent);
+        	overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
         	break;
         default:
             break;
@@ -199,6 +200,12 @@ public class KlasifikasiActivity extends Activity{
             // error in creating fragment
             Log.e("MainActivity", "Error in creating fragment");
         }
+    }
+    
+    @Override
+    public void onBackPressed() {
+    	// TODO Auto-generated method stub
+//    	super.onBackPressed();
     }
 
     /**

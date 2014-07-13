@@ -5,10 +5,16 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.app.SearchManager;
+import android.app.SearchableInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -23,12 +29,13 @@ import aprisma.akirah.bingung.R;
 import aprisma.akirah.bingung.detail.MapActivity;
 
 @SuppressLint("NewApi")
-public class Klasifikasi extends Fragment {
+public class Klasifikasi extends Fragment implements SearchView.OnQueryTextListener {
 
 	public final static String KLASIFIKASI_REQUEST = "klasifikasi_request";
 	public static ArrayList<String> GET_KLASIFIKASI = new ArrayList<String>();
 	private AutoCompleteTextView inputSearch;
 	private ListAdapter adapter;
+	private SearchView searchView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -119,8 +126,65 @@ public class Klasifikasi extends Fragment {
 				MapActivity.class);
 		intent.putExtra(KLASIFIKASI_REQUEST, hasil);
 		startActivity(intent);
+		getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
+	}
+	
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		// Inflate the options menu from XML
+	    inflater.inflate(R.menu.main, menu);
+	    MenuItem searchitem = menu.findItem(R.id.grid_default_search);
+	    searchView = (SearchView) searchitem.getActionView();
+	    setupSearchView(searchitem);
+	}
+	
+	
+	private void setupSearchView(MenuItem searchItem) {
+
+//        if (isAlwaysExpanded()) {
+//        	searchView.setIconifiedByDefault(false);
+//        } else {
+//            searchItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM
+//                    | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+//        }
+        
+        searchView.setIconifiedByDefault(true);
+
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        if (searchManager != null) {
+        	Toast.makeText(getActivity(), "NOT NULL", Toast.LENGTH_SHORT).show();
+            List<SearchableInfo> searchables = searchManager.getSearchablesInGlobalSearch();
+
+            SearchableInfo info = searchManager.getSearchableInfo(getActivity().getComponentName());
+            for (SearchableInfo inf : searchables) {
+                if (inf.getSuggestAuthority() != null
+                        && inf.getSuggestAuthority().startsWith("applications")) {
+                    info = inf;
+                }
+            }
+            searchView.setSearchableInfo(info);
+        }else{
+        	Toast.makeText(getActivity(), "NULL", Toast.LENGTH_SHORT).show();
+        }
+
+        searchView.setOnQueryTextListener(this);
+    }
+	
+	@Override
+	public boolean onQueryTextChange(String arg0) {
+        return false;
 	}
 
+	@Override
+	public boolean onQueryTextSubmit(String arg0) {
+        return false;
+	}
+
+    protected boolean isAlwaysExpanded() {
+        return false;
+    }
+	
 	/*
 	 * Custom class untuk adapter list view
 	 */
@@ -173,5 +237,7 @@ public class Klasifikasi extends Fragment {
 			return view;
 		}
 	}
+
+	
 
 }
