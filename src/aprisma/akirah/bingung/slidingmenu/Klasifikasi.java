@@ -112,7 +112,7 @@ public class Klasifikasi extends Fragment implements SearchView.OnQueryTextListe
 	        	clicked(v, android.R.id.text1);
 	        }
 	    });
-
+		
 	}
 	
 	/*
@@ -136,6 +136,7 @@ public class Klasifikasi extends Fragment implements SearchView.OnQueryTextListe
 	    inflater.inflate(R.menu.main, menu);
 	    MenuItem searchitem = menu.findItem(R.id.grid_default_search);
 	    searchView = (SearchView) searchitem.getActionView();
+	    
 	    setupSearchView(searchitem);
 	}
 	

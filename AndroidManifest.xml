@@ -40,11 +40,6 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <provider
-            android:name="aprisma.akirah.bingung.slidingmenu.SearchSuggest"
-            android:authorities="aprisma.akirah.bingung.slidingmenu.SearchSuggest"
-            android:exported="false" />
-
         <activity
             android:name="aprisma.akirah.bingung.MainActivity"
             android:label="@string/app_name"
@@ -62,15 +57,7 @@
         <activity
             android:name="aprisma.akirah.bingung.slidingmenu.KlasifikasiActivity"
             android:label="@string/klasifikasi"
-            android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@layout/searchable" />
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="aprisma.akirah.bingung.timeline.TimelineAcitivity"
             android:label="@string/timeline"
