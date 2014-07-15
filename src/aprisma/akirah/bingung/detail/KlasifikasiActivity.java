@@ -5,19 +5,24 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.SearchManager;
+import android.app.SearchableInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
+import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
 
 @SuppressLint("NewApi")
@@ -25,8 +30,9 @@ public class KlasifikasiActivity extends Activity{
 
 	public final static String KLASIFIKASI_REQUEST = "klasifikasi_request";
 	public static ArrayList<String> GET_KLASIFIKASI = new ArrayList<String>();
-	private AutoCompleteTextView inputSearch;
+//	private AutoCompleteTextView inputSearch;
 	private ListAdapter adapter;
+	private SearchView searchView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +43,50 @@ public class KlasifikasiActivity extends Activity{
 		setKlasifikasi();
 		setToList();
 	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+	    MenuItem searchitem = menu.findItem(R.id.grid_default_search);
+	    searchView = (SearchView) searchitem.getActionView();
+	    setupSearchView(searchitem);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	private void setupSearchView(MenuItem searchItem) {
+
+		searchView.setIconifiedByDefault(true);
+
+      SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+      if (searchManager != null) {
+          List<SearchableInfo> searchables = searchManager.getSearchablesInGlobalSearch();
+
+          SearchableInfo info = searchManager.getSearchableInfo(getComponentName());
+          for (SearchableInfo inf : searchables) {
+              if (inf.getSuggestAuthority() != null
+                      && inf.getSuggestAuthority().startsWith("applications")) {
+                  info = inf;
+              }
+          }
+          searchView.setSearchableInfo(info);
+      }else{
+      }
+
+      searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+		
+		@Override
+		public boolean onQueryTextSubmit(String arg0) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+		
+		@Override
+		public boolean onQueryTextChange(String arg0) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+	});
+  }
 	
 	/*
 	 * Untuk menyimpan Klasifikasi dari serverke dalam array GET_KLASIFIKASI
@@ -83,20 +133,20 @@ public class KlasifikasiActivity extends Activity{
 			}
 		});
 
-		inputSearch = (AutoCompleteTextView) this.findViewById(
-				R.id.inputSearch);
-		
-		ArrayAdapter<String> adapterAuto = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, GET_KLASIFIKASI);
-		
-		inputSearch.setAdapter(adapterAuto);
-		
-		inputSearch.setOnItemClickListener(new OnItemClickListener() {
-	        @Override
-	        public void onItemClick(AdapterView<?> p, View v, int pos, long id) {
-	        	clicked(v, android.R.id.text1);
-	        }
-	    });
+//		inputSearch = (AutoCompleteTextView) this.findViewById(
+//				R.id.inputSearch);
+//		
+//		ArrayAdapter<String> adapterAuto = new ArrayAdapter<String>(this,
+//				android.R.layout.simple_list_item_1, GET_KLASIFIKASI);
+//		
+//		inputSearch.setAdapter(adapterAuto);
+//		
+//		inputSearch.setOnItemClickListener(new OnItemClickListener() {
+//	        @Override
+//	        public void onItemClick(AdapterView<?> p, View v, int pos, long id) {
+//	        	clicked(v, android.R.id.text1);
+//	        }
+//	    });
 		
 	}
 	
@@ -170,9 +220,29 @@ public class KlasifikasiActivity extends Activity{
 	@Override
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
-		super.onBackPressed();
-		overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent = null;
+		switch (item.getItemId()) {
+		case R.id.action_settings:
+			intent = new Intent(getApplicationContext(), PengaturanActivity.class);
+			startActivity(intent);
+			overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
+			break;
+		case R.id.setlang:
+			Toast.makeText(getApplicationContext(), "SET LANG", Toast.LENGTH_SHORT).show();
+			break;
+		case R.id.logout:
+			intent = new Intent(getApplicationContext(), MainActivity.class);
+			startActivity(intent);
+			overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
+			return true;
+		default:
+			break;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
-	
 }

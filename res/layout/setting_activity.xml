@@ -47,14 +47,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:background="@drawable/ic_action_person" />
+            android:background="@drawable/ic_action_view_as_list" />
 
         <TextView
             android:id="@+id/profil_tv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:text="@string/profil"
+            android:text="@string/thread"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
 
@@ -75,14 +75,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:background="@drawable/ic_action_person" />
+            android:background="@drawable/ic_action_help" />
 
         <TextView
             android:id="@+id/thread_tv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:text="@string/profil"
+            android:text="@string/bantuan"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
 

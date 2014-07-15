@@ -19,15 +19,15 @@
 
         <TextView
             android:id="@+id/logo_klasifikasi"
-            android:layout_width="@dimen/logo_klasifikasi_width"
-            android:layout_height="@dimen/logo_klasifikasi_height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/header"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:contentDescription="@string/klasifikasi"
             android:gravity="left|center_vertical" />
 
         <!-- Editext for Search -->
-
+		<!--  
         <AutoCompleteTextView
             android:id="@+id/inputSearch"
             android:layout_width="match_parent"
@@ -35,8 +35,7 @@
             android:gravity="right|center_vertical"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:drawableLeft="@drawable/ic_action_search"
-            android:hint="@string/cari"
-            android:inputType="textVisiblePassword" />
+            android:hint="@string/cari" /> -->
     </LinearLayout>
 
     <LinearLayout

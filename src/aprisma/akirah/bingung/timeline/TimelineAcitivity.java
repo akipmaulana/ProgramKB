@@ -13,9 +13,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
 import aprisma.akirah.bingung.detail.KlasifikasiActivity;
+import aprisma.akirah.bingung.detail.PengaturanActivity;
 
 @SuppressLint("NewApi")
 public class TimelineAcitivity extends FragmentActivity implements
@@ -109,9 +113,16 @@ public class TimelineAcitivity extends FragmentActivity implements
 		}
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent = null;
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			// This is called when the Home (Up) button is pressed in the action
@@ -134,6 +145,19 @@ public class TimelineAcitivity extends FragmentActivity implements
 				// navigate up to the hierarchical parent activity.
 				NavUtils.navigateUpTo(this, upIntent);
 			}
+			return true;
+		case R.id.action_settings:
+			intent = new Intent(getApplicationContext(), PengaturanActivity.class);
+			startActivity(intent);
+			overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
+			return true;
+		case R.id.setlang:
+			Toast.makeText(getApplicationContext(), "SET LANG", Toast.LENGTH_SHORT).show();
+			return true;
+		case R.id.logout:
+			intent = new Intent(getApplicationContext(), MainActivity.class);
+			startActivity(intent);
+			overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
