@@ -1,58 +1,43 @@
-package aprisma.akirah.bingung.slidingmenu;
+package aprisma.akirah.bingung.detail;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
-import android.app.Fragment;
-import android.app.SearchManager;
-import android.app.SearchableInfo;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 import aprisma.akirah.bingung.R;
-import aprisma.akirah.bingung.detail.MapActivity;
 
 @SuppressLint("NewApi")
-public class Klasifikasi extends Fragment implements SearchView.OnQueryTextListener {
+public class KlasifikasiActivity extends Activity{
 
 	public final static String KLASIFIKASI_REQUEST = "klasifikasi_request";
 	public static ArrayList<String> GET_KLASIFIKASI = new ArrayList<String>();
 	private AutoCompleteTextView inputSearch;
 	private ListAdapter adapter;
-	private SearchView searchView;
-
+	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.klasifikasi_activity,
-				container, false);
-		return rootView;
-	}
-
-	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		super.onViewCreated(view, savedInstanceState);
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.klasifikasi_activity);
+		
 		setKlasifikasi();
 		setToList();
 	}
-
+	
 	/*
 	 * Untuk menyimpan Klasifikasi dari serverke dalam array GET_KLASIFIKASI
 	 */
@@ -83,9 +68,9 @@ public class Klasifikasi extends Fragment implements SearchView.OnQueryTextListe
 	 * set klasifikasi ke dalam list view
 	 */
 	private void setToList() {
-		adapter = new ListAdapter(getActivity(), GET_KLASIFIKASI);
+		adapter = new ListAdapter(this, GET_KLASIFIKASI);
 
-		final ListView listView = (ListView) getActivity().findViewById(
+		final ListView listView = (ListView) findViewById(
 				R.id.list_klasifikasi);
 		listView.setAdapter(adapter);
 
@@ -98,10 +83,10 @@ public class Klasifikasi extends Fragment implements SearchView.OnQueryTextListe
 			}
 		});
 
-		inputSearch = (AutoCompleteTextView) getActivity().findViewById(
+		inputSearch = (AutoCompleteTextView) this.findViewById(
 				R.id.inputSearch);
 		
-		ArrayAdapter<String> adapterAuto = new ArrayAdapter<String>(getActivity(),
+		ArrayAdapter<String> adapterAuto = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, GET_KLASIFIKASI);
 		
 		inputSearch.setAdapter(adapterAuto);
@@ -121,70 +106,13 @@ public class Klasifikasi extends Fragment implements SearchView.OnQueryTextListe
 	private void clicked(View v, int id){
 		TextView tv = (TextView) v.findViewById(id);
     	String hasil = tv.getText().toString();
-    	Toast.makeText(getActivity(), hasil, Toast.LENGTH_SHORT).show();
-    	Intent intent = new Intent(getActivity(),
+    	Intent intent = new Intent(this,
 				MapActivity.class);
 		intent.putExtra(KLASIFIKASI_REQUEST, hasil);
 		startActivity(intent);
-		getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
-	}
-	
-	
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		// Inflate the options menu from XML
-	    inflater.inflate(R.menu.main, menu);
-	    MenuItem searchitem = menu.findItem(R.id.grid_default_search);
-	    searchView = (SearchView) searchitem.getActionView();
-	    
-	    setupSearchView(searchitem);
-	}
-	
-	
-	private void setupSearchView(MenuItem searchItem) {
-
-//        if (isAlwaysExpanded()) {
-//        	searchView.setIconifiedByDefault(false);
-//        } else {
-//            searchItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM
-//                    | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-//        }
-        
-        searchView.setIconifiedByDefault(true);
-
-        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
-        if (searchManager != null) {
-        	Toast.makeText(getActivity(), "NOT NULL", Toast.LENGTH_SHORT).show();
-            List<SearchableInfo> searchables = searchManager.getSearchablesInGlobalSearch();
-
-            SearchableInfo info = searchManager.getSearchableInfo(getActivity().getComponentName());
-            for (SearchableInfo inf : searchables) {
-                if (inf.getSuggestAuthority() != null
-                        && inf.getSuggestAuthority().startsWith("applications")) {
-                    info = inf;
-                }
-            }
-            searchView.setSearchableInfo(info);
-        }else{
-        	Toast.makeText(getActivity(), "NULL", Toast.LENGTH_SHORT).show();
-        }
-
-        searchView.setOnQueryTextListener(this);
-    }
-	
-	@Override
-	public boolean onQueryTextChange(String arg0) {
-        return false;
+		overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
 	}
 
-	@Override
-	public boolean onQueryTextSubmit(String arg0) {
-        return false;
-	}
-
-    protected boolean isAlwaysExpanded() {
-        return false;
-    }
 	
 	/*
 	 * Custom class untuk adapter list view
@@ -238,7 +166,13 @@ public class Klasifikasi extends Fragment implements SearchView.OnQueryTextListe
 			return view;
 		}
 	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
+	}
 
 	
-
 }

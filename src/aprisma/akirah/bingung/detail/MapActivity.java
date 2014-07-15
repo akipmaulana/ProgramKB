@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import aprisma.akirah.bingung.R;
-import aprisma.akirah.bingung.slidingmenu.Klasifikasi;
 import aprisma.akirah.bingung.timeline.TimelineAcitivity;
 
 public class MapActivity extends Activity {
@@ -33,7 +32,7 @@ public class MapActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.map_activity);
 
-		getKlasifikasi = getIntent().getStringExtra(Klasifikasi.KLASIFIKASI_REQUEST).toString();
+		getKlasifikasi = getIntent().getStringExtra(KlasifikasiActivity.KLASIFIKASI_REQUEST).toString();
 		
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 //		getActionBar().setDisplayShowTitleEnabled(false);
@@ -67,7 +66,7 @@ public class MapActivity extends Activity {
 		case R.id.timelineBar:
 			Intent intent = new Intent(this,
 					TimelineAcitivity.class);
-			intent.putExtra(Klasifikasi.KLASIFIKASI_REQUEST, getKlasifikasi);
+			intent.putExtra(KlasifikasiActivity.KLASIFIKASI_REQUEST, getKlasifikasi);
 			startActivity(intent);
 			overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
 		}

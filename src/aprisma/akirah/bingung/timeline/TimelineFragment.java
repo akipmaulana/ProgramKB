@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import aprisma.akirah.bingung.R;
 import aprisma.akirah.bingung.detail.DetailActivity;
-import aprisma.akirah.bingung.slidingmenu.Klasifikasi;
+import aprisma.akirah.bingung.detail.KlasifikasiActivity;
 
 public class TimelineFragment extends ListFragment {
 
@@ -77,10 +77,10 @@ public class TimelineFragment extends ListFragment {
      */
     private void setListenerCustom(View vi){
     	
-    	TimelineList[] list_line = new TimelineList[Klasifikasi.GET_KLASIFIKASI.size()];
-        for (int i=0;i<Klasifikasi.GET_KLASIFIKASI.size();i++){
+    	TimelineList[] list_line = new TimelineList[KlasifikasiActivity.GET_KLASIFIKASI.size()];
+        for (int i=0;i<KlasifikasiActivity.GET_KLASIFIKASI.size();i++){
         	list_line[i]=new TimelineList(
-        			R.id.imageku, Klasifikasi.GET_KLASIFIKASI.get(mNum), "farah", "Akirah", "Munyu");
+        			R.id.imageku, KlasifikasiActivity.GET_KLASIFIKASI.get(mNum), "farah", "Akirah", "Munyu");
         }
         
         TimelineListAdapter adapter = new TimelineListAdapter(getActivity(), R.layout.timeline_list, list_line);

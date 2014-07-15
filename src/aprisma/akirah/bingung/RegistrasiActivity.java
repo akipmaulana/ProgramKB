@@ -6,9 +6,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
-import aprisma.akirah.bingung.slidingmenu.KlasifikasiActivity;
+import aprisma.akirah.bingung.detail.KlasifikasiActivity;
 
 public class RegistrasiActivity extends Activity {
 
@@ -24,12 +23,6 @@ public class RegistrasiActivity extends Activity {
 		setContentView(R.layout.registrasi_activity);
 
 		getActionBar().hide();
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// TODO Auto-generated method stub
-		return super.onCreateOptionsMenu(menu);
 	}
 
 	/*
