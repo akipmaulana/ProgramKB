@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" 
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin">
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:onClick="profilClicked">
 
         <TextView
             android:id="@+id/bantuan_img"
@@ -40,7 +41,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" 
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin">
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:onClick="timelineClicked">
 
         <TextView
             android:id="@+id/profil_img"
@@ -68,7 +70,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" 
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin">
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:onClick="bantuanClicked">
 
         <TextView
             android:id="@+id/thread_img"

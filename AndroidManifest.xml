@@ -65,7 +65,7 @@
             android:theme="@style/CustomActionBarThemeTimeline" />
         <activity
             android:name="aprisma.akirah.bingung.detail.DetailActivity"
-            android:label="@string/deskripsi"
+            android:label="@string/deskripsi_title"
             android:screenOrientation="portrait" />
         <activity
             android:name="aprisma.akirah.bingung.detail.MapActivity"
@@ -79,6 +79,30 @@
         <activity
             android:name="aprisma.akirah.bingung.detail.PengaturanActivity"
             android:label="@string/action_settings"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="aprisma.akirah.bingung.detail.ProfilActivity"
+            android:label="@string/profil"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="aprisma.akirah.bingung.detail.MyTimelineActivity"
+            android:label="@string/mytimeline"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="aprisma.akirah.bingung.detail.BantuanActivity"
+            android:label="@string/bantuan"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="aprisma.akirah.bingung.detail.FotoActivity"
+            android:label="@string/foto_profil"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="aprisma.akirah.bingung.detail.DetailProfilActivity"
+            android:label="@string/detail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="aprisma.akirah.bingung.detail.AkunActivity"
+            android:label="@string/akun"
             android:screenOrientation="portrait" />
     </application>
 

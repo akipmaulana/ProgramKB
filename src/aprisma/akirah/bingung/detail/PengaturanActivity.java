@@ -2,8 +2,14 @@ package aprisma.akirah.bingung.detail;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
 
 @SuppressLint("NewApi")
@@ -20,17 +26,54 @@ public class PengaturanActivity extends Activity {
 	}
 	
 	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.main, menu);
+		MenuItem itemSetting = menu.findItem(R.id.action_settings);
+		itemSetting.setVisible(false);itemSetting.setEnabled(false);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent = null;
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			finish();
 			overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
 			break;
+		case R.id.setlang:
+			Toast.makeText(getApplicationContext(), "SET LANG",
+					Toast.LENGTH_SHORT).show();
+			return true;
+		case R.id.logout:
+			intent = new Intent(getApplicationContext(), MainActivity.class);
+			startActivity(intent);
+			overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
+			return true;
 
 		default:
 			break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public void profilClicked(View view){
+		Intent intent = new Intent(this, ProfilActivity.class);
+		startActivity(intent);
+		overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
+	}
+	
+	public void timelineClicked(View view){
+		Intent intent = new Intent(this, MyTimelineActivity.class);
+		startActivity(intent);
+		overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
+	}
+	
+	public void bantuanClicked(View view){
+		Intent intent = new Intent(this, BantuanActivity.class);
+		startActivity(intent);
+		overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
 	}
 
 }

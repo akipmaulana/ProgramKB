@@ -10,6 +10,9 @@
     <string name="profil">Profil</string>
     <string name="thread">Timeline ku</string>
     <string name="bantuan">Bantuan</string>
+    <string name="detail">Informasi Detail</string>
+    <string name="foto_profil">Foto Profil</string>
+    <string name="akun">Akun</string>
     <string name="login">Login</string>
     <string name="registrasi">Registrasi</string>
     <string name="registrasi_underline"><u>Registrasi</u></string>
@@ -37,7 +40,9 @@
     <string name="lihat">Dilihat</string>
     <string name="nilai">Nilai</string>
     <string name="arah">Petunjuk Jalan</string>
-    <string name="deskripsi"><u>Deskripsi </u>:</string>
+    <string name="deskripsi_content"><u>Deskripsi </u>:</string>
+    <string name="deskripsi_title">Dekripsi</string>
+    <string name="mytimeline">Timeline Ku</string>
     
     <string name="drawer_open">Slider Menu Opened</string>
     <string name="drawer_close">Slider Menu Closed</string>
