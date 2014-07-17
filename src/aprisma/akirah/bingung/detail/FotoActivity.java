@@ -21,7 +21,7 @@ public class FotoActivity extends Activity {
 		setContentView(R.layout.foto_profil_layout);
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-		
+
 	}
 
 	@Override
@@ -55,6 +55,11 @@ public class FotoActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
+	}
 
 }

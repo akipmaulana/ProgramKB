@@ -20,20 +20,21 @@ public class PengaturanActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.setting_activity);
-		
+
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-		
+
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main, menu);
 		MenuItem itemSetting = menu.findItem(R.id.action_settings);
-		itemSetting.setVisible(false);itemSetting.setEnabled(false);
+		itemSetting.setVisible(false);
+		itemSetting.setEnabled(false);
 		return super.onCreateOptionsMenu(menu);
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent intent = null;
@@ -57,23 +58,30 @@ public class PengaturanActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	public void profilClicked(View view){
+
+	public void profilClicked(View view) {
 		Intent intent = new Intent(this, ProfilActivity.class);
 		startActivity(intent);
 		overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
 	}
-	
-	public void timelineClicked(View view){
+
+	public void timelineClicked(View view) {
 		Intent intent = new Intent(this, MyTimelineActivity.class);
 		startActivity(intent);
 		overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
 	}
-	
-	public void bantuanClicked(View view){
+
+	public void bantuanClicked(View view) {
 		Intent intent = new Intent(this, BantuanActivity.class);
 		startActivity(intent);
 		overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
+	}
+
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
 	}
 
 }

@@ -94,23 +94,10 @@ public class KlasifikasiActivity extends Activity{
 	private void setKlasifikasi() {
 		GET_KLASIFIKASI.clear();
 		GET_KLASIFIKASI.add("Makanan");
-		GET_KLASIFIKASI.add("Makanen");
-		GET_KLASIFIKASI.add("Makanin");
-		GET_KLASIFIKASI.add("Makanun");
-		GET_KLASIFIKASI.add("Makanon");
 		GET_KLASIFIKASI.add("Jalan-jalan");
 		GET_KLASIFIKASI.add("Hiburan");
 		GET_KLASIFIKASI.add("Hotel");
 		GET_KLASIFIKASI.add("Bisnis");
-		GET_KLASIFIKASI.add("Akip");
-		GET_KLASIFIKASI.add("Farah");
-		GET_KLASIFIKASI.add("Akirah");
-		GET_KLASIFIKASI.add("Puppy");
-		GET_KLASIFIKASI.add("Pimmy");
-		GET_KLASIFIKASI.add("Minyi");
-		GET_KLASIFIKASI.add("Pinoy");
-		GET_KLASIFIKASI.add("Mumuy");
-		GET_KLASIFIKASI.add("Munyun");
 		GET_KLASIFIKASI.add("Lainnya");
 	}
 

@@ -1,17 +1,492 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="#ffffff"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin" >
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/detail"
-        android:textSize="36sp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        tools:targetApi="11" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+            android:paddingTop="@dimen/abc_action_bar_subtitle_bottom_margin" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/identitas_diri"
+                android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#40808080" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="showPopUp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:tag="@string/nama_lengkap" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+                android:text="@string/nama_lengkap"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Large" />
+
+            <TextView
+                android:id="@+id/nama_lengkap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nama_lengkap"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.Base.DropDownItem"
+                android:textColor="#404040" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#20000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="showPopUp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:tag="@string/jekel" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+                android:text="@string/jekel"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Large" />
+
+            <TextView
+                android:id="@+id/jekel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/jekel"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.Base.DropDownItem"
+                android:textColor="#404040" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#20000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="showPopUp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:tag="@string/tanggal_lahir" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+                android:text="@string/tanggal_lahir"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Large" />
+
+            <TextView
+                android:id="@+id/tanggal_lahir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tanggal_lahir"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.Base.DropDownItem"
+                android:textColor="#404040" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#20000000" />
+
+        <!-- IDENTITAS DIRI -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/media_sosial"
+                android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#40808080" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="showPopUp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:tag="@string/mail" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+                android:text="@string/mail"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Large" />
+
+            <TextView
+                android:id="@+id/mail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mail"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.Base.DropDownItem"
+                android:textColor="#404040" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#20000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="showPopUp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:tag="@string/situs" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+                android:text="@string/situs"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Large" />
+
+            <TextView
+                android:id="@+id/situs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/situs"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.Base.DropDownItem"
+                android:textColor="#404040" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#20000000" />
+
+        <!-- SOSIAL MEDIA -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tempat_tinggal"
+                android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#40808080" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="showPopUp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:tag="@string/alamat" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+                android:text="@string/alamat"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Large" />
+
+            <TextView
+                android:id="@+id/alamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/alamat"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.Base.DropDownItem"
+                android:textColor="#404040" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#20000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="showPopUp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:tag="@string/kota" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+                android:text="@string/kota"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Large" />
+
+            <TextView
+                android:id="@+id/kota"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kota"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.Base.DropDownItem"
+                android:textColor="#404040" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#20000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="showPopUp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:tag="@string/provinsi" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+                android:text="@string/provinsi"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Large" />
+
+            <TextView
+                android:id="@+id/provinsi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/provinsi"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.Base.DropDownItem"
+                android:textColor="#404040" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#20000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="showPopUp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:tag="@string/negara" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+                android:text="@string/negara"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Large" />
+
+            <TextView
+                android:id="@+id/negara"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/negara"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.Base.DropDownItem"
+                android:textColor="#404040" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#20000000" />
+
+        <!-- TEMPAT TINGGAL -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lainnya"
+                android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#40808080" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="showPopUp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:tag="@string/pendidikan" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+                android:text="@string/pendidikan"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Large" />
+
+            <TextView
+                android:id="@+id/pendidikan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pendidikan"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.Base.DropDownItem"
+                android:textColor="#404040" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#20000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="showPopUp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:tag="@string/pekerjaan" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+                android:text="@string/pekerjaan"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Large" />
+
+            <TextView
+                android:id="@+id/pekerjaan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pekerjaan"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.Base.DropDownItem"
+                android:textColor="#404040" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#20000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="showPopUp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:tag="@string/hobi" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+                android:text="@string/hobi"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Large" />
+
+            <TextView
+                android:id="@+id/hobi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/hobi"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.Base.DropDownItem"
+                android:textColor="#404040" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#20000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="showPopUp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:tag="@string/biografi" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/abc_action_bar_subtitle_bottom_margin"
+                android:text="@string/biografi"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Large" />
+
+            <TextView
+                android:id="@+id/biografi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/biografi"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.Base.DropDownItem"
+                android:textColor="#404040" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#20000000" />
+
+        <!-- LAINNYA -->
+
+    </LinearLayout>
+
+</ScrollView>
