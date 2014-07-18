@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
+import aprisma.akirah.bingung.holder.User;
 
 public class BantuanActivity extends Activity {
 
@@ -49,9 +50,9 @@ public class BantuanActivity extends Activity {
 					Toast.LENGTH_SHORT).show();
 			return true;
 		case R.id.logout:
+			User.ISLOGIN = false;
 			intent = new Intent(getApplicationContext(), MainActivity.class);
 			startActivity(intent);
-			overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

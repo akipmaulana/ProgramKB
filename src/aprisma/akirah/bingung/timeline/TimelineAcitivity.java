@@ -20,6 +20,7 @@ import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
 import aprisma.akirah.bingung.detail.KlasifikasiActivity;
 import aprisma.akirah.bingung.detail.PengaturanActivity;
+import aprisma.akirah.bingung.holder.User;
 
 @SuppressLint("NewApi")
 public class TimelineAcitivity extends FragmentActivity implements
@@ -116,6 +117,9 @@ public class TimelineAcitivity extends FragmentActivity implements
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
+		
+		PengaturanActivity.SetMenu(menu);
+		
 		return super.onCreateOptionsMenu(menu);
 	}
 	
@@ -155,9 +159,9 @@ public class TimelineAcitivity extends FragmentActivity implements
 			Toast.makeText(getApplicationContext(), "SET LANG", Toast.LENGTH_SHORT).show();
 			return true;
 		case R.id.logout:
+			User.ISLOGIN = false;
 			intent = new Intent(getApplicationContext(), MainActivity.class);
 			startActivity(intent);
-			overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

@@ -43,13 +43,7 @@
         <activity
             android:name="aprisma.akirah.bingung.MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="aprisma.akirah.bingung.RegistrasiActivity"
             android:label="@string/registrasi"
@@ -57,7 +51,13 @@
         <activity
             android:name="aprisma.akirah.bingung.detail.KlasifikasiActivity"
             android:label="@string/klasifikasi"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="aprisma.akirah.bingung.timeline.TimelineAcitivity"
             android:label="@string/timeline"

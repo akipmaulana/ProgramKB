@@ -11,9 +11,21 @@ import android.view.View;
 import android.widget.Toast;
 import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
+import aprisma.akirah.bingung.holder.User;
 
 @SuppressLint("NewApi")
 public class PengaturanActivity extends Activity {
+
+	public static void SetMenu(Menu menu) {
+		if (!User.ISLOGIN) {
+
+			MenuItem setting = menu.findItem(R.id.action_settings);
+			setting.setEnabled(false);
+			setting.setVisible(false);
+			MenuItem logout = menu.findItem(R.id.logout);
+			logout.setTitle(R.string.masuk);
+		}
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +41,7 @@ public class PengaturanActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main, menu);
+		
 		MenuItem itemSetting = menu.findItem(R.id.action_settings);
 		itemSetting.setVisible(false);
 		itemSetting.setEnabled(false);
@@ -48,9 +61,9 @@ public class PengaturanActivity extends Activity {
 					Toast.LENGTH_SHORT).show();
 			return true;
 		case R.id.logout:
+			User.ISLOGIN = false;
 			intent = new Intent(getApplicationContext(), MainActivity.class);
 			startActivity(intent);
-			overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
 			return true;
 
 		default:

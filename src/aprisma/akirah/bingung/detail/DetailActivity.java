@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
+import aprisma.akirah.bingung.holder.User;
 
 @SuppressLint("NewApi")
 public class DetailActivity extends Activity {
@@ -28,6 +29,9 @@ public class DetailActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main, menu);
+		
+		PengaturanActivity.SetMenu(menu);
+		
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -48,9 +52,9 @@ public class DetailActivity extends Activity {
 			Toast.makeText(getApplicationContext(), "SET LANG", Toast.LENGTH_SHORT).show();
 			return true;
 		case R.id.logout:
+			User.ISLOGIN = false;
 			intent = new Intent(getApplicationContext(), MainActivity.class);
 			startActivity(intent);
-			overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
