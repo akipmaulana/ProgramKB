@@ -12,5 +12,5 @@
         android:layout_height="wrap_content"
         tools:targetApi="11" >
     </android.support.v7.widget.SearchView>
-
+    
 </LinearLayout>

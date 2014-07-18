@@ -8,27 +8,28 @@
         android:orderInCategory="2"
         android:title="@string/action_settings"
         app:showAsAction="never"/>
-    
-    <item     
-        android:id="@+id/grid_default_search"
-        android:icon="@android:drawable/ic_menu_search"
-        android:title="@string/cari"
+    <item
+        android:id="@+id/post"
+        android:icon="@drawable/ic_action_camera"
         android:showAsAction="always"
-        android:actionViewClass="android.support.v7.widget.SearchView" 
+        android:title="@string/post"/>
+    <item
+        android:id="@+id/grid_default_search"
+        android:actionViewClass="android.support.v7.widget.SearchView"
+        android:icon="@android:drawable/ic_menu_search"
         android:searchSuggestAuthority="com.example.MyCustomSuggestionProvider"
         android:searchSuggestSelection="word MATCH ?"
-    />
-    
-    <item 
+        android:showAsAction="always"
+        android:title="@string/cari"/>
+    <item
         android:id="@+id/setlang"
-        android:title="@string/en"
         android:orderInCategory="1"
-        android:showAsAction="never"/>
-    
-    <item 
+        android:showAsAction="never"
+        android:title="@string/en"/>
+    <item
         android:id="@+id/logout"
         android:orderInCategory="3"
-        android:title="@string/keluar"
-        android:showAsAction="never"/>
-    
+        android:showAsAction="never"
+        android:title="@string/keluar"/>
+
 </menu>

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
@@ -65,6 +66,20 @@ public class DetailActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onBackPressed();
 		overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
+	}
+	
+	public void comment(View view){
+		
+		Intent intent = null;
+		if (User.ISLOGIN){
+			intent = new Intent(this, CommentActivity.class);
+			startActivity(intent);
+			overridePendingTransition(R.anim.slide_bottom, R.anim.slide_bottom);
+		}else{
+			intent = new Intent(this, MainActivity.class);
+			startActivity(intent);
+		}
+		
 	}
 
 }

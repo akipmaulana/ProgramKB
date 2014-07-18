@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" 
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
 
     <item
         android:id="@+id/ok_done"
-        android:title="@string/ok"
         android:icon="@drawable/ic_action_accept"
-        android:showAsAction="withText|always"/>
-    
+        android:showAsAction="withText|always"
+        android:title="@string/ok"/>
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="2"

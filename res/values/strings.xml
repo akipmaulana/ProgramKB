@@ -5,6 +5,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="ok">Done</string>
+    <string name="post">Posting</string>
     <string name="in">Bahasa Indonesia</string>
     <string name="en">Bahasa Inggris</string>
     <string name="keluar">Keluar</string>
@@ -53,16 +54,20 @@
     <string name="kosong">No Post/Tidak ada kiriman</string>
     <string name="titik2">:</string>
     <string name="nama_">Nama</string>
-    <string name="lokasi_">Lokasi</string>
+    <string name="telpon">Telepon</string>
     <string name="cari">Cari</string>
-    <string name="sample_warung">Warung Pasta</string>
+    <string name="sample_warung">Warung Pasta - Bandung</string>
     <string name="sample_lihat">14</string>
     <string name="sample_desk"><p>Warung pasta adalah tempat kuliner yang sangat elegan dari sisi pelayanan dan makanan. oh iyaa makanannya juga enak dan terjangkau looohh...</p></string>
+    <string name="sample_nomor">+62 87543998</string>
+    <string name="sample_site">www.warungpasta.com</string>
+    <string name="sample_post_time">1 menit yang lalu</string>
     <string name="lihat">Dilihat</string>
-    <string name="nilai">Nilai</string>
+    <string name="suka">Suka</string>
     <string name="arah">Petunjuk Jalan</string>
-    <string name="deskripsi_content"><u>Deskripsi </u>:</string>
     <string name="deskripsi_title">Dekripsi</string>
+    <string name="beri_koment">Beri Komentar</string>
+    <string name="review">Review</string>
     <string name="mytimeline">Timeline Ku</string>
     
     <string name="drawer_open">Slider Menu Opened</string>
@@ -70,3 +75,4 @@
      
 
 </resources>
+

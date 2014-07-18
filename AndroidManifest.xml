@@ -104,6 +104,10 @@
             android:name="aprisma.akirah.bingung.detail.AkunActivity"
             android:label="@string/akun"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="aprisma.akirah.bingung.detail.CommentActivity"
+            android:label="@string/beri_koment"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

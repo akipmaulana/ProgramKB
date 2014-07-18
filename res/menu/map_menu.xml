@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    
-    <item 
+
+    <item
         android:id="@+id/timelineBar"
-        android:title="@string/timeline"
         android:orderInCategory="0"
-        android:showAsAction="ifRoom|withText"/>
-    
-     <item 
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/timeline"/>
+    <item
         android:id="@+id/setlang"
-        android:title="@string/en"
         android:orderInCategory="1"
-        android:showAsAction="never"/>
-     
-     <item
+        android:showAsAction="never"
+        android:title="@string/en"/>
+    <item
         android:id="@+id/action_settings"
         android:orderInCategory="2"
-        android:title="@string/action_settings"
-        android:showAsAction="never"/>
-     
-     <item 
+        android:showAsAction="never"
+        android:title="@string/action_settings"/>
+    <item
         android:id="@+id/logout_map"
         android:orderInCategory="3"
-        android:title="@string/keluar"
-        android:showAsAction="never"/>
-     
+        android:showAsAction="never"
+        android:title="@string/keluar"/>
+
 </menu>
