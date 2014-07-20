@@ -20,6 +20,7 @@ import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
 import aprisma.akirah.bingung.detail.KlasifikasiActivity;
 import aprisma.akirah.bingung.detail.PengaturanActivity;
+import aprisma.akirah.bingung.holder.Klasifikasi;
 import aprisma.akirah.bingung.holder.User;
 
 @SuppressLint("NewApi")
@@ -96,7 +97,7 @@ public class TimelineAcitivity extends FragmentActivity implements
 
 		Intent intent = getIntent();
 		goestoKlasifikasi(intent
-				.getStringExtra(KlasifikasiActivity.KLASIFIKASI_REQUEST).toString());
+				.getStringExtra(Klasifikasi.KLASIFIKASI_REQUEST).toString());
 	}
 
 	/*
@@ -105,7 +106,7 @@ public class TimelineAcitivity extends FragmentActivity implements
 	 */
 	private void goestoKlasifikasi(String klasifikasiRespon) {
 		int indexOfsearch = 0;
-		for (String s : KlasifikasiActivity.GET_KLASIFIKASI) {
+		for (String s : Klasifikasi.GET_KLASIFIKASI) {
 			if (s.equals(klasifikasiRespon)) {
 				mViewPager.setCurrentItem(indexOfsearch);
 				return;
@@ -207,7 +208,7 @@ public class TimelineAcitivity extends FragmentActivity implements
 		public int getCount() {
 			// Akip's Code
 			int count = 0;
-			for (int i = 0; i < KlasifikasiActivity.GET_KLASIFIKASI.size(); i++) {
+			for (int i = 0; i < Klasifikasi.GET_KLASIFIKASI.size(); i++) {
 				count++;
 			}
 			return count;
@@ -215,7 +216,7 @@ public class TimelineAcitivity extends FragmentActivity implements
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			return KlasifikasiActivity.GET_KLASIFIKASI.get(indeksOfKlasfikasi++);
+			return Klasifikasi.GET_KLASIFIKASI.get(indeksOfKlasfikasi++);
 		}
 	}
 	

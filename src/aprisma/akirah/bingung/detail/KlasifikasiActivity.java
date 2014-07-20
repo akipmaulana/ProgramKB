@@ -1,6 +1,5 @@
 package aprisma.akirah.bingung.detail;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -24,24 +23,24 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
+import aprisma.akirah.bingung.holder.Klasifikasi;
 import aprisma.akirah.bingung.holder.User;
 
 @SuppressLint("NewApi")
 public class KlasifikasiActivity extends Activity {
 
-	public final static String KLASIFIKASI_REQUEST = "klasifikasi_request";
-	public static ArrayList<String> GET_KLASIFIKASI = new ArrayList<String>();
 	// private AutoCompleteTextView inputSearch;
 	private ListAdapter adapter;
 	private SearchView searchView;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.klasifikasi_activity);
+		
+		new Klasifikasi(getApplicationContext());
 
-		setKlasifikasi();
 		setToList();
 	}
 
@@ -94,24 +93,13 @@ public class KlasifikasiActivity extends Activity {
 		});
 	}
 
-	/*
-	 * Untuk menyimpan Klasifikasi dari serverke dalam array GET_KLASIFIKASI
-	 */
-	private void setKlasifikasi() {
-		GET_KLASIFIKASI.clear();
-		GET_KLASIFIKASI.add("Makanan");
-		GET_KLASIFIKASI.add("Jalan-jalan");
-		GET_KLASIFIKASI.add("Hiburan");
-		GET_KLASIFIKASI.add("Hotel");
-		GET_KLASIFIKASI.add("Bisnis");
-		GET_KLASIFIKASI.add("Lainnya");
-	}
+	
 
 	/*
 	 * set klasifikasi ke dalam list view
 	 */
 	private void setToList() {
-		adapter = new ListAdapter(this, GET_KLASIFIKASI);
+		adapter = new ListAdapter(this, Klasifikasi.GET_KLASIFIKASI);
 
 		final ListView listView = (ListView) findViewById(R.id.list_klasifikasi);
 		listView.setAdapter(adapter);
@@ -149,7 +137,7 @@ public class KlasifikasiActivity extends Activity {
 		TextView tv = (TextView) v.findViewById(id);
 		String hasil = tv.getText().toString();
 		Intent intent = new Intent(this, MapActivity.class);
-		intent.putExtra(KLASIFIKASI_REQUEST, hasil);
+		intent.putExtra(Klasifikasi.KLASIFIKASI_REQUEST, hasil);
 		startActivity(intent);
 		overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
 	}

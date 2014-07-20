@@ -555,6 +555,7 @@ int string beri_koment 0x7f070069
 int string biografi 0x7f07004b
 int string bisnis 0x7f070056
 int string cari 0x7f07005e
+int string comment 0x7f07006d
 int string common_google_play_services_enable_button 0x7f070006
 int string common_google_play_services_enable_text 0x7f070005
 int string common_google_play_services_enable_title 0x7f070004
@@ -577,8 +578,8 @@ int string common_signin_button_text 0x7f070012
 int string common_signin_button_text_long 0x7f070013
 int string deskripsi_title 0x7f070068
 int string detail 0x7f070034
-int string drawer_close 0x7f07006d
-int string drawer_open 0x7f07006c
+int string drawer_close 0x7f070071
+int string drawer_open 0x7f070070
 int string en 0x7f07002e
 int string foto_profil 0x7f070035
 int string hello_world 0x7f070029
@@ -589,6 +590,7 @@ int string identitas_diri 0x7f07004d
 int string in 0x7f07002d
 int string jalan 0x7f070053
 int string jekel 0x7f070041
+int string judul 0x7f07006c
 int string keluar 0x7f07002f
 int string klasifikasi 0x7f070058
 int string konf_password 0x7f07003f
@@ -612,6 +614,7 @@ int string old_password 0x7f07003d
 int string password 0x7f07003c
 int string pekerjaan 0x7f070049
 int string pendidikan 0x7f070048
+int string penilaian 0x7f07006e
 int string post 0x7f07002c
 int string profil 0x7f070031
 int string provinsi 0x7f070046
@@ -633,6 +636,7 @@ int string tempat_tinggal 0x7f07004f
 int string thread 0x7f070032
 int string timeline 0x7f070059
 int string titik2 0x7f07005b
+int string tulis 0x7f07006f
 int string ubah_password 0x7f07004c
 int style AppBaseTheme 0x7f0b008b
 int style AppTheme 0x7f0b008c

@@ -1612,6 +1612,7 @@ containing a value of this type.
         public static final int biografi=0x7f07004b;
         public static final int bisnis=0x7f070056;
         public static final int cari=0x7f07005e;
+        public static final int comment=0x7f07006d;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -1685,8 +1686,8 @@ containing a value of this type.
         public static final int common_signin_button_text_long=0x7f070013;
         public static final int deskripsi_title=0x7f070068;
         public static final int detail=0x7f070034;
-        public static final int drawer_close=0x7f07006d;
-        public static final int drawer_open=0x7f07006c;
+        public static final int drawer_close=0x7f070071;
+        public static final int drawer_open=0x7f070070;
         public static final int en=0x7f07002e;
         public static final int foto_profil=0x7f070035;
         public static final int hello_world=0x7f070029;
@@ -1697,6 +1698,7 @@ containing a value of this type.
         public static final int in=0x7f07002d;
         public static final int jalan=0x7f070053;
         public static final int jekel=0x7f070041;
+        public static final int judul=0x7f07006c;
         public static final int keluar=0x7f07002f;
         public static final int klasifikasi=0x7f070058;
         public static final int konf_password=0x7f07003f;
@@ -1722,6 +1724,7 @@ containing a value of this type.
         public static final int password=0x7f07003c;
         public static final int pekerjaan=0x7f070049;
         public static final int pendidikan=0x7f070048;
+        public static final int penilaian=0x7f07006e;
         public static final int post=0x7f07002c;
         public static final int profil=0x7f070031;
         public static final int provinsi=0x7f070046;
@@ -1743,6 +1746,7 @@ containing a value of this type.
         public static final int thread=0x7f070032;
         public static final int timeline=0x7f070059;
         public static final int titik2=0x7f07005b;
+        public static final int tulis=0x7f07006f;
         public static final int ubah_password=0x7f07004c;
     }
     public static final class style {

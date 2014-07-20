@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
+import aprisma.akirah.bingung.holder.Klasifikasi;
 import aprisma.akirah.bingung.holder.User;
 import aprisma.akirah.bingung.timeline.TimelineAcitivity;
 
@@ -41,7 +42,7 @@ public class MapActivity extends Activity {
 		setContentView(R.layout.map_activity);
 
 		getKlasifikasi = getIntent().getStringExtra(
-				KlasifikasiActivity.KLASIFIKASI_REQUEST).toString();
+				Klasifikasi.KLASIFIKASI_REQUEST).toString();
 
 		ActionBar actionBar = getActionBar();
 		actionBar.setCustomView(R.layout.actionbar_top_search); // load your
@@ -97,7 +98,7 @@ public class MapActivity extends Activity {
 			return true;
 		case R.id.timelineBar:
 			Intent intent = new Intent(this, TimelineAcitivity.class);
-			intent.putExtra(KlasifikasiActivity.KLASIFIKASI_REQUEST,
+			intent.putExtra(Klasifikasi.KLASIFIKASI_REQUEST,
 					getKlasifikasi);
 			startActivity(intent);
 			overridePendingTransition(R.anim.slide_in, R.anim.slide_in);

@@ -69,6 +69,11 @@
     <string name="beri_koment">Beri Komentar</string>
     <string name="review">Review</string>
     <string name="mytimeline">Timeline Ku</string>
+    <string name="judul">Judul</string>
+    <string name="comment">Isi Komentar</string>
+    <string name="penilaian">Penilaian</string>
+    <string name="tulis">Tulis . . .</string>
+    
     
     <string name="drawer_open">Slider Menu Opened</string>
     <string name="drawer_close">Slider Menu Closed</string>

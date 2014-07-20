@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
+import aprisma.akirah.bingung.holder.Klasifikasi;
 import aprisma.akirah.bingung.holder.User;
 import aprisma.akirah.bingung.timeline.TimelineList;
 import aprisma.akirah.bingung.timeline.TimelineListAdapter;
@@ -86,8 +87,8 @@ public class MyTimelineActivity extends ListActivity {
      */
     private void setListenerCustom(){
     	
-    	TimelineList[] list_line = new TimelineList[KlasifikasiActivity.GET_KLASIFIKASI.size()];
-        for (int i=0;i<KlasifikasiActivity.GET_KLASIFIKASI.size();i++){
+    	TimelineList[] list_line = new TimelineList[Klasifikasi.GET_KLASIFIKASI.size()];
+        for (int i=0;i<Klasifikasi.GET_KLASIFIKASI.size();i++){
         	list_line[i]=new TimelineList(
         			R.id.imageku, "Akip", "farah", "Akirah", "Munyu");
         }
