@@ -8,11 +8,31 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.util.Log;
 import aprisma.akirah.bingung.service.DatabaseHandler;
 
 public class User extends KlikBParent{
 
 	public static Boolean ISLOGIN = false;
+	
+	public static final String TAG_USER = "user";
+	
+	private static final String TAG_FULLNAME = "fullname";
+	private static final String TAG_EMAIL = "email";
+	private static final String TAG_USERPASS = "userpass";
+	private static final String TAG_SEX = "sex";
+	private static final String TAG_BIRTHDAY = "birthday";
+	private static final String TAG_ALAMAT = "alamat";
+	private static final String TAG_PROVINSI = "provinsi";
+	private static final String TAG_NEGARA = "negara";
+	private static final String TAG_AVATAR = "avatar";
+	private static final String TAG_PEKERJAAN = "pekerjaan";
+	private static final String TAG_WEBSITE = "website";
+	private static final String TAG_HOBBY = "hobby";
+	private static final String TAG_BIO = "bio";
+	private static final String TAG_PENDIDIKAN = "pendidikan";
+	private static final String TAG_STATUS = "status";
+	private static final String TAG_USERS_TGL = "users_tgl";
 
 	private String email;
 	private String password;
@@ -30,29 +50,20 @@ public class User extends KlikBParent{
 	private String hobi;
 	private String biografi;
 
-	private static String login_tag = "login";
-	private static String register_tag = "register";
-
-	public User(String email, String password) {
-		this.email = email;
-		this.password = password;
-	}
-
 	/**
 	 * function make Login Request
 	 * 
 	 * @param email
 	 * @param password
 	 * */
-	public JSONObject loginUser(String email, String password) {
+	public JSONObject loginUser(String email, String userpass) {
 		// Building Parameters
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("tag", login_tag));
-		params.add(new BasicNameValuePair("email", email));
-		params.add(new BasicNameValuePair("password", password));
+		params.add(new BasicNameValuePair("tag", LOGIN_TAG));
+		params.add(new BasicNameValuePair(TAG_EMAIL, email));
+		params.add(new BasicNameValuePair(TAG_USERPASS, userpass));
 		JSONObject json = JSONPARSER.getJSONFromUrl(URL, params);
-		// return json
-		// Log.e("JSON", json.toString());
+		Log.e("JSON", json.toString());
 		return json;
 	}
 
@@ -63,13 +74,13 @@ public class User extends KlikBParent{
 	 * @param email
 	 * @param password
 	 * */
-	public JSONObject registerUser(String name, String email, String password) {
+	public JSONObject registerUser(String fullname, String email, String userpass) {
 		// Building Parameters
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("tag", register_tag));
-		params.add(new BasicNameValuePair("name", name));
-		params.add(new BasicNameValuePair("email", email));
-		params.add(new BasicNameValuePair("password", password));
+		params.add(new BasicNameValuePair("tag", REGISTRASI_TAG));
+		params.add(new BasicNameValuePair(TAG_USERPASS, userpass));
+		params.add(new BasicNameValuePair(TAG_EMAIL, email));
+		params.add(new BasicNameValuePair(TAG_FULLNAME, fullname));
 
 		// getting JSON Object
 		JSONObject json = JSONPARSER.getJSONFromUrl(URL, params);

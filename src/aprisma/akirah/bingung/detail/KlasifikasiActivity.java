@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,9 +40,8 @@ public class KlasifikasiActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.klasifikasi_activity);
 		
-		new Klasifikasi(getApplicationContext());
+		new Klasifikasi(getApplicationContext(), this);
 
-		setToList();
 	}
 
 	@Override
@@ -98,11 +98,13 @@ public class KlasifikasiActivity extends Activity {
 	/*
 	 * set klasifikasi ke dalam list view
 	 */
-	private void setToList() {
+	public void setToList() {
 		adapter = new ListAdapter(this, Klasifikasi.GET_KLASIFIKASI);
 
 		final ListView listView = (ListView) findViewById(R.id.list_klasifikasi);
 		listView.setAdapter(adapter);
+		
+		Log.e("DULU", "FINISH ACTIVITY");
 
 		listView.setOnItemClickListener(new OnItemClickListener() {
 

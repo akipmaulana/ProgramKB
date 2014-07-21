@@ -50,7 +50,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="aprisma.akirah.bingung.detail.KlasifikasiActivity"
-            android:label="@string/klasifikasi"
+            android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
