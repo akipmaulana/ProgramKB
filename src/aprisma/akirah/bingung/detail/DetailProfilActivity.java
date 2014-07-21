@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
@@ -31,6 +32,20 @@ public class DetailProfilActivity extends Activity {
 		setContentView(R.layout.detail_layout);
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+		
+		((TextView) findViewById(R.id.nama_lengkap)).setText(User.fullname);
+		((TextView) findViewById(R.id.jekel)).setText(User.sex);
+		((TextView) findViewById(R.id.tanggal_lahir)).setText(User.birthday);
+		((TextView) findViewById(R.id.mail)).setText(User.email);
+		((TextView) findViewById(R.id.situs)).setText(User.website);
+		((TextView) findViewById(R.id.alamat)).setText(User.alamat);
+		((TextView) findViewById(R.id.kota)).setText(User.kota);
+		((TextView) findViewById(R.id.provinsi)).setText(User.provinsi);
+		((TextView) findViewById(R.id.negara)).setText(User.negara);
+		((TextView) findViewById(R.id.pendidikan)).setText(User.pendidikan);
+		((TextView) findViewById(R.id.pekerjaan)).setText(User.pekerjaan);
+		((TextView) findViewById(R.id.hobi)).setText(User.hobi);
+		((TextView) findViewById(R.id.biografi)).setText(User.bio);
 	}
 
 	private void popUpEditText() {

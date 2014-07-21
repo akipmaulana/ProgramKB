@@ -51,6 +51,17 @@
         android:inputType="textPassword"
         android:padding="8dp"
         android:textSize="16sp" />
+    
+    <EditText
+        android:id="@+id/reg_pass2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:background="@android:drawable/editbox_background_normal"
+        android:hint="@string/konf_password"
+        android:inputType="textPassword"
+        android:padding="8dp"
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/btn_regist"
@@ -65,7 +76,7 @@
         android:textColor="#FFFFFFFF" />
     
     <TextView 
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12sp"

@@ -1,10 +1,14 @@
 package aprisma.akirah.bingung.detail;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,11 +24,9 @@ import aprisma.akirah.bingung.holder.User;
 
 public class AkunActivity extends Activity {
 
-	private TextView old_pass;
 	private TextView new_pass;
 	private TextView conf_pass;
 
-	private String temp_old_pass;
 	private String temp_new_pass;
 	private String temp_conf_pass;
 
@@ -43,11 +45,9 @@ public class AkunActivity extends Activity {
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
-		old_pass = (TextView) findViewById(R.id.old_pass);
 		new_pass = (TextView) findViewById(R.id.new_pass);
 		conf_pass = (TextView) findViewById(R.id.conf_pass);
 
-		temp_old_pass = old_pass.getText().toString();
 		temp_new_pass = new_pass.getText().toString();
 		temp_conf_pass = conf_pass.getText().toString();
 
@@ -67,17 +67,14 @@ public class AkunActivity extends Activity {
 
 		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
-				if (TITLE.equals("Kata Sandi Lama")) {
-					old_pass.setText(input.getText().toString());
-				} else if (TITLE.equals("Kata Sandi Baru")) {
+				if (TITLE.equals("Kata Sandi Baru")) {
 					new_pass.setText(input.getText().toString());
 				} else {
 					conf_pass.setText(input.getText().toString());
 				}
 
 				// Activate Ok MenuItem
-				if (!temp_old_pass.equals(old_pass.getText().toString())
-						&& !temp_new_pass.equals(new_pass.getText().toString())
+				if (!temp_new_pass.equals(new_pass.getText().toString())
 						&& !temp_conf_pass.equals(conf_pass.getText()
 								.toString())) {
 					ok_done.setEnabled(true);
@@ -117,9 +114,14 @@ public class AkunActivity extends Activity {
 			overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
 			return true;
 		case R.id.ok_done:
-			intent = new Intent(getApplicationContext(), ProfilActivity.class);
-			startActivity(intent);
-			overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
+			if (new_pass.getText().toString().isEmpty() || 
+				conf_pass.getText().toString().isEmpty()) {
+				Toast.makeText(getApplicationContext(),
+						"Masukan Data Anda Dengan Lengkap", Toast.LENGTH_SHORT)
+						.show();
+			} else {
+				new Akun().execute();
+			}
 			return true;
 		case R.id.action_settings:
 			intent = new Intent(getApplicationContext(),
@@ -145,6 +147,44 @@ public class AkunActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onBackPressed();
 		overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
+	}
+	
+	private class Akun extends AsyncTask<Void, Void, Void>{
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			if (new_pass.getText().toString().equals(conf_pass.getText().toString())) {
+				JSONObject jsonObj = User.updateUserPass(new_pass.getText().toString());
+				try {
+					int tag_success = jsonObj.getInt(User.TAG_SUCCESS);
+					if (tag_success == 1) {
+
+						// Update Lokal
+						User.userpass = new_pass.getText().toString();
+
+						Intent intent = new Intent(getApplicationContext(),
+								ProfilActivity.class);
+						startActivity(intent);
+						overridePendingTransition(R.anim.slide_in,
+								R.anim.slide_in);
+					} else {
+						Toast.makeText(
+								getApplicationContext(),
+								"Tejadi Kesalahan Sistem. Silahkan Coba Lagi",
+								Toast.LENGTH_SHORT).show();
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				Toast.makeText(getApplicationContext(),
+						"Konfirmasi Password Salah", Toast.LENGTH_SHORT)
+						.show();
+			}
+			return null;
+		}
+		
 	}
 
 }

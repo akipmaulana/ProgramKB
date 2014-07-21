@@ -1,28 +1,37 @@
 package aprisma.akirah.bingung.holder;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
 import android.util.Log;
 import aprisma.akirah.bingung.service.DatabaseHandler;
 
-public class User extends KlikBParent{
+public class User extends KlikBParent implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public static Boolean ISLOGIN = false;
 	
 	public static final String TAG_USER = "user";
 	
+	private static final String TAG_ID_USER = "id_user";
 	private static final String TAG_FULLNAME = "fullname";
 	private static final String TAG_EMAIL = "email";
 	private static final String TAG_USERPASS = "userpass";
 	private static final String TAG_SEX = "sex";
 	private static final String TAG_BIRTHDAY = "birthday";
 	private static final String TAG_ALAMAT = "alamat";
+	private static final String TAG_KOTA = "kota";
 	private static final String TAG_PROVINSI = "provinsi";
 	private static final String TAG_NEGARA = "negara";
 	private static final String TAG_AVATAR = "avatar";
@@ -34,28 +43,25 @@ public class User extends KlikBParent{
 	private static final String TAG_STATUS = "status";
 	private static final String TAG_USERS_TGL = "users_tgl";
 
-	private String email;
-	private String password;
+	public static String id_user;
+	public static String fullname;
+	public static String email;
+	public static String userpass;
+	public static String sex;
+	public static String birthday;
+	public static String alamat;
+	public static String kota;
+	public static String provinsi;
+	public static String negara;
+	public static String avatar;
+	public static String pekerjaan;
+	public static String website;
+	public static String hobi;
+	public static String bio;
+	public static String pendidikan;
+	public static String status;
+	public static String users_tgl;
 
-	private String namaLengkap;
-	private String jenisKelamin;
-	private String tanggalLahir;
-	private String situs;
-	private String alamat;
-	private String kota;
-	private String provinsi;
-	private String negara;
-	private String pendidikan;
-	private String pekerjaan;
-	private String hobi;
-	private String biografi;
-
-	/**
-	 * function make Login Request
-	 * 
-	 * @param email
-	 * @param password
-	 * */
 	public JSONObject loginUser(String email, String userpass) {
 		// Building Parameters
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -67,13 +73,6 @@ public class User extends KlikBParent{
 		return json;
 	}
 
-	/**
-	 * function make Login Request
-	 * 
-	 * @param name
-	 * @param email
-	 * @param password
-	 * */
 	public JSONObject registerUser(String fullname, String email, String userpass) {
 		// Building Parameters
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -87,7 +86,42 @@ public class User extends KlikBParent{
 		// return json
 		return json;
 	}
+	
+	public void fetchDataUser(JSONObject jsonOBJECT) throws JSONException{
+		JSONObject jsonOBJ = jsonOBJECT.getJSONObject(TAG_USER);
+		id_user = jsonOBJ.getString(TAG_ID_USER);
+		fullname = jsonOBJ.getString(TAG_FULLNAME);
+		email = jsonOBJ.getString(TAG_EMAIL);
+		userpass = jsonOBJ.getString(TAG_USERPASS);
+		sex = jsonOBJ.getString(TAG_SEX);
+		birthday = jsonOBJ.getString(TAG_BIRTHDAY);
+		alamat = jsonOBJ.getString(TAG_ALAMAT);
+		kota = jsonOBJ.getString(TAG_KOTA);
+		provinsi = jsonOBJ.getString(TAG_PROVINSI);
+		negara = jsonOBJ.getString(TAG_NEGARA);
+		avatar = jsonOBJ.getString(TAG_AVATAR);
+		pekerjaan = jsonOBJ.getString(TAG_PEKERJAAN);
+		website = jsonOBJ.getString(TAG_WEBSITE);
+		hobi = jsonOBJ.getString(TAG_HOBBY);
+		bio = jsonOBJ.getString(TAG_BIO);
+		pendidikan = jsonOBJ.getString(TAG_PENDIDIKAN);
+		status = jsonOBJ.getString(TAG_STATUS);
+		users_tgl = jsonOBJ.getString(TAG_USERS_TGL);
+		
+	}
 
+	public static JSONObject updateUserPass(String newUserPass){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("tag", SETPASS_TAG));
+		params.add(new BasicNameValuePair(TAG_USERPASS, newUserPass));
+		params.add(new BasicNameValuePair(TAG_EMAIL, User.email));
+
+		// getting JSON Object
+		JSONObject json = JSONPARSER.getJSONFromUrl(URL, params);
+		// return json
+		return json;
+	}
+	
 	/**
 	 * Function get Login status
 	 * */
@@ -108,118 +142,6 @@ public class User extends KlikBParent{
 		DatabaseHandler db = new DatabaseHandler(context);
 		db.resetTables();
 		return true;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getNamaLengkap() {
-		return namaLengkap;
-	}
-
-	public void setNamaLengkap(String namaLengkap) {
-		this.namaLengkap = namaLengkap;
-	}
-
-	public String getJenisKelamin() {
-		return jenisKelamin;
-	}
-
-	public void setJenisKelamin(String jenisKelamin) {
-		this.jenisKelamin = jenisKelamin;
-	}
-
-	public String getTanggalLahir() {
-		return tanggalLahir;
-	}
-
-	public void setTanggalLahir(String tanggalLahir) {
-		this.tanggalLahir = tanggalLahir;
-	}
-
-	public String getSitus() {
-		return situs;
-	}
-
-	public void setSitus(String situs) {
-		this.situs = situs;
-	}
-
-	public String getAlamat() {
-		return alamat;
-	}
-
-	public void setAlamat(String alamat) {
-		this.alamat = alamat;
-	}
-
-	public String getKota() {
-		return kota;
-	}
-
-	public void setKota(String kota) {
-		this.kota = kota;
-	}
-
-	public String getProvinsi() {
-		return provinsi;
-	}
-
-	public void setProvinsi(String provinsi) {
-		this.provinsi = provinsi;
-	}
-
-	public String getNegara() {
-		return negara;
-	}
-
-	public void setNegara(String negara) {
-		this.negara = negara;
-	}
-
-	public String getPendidikan() {
-		return pendidikan;
-	}
-
-	public void setPendidikan(String pendidikan) {
-		this.pendidikan = pendidikan;
-	}
-
-	public String getPekerjaan() {
-		return pekerjaan;
-	}
-
-	public void setPekerjaan(String pekerjaan) {
-		this.pekerjaan = pekerjaan;
-	}
-
-	public String getHobi() {
-		return hobi;
-	}
-
-	public void setHobi(String hobi) {
-		this.hobi = hobi;
-	}
-
-	public String getBiografi() {
-		return biografi;
-	}
-
-	public void setBiografi(String biografi) {
-		this.biografi = biografi;
 	}
 
 }
