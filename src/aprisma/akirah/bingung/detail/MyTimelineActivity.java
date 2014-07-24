@@ -15,6 +15,7 @@ import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
 import aprisma.akirah.bingung.holder.Klasifikasi;
 import aprisma.akirah.bingung.holder.User;
+import aprisma.akirah.bingung.timeline.TimelineAcitivity;
 import aprisma.akirah.bingung.timeline.TimelineList;
 import aprisma.akirah.bingung.timeline.TimelineListAdapter;
 
@@ -89,8 +90,8 @@ public class MyTimelineActivity extends ListActivity {
     	
     	TimelineList[] list_line = new TimelineList[Klasifikasi.GET_KLASIFIKASI.size()];
         for (int i=0;i<Klasifikasi.GET_KLASIFIKASI.size();i++){
-        	list_line[i]=new TimelineList(
-        			R.id.imageku, "Akip", "farah", "Akirah", "Munyu");
+        	list_line[i]=new TimelineList(0,
+        			"", "Akip", TimelineAcitivity.timelines[0].getDeskripsiku(), "Akirah", "Munyu");
         }
         
         TimelineListAdapter adapter = new TimelineListAdapter(this, R.layout.timeline_list, list_line);

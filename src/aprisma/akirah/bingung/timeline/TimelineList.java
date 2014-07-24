@@ -3,14 +3,16 @@ package aprisma.akirah.bingung.timeline;
 
 public class TimelineList{
 
-	private int imageku;
+	private int id;
+	private String imageku;
 	private String namaku;
 	private String deskripsiku;
 	private String rataku;
 	private String viewku;
 	
 	
-	public TimelineList(int imageku, String namaku, String deskripsiku, String rataku, String viewku) {
+	public TimelineList(int id, String imageku, String namaku, String deskripsiku, String rataku, String viewku) {
+		this.id = id;
 		this.imageku = imageku;
 		this.namaku = namaku;
 		this.deskripsiku = deskripsiku;
@@ -18,8 +20,11 @@ public class TimelineList{
 		this.viewku = viewku;
 	}
 
+	public int getId() {
+		return id;
+	}
 
-	public int getImageku() {
+	public String getImageku() {
 		return imageku;
 	}
 

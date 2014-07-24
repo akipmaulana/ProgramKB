@@ -1,6 +1,13 @@
 package aprisma.akirah.bingung.detail;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -8,9 +15,9 @@ import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,14 +40,14 @@ public class KlasifikasiActivity extends Activity {
 	// private AutoCompleteTextView inputSearch;
 	private ListAdapter adapter;
 	private SearchView searchView;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.klasifikasi_activity);
-		
-		new Klasifikasi(getApplicationContext(), this);
+
+		new Getcatalog().execute();
 
 	}
 
@@ -54,6 +61,36 @@ public class KlasifikasiActivity extends Activity {
 		PengaturanActivity.SetMenu(menu);
 
 		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent = null;
+		switch (item.getItemId()) {
+		case R.id.action_settings:
+			intent = new Intent(getApplicationContext(),
+					PengaturanActivity.class);
+			startActivity(intent);
+			overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
+			break;
+		case R.id.setlang:
+			Toast.makeText(getApplicationContext(), "SET LANG",
+					Toast.LENGTH_SHORT).show();
+			break;
+		case R.id.logout:
+			User.ISLOGIN = false;
+			intent = new Intent(getApplicationContext(), MainActivity.class);
+			startActivity(intent);
+			return true;
+		default:
+			break;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 	private void setupSearchView(MenuItem searchItem) {
@@ -93,8 +130,6 @@ public class KlasifikasiActivity extends Activity {
 		});
 	}
 
-	
-
 	/*
 	 * set klasifikasi ke dalam list view
 	 */
@@ -103,8 +138,6 @@ public class KlasifikasiActivity extends Activity {
 
 		final ListView listView = (ListView) findViewById(R.id.list_klasifikasi);
 		listView.setAdapter(adapter);
-		
-		Log.e("DULU", "FINISH ACTIVITY");
 
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -197,34 +230,55 @@ public class KlasifikasiActivity extends Activity {
 		}
 	}
 
-	@Override
-	public void onBackPressed() {
-		// TODO Auto-generated method stub
-	}
+	/**
+	 * Async task class to get json by making HTTP call
+	 * */
+	JSONArray klasifications = null;
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent intent = null;
-		switch (item.getItemId()) {
-		case R.id.action_settings:
-			intent = new Intent(getApplicationContext(),
-					PengaturanActivity.class);
-			startActivity(intent);
-			overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
-			break;
-		case R.id.setlang:
-			Toast.makeText(getApplicationContext(), "SET LANG",
-					Toast.LENGTH_SHORT).show();
-			break;
-		case R.id.logout:
-			User.ISLOGIN = false;
-			intent = new Intent(getApplicationContext(), MainActivity.class);
-			startActivity(intent);
-			return true;
-		default:
-			break;
+	public class Getcatalog extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
 		}
-		return super.onOptionsItemSelected(item);
+
+		@Override
+		protected Void doInBackground(Void... arg0) {
+			// Creating service handler class instance
+			try {
+				List<NameValuePair> params = new ArrayList<NameValuePair>();
+				params.add(new BasicNameValuePair("tag",
+						Klasifikasi.KLASIFIKASI_TAG));
+				JSONObject jsonObj = Klasifikasi.JSONPARSER.getJSONFromUrl(
+						Klasifikasi.URL, params);
+
+				// Getting JSON Array node
+				klasifications = jsonObj.getJSONArray(Klasifikasi.TAG_ITEM);
+
+				// looping through All Contacts
+				Klasifikasi.GET_KLASIFIKASI.clear();
+				Klasifikasi.ID_KLASIFIKASI.clear();
+				for (int i = 0; i < klasifications.length(); i++) {
+					JSONObject c = klasifications.getJSONObject(i);
+					String name_item = c.getString(Klasifikasi.TAG_NAME);
+					String id_item = c.getString(Klasifikasi.TAG_ID_CATALOG);
+					Klasifikasi.GET_KLASIFIKASI.add(name_item);
+					Klasifikasi.ID_KLASIFIKASI.add(id_item);
+				}
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			setToList();
+		}
 	}
 
 }

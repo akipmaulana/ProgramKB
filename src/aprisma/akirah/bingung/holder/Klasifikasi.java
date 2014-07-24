@@ -9,74 +9,69 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Context;
-import android.os.AsyncTask;
-import aprisma.akirah.bingung.detail.KlasifikasiActivity;
+import android.util.Log;
 
 public class Klasifikasi extends KlikBParent {
 
 	public final static String KLASIFIKASI_REQUEST = "klasifikasi_request";
 	public static ArrayList<String> GET_KLASIFIKASI = new ArrayList<String>();
+	public static ArrayList<String> ID_KLASIFIKASI = new ArrayList<String>();
 
 	// JSON Node names
-	private static final String TAG_ITEM = "item";
-	private static final String TAG_NAME = "name_catalog";
-
-	JSONArray klasifications = null;
-
-	private Getcatalog getKlasi;
-	private KlasifikasiActivity klasActiv;
-
-	public Klasifikasi(Context ctx, KlasifikasiActivity klasActiv) {
-		this.klasActiv = klasActiv;
-		getKlasi = new Getcatalog();
-		getKlasi.execute();
+	public static final String TAG_CATALOGS = "catalogs";
+	public static final String TAG_ITEM = "item";
+	public static final String TAG_NAME = "name_catalog";
+	public static final String TAG_ID_CATALOG = "id_catalog";
+	public static final String TAG_ID_POSTING = "id_posting";
+	public static final String TAG_JUDUL = "judul";
+	public static final String TAG_NAME_MERCHANT = "nama_merchant";
+	public static final String TAG_ALAMAT = "alamat";
+	public static final String TAG_COUNTER = "counter";
+	public static final String TAG_ISI_POSTING = "isi_posting";
+	public static final String TAG_RATING = "rating";
+	public static final String TAG_JUM_COM = "jum_com";
+	public static final String TAG_FILLNAME_IMG = "filename_image";
+	public static final String TAG_DESC = "desc";
+	public static final String TAG_META_KEYWORD = "meta_keyword";
+	public static final String TAG_IMG = "img";
+	
+	public Klasifikasi() {
+		// TODO Auto-generated constructor stub
 	}
-
-	/**
-	 * Async task class to get json by making HTTP call
-	 * */
-	public class Getcatalog extends AsyncTask<Void, Void, Void> {
+	
+	public JSONObject getTimelineJSON(String id_catalog, String page, String lang){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("tag", CATEGORY_TAG));
+		params.add(new BasicNameValuePair("id_catalog", id_catalog));
+		params.add(new BasicNameValuePair("page", page));
+		params.add(new BasicNameValuePair("lang", lang));
+		JSONObject json = JSONPARSER.getJSONFromUrl(URL, params);
+		return json;
+	}
+	
+	public int getCountTotal(){
+		int hasil = 0;
 		
-		@Override
-		protected void onPreExecute() {
-			// TODO Auto-generated method stub
-			super.onPreExecute();
-		}
-
-		@Override
-		protected Void doInBackground(Void... arg0) {
-			// Creating service handler class instance
+		for (int j = 0; j < Klasifikasi.GET_KLASIFIKASI.size(); j++) {
+			JSONObject jsonObj = getTimelineJSON(
+					Klasifikasi.ID_KLASIFIKASI.get(j), "0", "english");
 			try {
-				List<NameValuePair> params = new ArrayList<NameValuePair>();
-				params.add(new BasicNameValuePair("tag", KLASIFIKASI_TAG));
-				JSONObject jsonObj = JSONPARSER.getJSONFromUrl(URL, params);
-
-				// Getting JSON Array node
-				klasifications = jsonObj.getJSONArray(TAG_ITEM);
-
-				// looping through All Contacts
-				GET_KLASIFIKASI.clear();
-				for (int i = 0; i < klasifications.length(); i++) {
-					JSONObject c = klasifications.getJSONObject(i);
-					String name_item = c.getString(TAG_NAME);
-					GET_KLASIFIKASI.add(name_item);
+				if (jsonObj.getInt(Klasifikasi.TAG_SUCCESS) == 1) {
+					JSONArray catalogs = jsonObj
+							.getJSONArray(Klasifikasi.TAG_CATALOGS);
+					
+					hasil += catalogs.length();
+					
 				}
-
-
 			} catch (JSONException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return null;
 		}
 		
-		@Override
-		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
-			super.onPostExecute(result);
-			klasActiv.setToList();
-		}
-
+		Log.e("TOTAL COUNT", hasil+"");
+		
+		return hasil;
 	}
-
+	
 }

@@ -1,10 +1,16 @@
 package aprisma.akirah.bingung.timeline;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -13,6 +19,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -45,7 +52,12 @@ public class TimelineAcitivity extends FragmentActivity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.timeline_layout);
+		
+		new Timeline().execute();
+		
+	}
 
+	private void initialized() {
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections
 		// of the app.
@@ -79,6 +91,7 @@ public class TimelineAcitivity extends FragmentActivity implements
 						// We can also use ActionBar.Tab#select() to do this if
 						// we have a reference to the
 						// Tab.
+						Log.e("POSISI : ", position + "");
 						actionBar.setSelectedNavigationItem(position);
 					}
 				});
@@ -93,7 +106,10 @@ public class TimelineAcitivity extends FragmentActivity implements
 			actionBar.addTab(actionBar.newTab()
 					.setText(mAppSectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
+			// new Timeline(Klasifikasi.ID_KLASIFIKASI.get(i)).execute();
 		}
+
+		Log.e("COUNT", mAppSectionsPagerAdapter.getCount() + "");
 
 		Intent intent = getIntent();
 		goestoKlasifikasi(intent
@@ -118,12 +134,12 @@ public class TimelineAcitivity extends FragmentActivity implements
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
-		
+
 		PengaturanActivity.SetMenu(menu);
-		
+
 		return super.onCreateOptionsMenu(menu);
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -152,12 +168,14 @@ public class TimelineAcitivity extends FragmentActivity implements
 			}
 			return true;
 		case R.id.action_settings:
-			intent = new Intent(getApplicationContext(), PengaturanActivity.class);
+			intent = new Intent(getApplicationContext(),
+					PengaturanActivity.class);
 			startActivity(intent);
 			overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
 			return true;
 		case R.id.setlang:
-			Toast.makeText(getApplicationContext(), "SET LANG", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "SET LANG",
+					Toast.LENGTH_SHORT).show();
 			return true;
 		case R.id.logout:
 			User.ISLOGIN = false;
@@ -219,12 +237,79 @@ public class TimelineAcitivity extends FragmentActivity implements
 			return Klasifikasi.GET_KLASIFIKASI.get(indeksOfKlasfikasi++);
 		}
 	}
-	
+
 	@Override
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
 		super.onBackPressed();
 		overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
+	}
+
+	private ProgressDialog pDialog;
+
+	public static TimelineList[] timelines;
+
+	private class Timeline extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			pDialog = new ProgressDialog(TimelineAcitivity.this);
+			pDialog.setMessage("Please wait . . .");
+			pDialog.setCancelable(false);
+			pDialog.show();
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			Klasifikasi klasifikasi = new Klasifikasi();
+			timelines = new TimelineList[klasifikasi.getCountTotal()];
+			int index = 0;
+			for (int j = 0; j < Klasifikasi.GET_KLASIFIKASI.size(); j++) {
+				JSONObject jsonObj = klasifikasi.getTimelineJSON(
+						Klasifikasi.ID_KLASIFIKASI.get(j), "0", "english");
+				try {
+					if (jsonObj.getInt(Klasifikasi.TAG_SUCCESS) == 1) {
+						JSONArray catalogs = jsonObj
+								.getJSONArray(Klasifikasi.TAG_CATALOGS);
+						
+						for (int i = 0; i < catalogs.length(); i++) {
+							JSONObject c = catalogs.getJSONObject(i);
+							String imageku = c
+									.getString(Klasifikasi.TAG_FILLNAME_IMG);
+							String namaku = c.getString(Klasifikasi.TAG_JUDUL);
+							String deskripsiku = c.getString(
+									Klasifikasi.TAG_ISI_POSTING);
+							String rataku = "RATING";
+							String viewku = c
+									.getString(Klasifikasi.TAG_COUNTER) + " Like";
+							timelines[index++] = new TimelineList(j, imageku, namaku,
+									deskripsiku, rataku, viewku);
+							Log.e("JENATE", j+"");
+						}
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+
+			// Dismiss the progress dialog
+			if (pDialog.isShowing()) {
+				pDialog.dismiss();
+			}
+			
+			initialized();
+
+		}
+
 	}
 
 }
