@@ -7,10 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 import aprisma.akirah.bingung.R;
 import aprisma.akirah.bingung.detail.DetailActivity;
+import aprisma.akirah.bingung.detail.MapActivity;
 import aprisma.akirah.bingung.holder.Klasifikasi;
 
 public class TimelineFragment extends ListFragment {
@@ -29,7 +28,6 @@ public class TimelineFragment extends ListFragment {
 		// Supply num input as an argument.
 		Bundle args = new Bundle();
 		args.putInt("num", num);
-		// args.putParcelableArray("timeline", (Parcelable[]) time);
 
 		f.setArguments(args);
 
@@ -43,8 +41,6 @@ public class TimelineFragment extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mNum = getArguments() != null ? getArguments().getInt("num") : 1;
-		// timelines = (TimelineList[]) (getArguments() != null ?
-		// getArguments().getParcelableArray("timeline") : null);
 
 	}
 
@@ -68,10 +64,6 @@ public class TimelineFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 
-		String namaku = ((TextView) v.findViewById(R.id.namaku)).getText()
-				.toString();
-		Toast.makeText(getActivity(), "Item clicked: " + namaku,
-				Toast.LENGTH_SHORT).show();
 		Intent intent = new Intent(getActivity(), DetailActivity.class);
 		startActivity(intent);
 		getActivity().overridePendingTransition(R.anim.slide_in,
@@ -87,24 +79,11 @@ public class TimelineFragment extends ListFragment {
 			if (mNum == i) {
 				initSearchById(i);
 				int index = 0;
-				for (int j = 0; j < TimelineAcitivity.timelines.length; j++) {
-					if (TimelineAcitivity.timelines[j].getId() == i) {
-						catalogs[index++] = TimelineAcitivity.timelines[j];
+				for (int j = 0; j < MapActivity.timelines.length; j++) {
+					if (MapActivity.timelines[j].getId() == i) {
+						catalogs[index++] = MapActivity.timelines[j];
 					}
 				}
-				// timelines = new TimelineList[i];
-				// int count = getSearchById(i);
-				// catalogs = new TimelineList[count];
-				// for (int j = 0; j < count; j++) {
-				//
-				// catalogs[j] = timelines[i + j];
-				//
-				// timelines[j] = new TimelineList(0, R.id.imageku,
-				// Klasifikasi.GET_KLASIFIKASI.get(mNum),
-				// Klasifikasi.GET_KLASIFIKASI.get(mNum),
-				// Klasifikasi.GET_KLASIFIKASI.get(mNum),
-				// Klasifikasi.GET_KLASIFIKASI.get(mNum));
-				// }
 			}
 		}
 
@@ -119,8 +98,8 @@ public class TimelineFragment extends ListFragment {
 	private void initSearchById(int id) {
 		int hasil = 0;
 
-		for (int i = 0; i < TimelineAcitivity.timelines.length; i++) {
-			if (TimelineAcitivity.timelines[i].getId() == id) {
+		for (int i = 0; i < MapActivity.timelines.length; i++) {
+			if (MapActivity.timelines[i].getId() == id) {
 				hasil++;
 			}
 		}

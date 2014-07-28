@@ -17,8 +17,8 @@
             android:id="@+id/imageku"
             android:layout_width="@dimen/image_width"
             android:layout_height="@dimen/image_width"
-            android:background="@drawable/actionbar"
-            android:contentDescription="@string/app_name" />
+            android:contentDescription="@string/app_name" 
+            android:src="@drawable/ic_launcher"/>
     </LinearLayout>
 
     <LinearLayout

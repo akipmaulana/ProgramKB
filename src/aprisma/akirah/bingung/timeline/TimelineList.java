@@ -1,5 +1,7 @@
 package aprisma.akirah.bingung.timeline;
 
+import com.google.android.gms.maps.model.LatLng;
+
 
 public class TimelineList{
 
@@ -10,14 +12,34 @@ public class TimelineList{
 	private String rataku;
 	private String viewku;
 	
+	private String lat;
+	private String lon;
 	
-	public TimelineList(int id, String imageku, String namaku, String deskripsiku, String rataku, String viewku) {
+	private LatLng latlon;
+	
+	public TimelineList(int id, String imageku, String namaku, String deskripsiku, String rataku, String viewku,
+			String lat, String lon) {
 		this.id = id;
 		this.imageku = imageku;
 		this.namaku = namaku;
 		this.deskripsiku = deskripsiku;
 		this.rataku = rataku;
 		this.viewku = viewku;
+		this.lat = lat;
+		this.lon = lon;
+	}
+	
+	public LatLng getLatLon() {
+		latlon = new LatLng(Double.parseDouble(lat), Double.parseDouble(lon));
+		return latlon;
+	}
+	
+	public String getLat(){
+		return lat;
+	}
+	
+	public String getLon() {
+		return lon;
 	}
 
 	public int getId() {

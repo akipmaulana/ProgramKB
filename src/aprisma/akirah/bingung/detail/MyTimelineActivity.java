@@ -15,7 +15,6 @@ import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
 import aprisma.akirah.bingung.holder.Klasifikasi;
 import aprisma.akirah.bingung.holder.User;
-import aprisma.akirah.bingung.timeline.TimelineAcitivity;
 import aprisma.akirah.bingung.timeline.TimelineList;
 import aprisma.akirah.bingung.timeline.TimelineListAdapter;
 
@@ -29,7 +28,7 @@ public class MyTimelineActivity extends ListActivity {
 		setContentView(R.layout.timeline_fragment);
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-		
+
 		setListenerCustom();
 	}
 
@@ -73,30 +72,35 @@ public class MyTimelineActivity extends ListActivity {
 		super.onBackPressed();
 		overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
 	}
-	
+
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		String namaku = ((TextView) v.findViewById(R.id.namaku)).getText().toString();
-        Toast.makeText(this, "Item clicked: " + namaku, Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, DetailActivity.class);
-        startActivity(intent);
-        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
+		String namaku = ((TextView) v.findViewById(R.id.namaku)).getText()
+				.toString();
+		Toast.makeText(this, "Item clicked: " + namaku, Toast.LENGTH_SHORT)
+				.show();
+		Intent intent = new Intent(this, DetailActivity.class);
+		startActivity(intent);
+		this.overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
 	}
-	
+
 	/*
-     * Method untuk set listener pada view custom yang clickable atau editable
-     */
-    private void setListenerCustom(){
-    	
-    	TimelineList[] list_line = new TimelineList[Klasifikasi.GET_KLASIFIKASI.size()];
-        for (int i=0;i<Klasifikasi.GET_KLASIFIKASI.size();i++){
-        	list_line[i]=new TimelineList(0,
-        			"", "Akip", TimelineAcitivity.timelines[0].getDeskripsiku(), "Akirah", "Munyu");
-        }
-        
-        TimelineListAdapter adapter = new TimelineListAdapter(this, R.layout.timeline_list, list_line);
-        
-        setListAdapter(adapter);
-    }
+	 * Method untuk set listener pada view custom yang clickable atau editable
+	 */
+	private void setListenerCustom() {
+
+		TimelineList[] list_line = new TimelineList[Klasifikasi.GET_KLASIFIKASI
+				.size()];
+		for (int i = 0; i < Klasifikasi.GET_KLASIFIKASI.size(); i++) {
+			list_line[i] = new TimelineList(0, "", "Akip",
+					MapActivity.timelines[0].getDeskripsiku(), "Akirah",
+					"Munyu", "-6.737246", "108.550656");
+		}
+
+		TimelineListAdapter adapter = new TimelineListAdapter(this,
+				R.layout.timeline_list, list_line);
+
+		setListAdapter(adapter);
+	}
 
 }

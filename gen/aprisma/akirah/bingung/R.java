@@ -1304,25 +1304,26 @@ containing a value of this type.
         public static final int ic_action_new_picture=0x7f02007e;
         public static final int ic_action_person=0x7f02007f;
         public static final int ic_action_picture=0x7f020080;
-        public static final int ic_action_search=0x7f020081;
-        public static final int ic_action_share=0x7f020082;
-        public static final int ic_action_view_as_list=0x7f020083;
-        public static final int ic_drawer=0x7f020084;
-        public static final int ic_launcher=0x7f020085;
-        public static final int ic_plusone_medium_off_client=0x7f020086;
-        public static final int ic_plusone_small_off_client=0x7f020087;
-        public static final int ic_plusone_standard_off_client=0x7f020088;
-        public static final int ic_plusone_tall_off_client=0x7f020089;
-        public static final int kuliner=0x7f02008a;
-        public static final int pasta=0x7f02008b;
-        public static final int rounded=0x7f02008c;
-        public static final int scroll_style=0x7f02008d;
-        public static final int tab_selected_example=0x7f02008e;
-        public static final int tab_selected_focused_example=0x7f02008f;
-        public static final int tab_selected_pressed_example=0x7f020090;
-        public static final int tab_unselected_example=0x7f020091;
-        public static final int tab_unselected_focused_example=0x7f020092;
-        public static final int tab_unselected_pressed_example=0x7f020093;
+        public static final int ic_action_replay=0x7f020081;
+        public static final int ic_action_search=0x7f020082;
+        public static final int ic_action_share=0x7f020083;
+        public static final int ic_action_view_as_list=0x7f020084;
+        public static final int ic_drawer=0x7f020085;
+        public static final int ic_launcher=0x7f020086;
+        public static final int ic_plusone_medium_off_client=0x7f020087;
+        public static final int ic_plusone_small_off_client=0x7f020088;
+        public static final int ic_plusone_standard_off_client=0x7f020089;
+        public static final int ic_plusone_tall_off_client=0x7f02008a;
+        public static final int kuliner=0x7f02008b;
+        public static final int pasta=0x7f02008c;
+        public static final int rounded=0x7f02008d;
+        public static final int scroll_style=0x7f02008e;
+        public static final int tab_selected_example=0x7f02008f;
+        public static final int tab_selected_focused_example=0x7f020090;
+        public static final int tab_selected_pressed_example=0x7f020091;
+        public static final int tab_unselected_example=0x7f020092;
+        public static final int tab_unselected_focused_example=0x7f020093;
+        public static final int tab_unselected_pressed_example=0x7f020094;
     }
     public static final class id {
         public static final int action_bar=0x7f06001f;
@@ -1396,7 +1397,7 @@ containing a value of this type.
         public static final int list_klasifikasi=0x7f060060;
         public static final int logo_klasifikasi=0x7f06005e;
         public static final int logout=0x7f060084;
-        public static final int logout_map=0x7f060086;
+        public static final int logout_map=0x7f060087;
         public static final int mail=0x7f060053;
         public static final int map=0x7f060061;
         public static final int middle=0x7f060015;
@@ -1409,7 +1410,7 @@ containing a value of this type.
         public static final int new_pass=0x7f060046;
         public static final int none=0x7f060000;
         public static final int normal=0x7f060001;
-        public static final int ok_done=0x7f060087;
+        public static final int ok_done=0x7f060088;
         public static final int pager=0x7f060073;
         public static final int pekerjaan=0x7f06005a;
         public static final int pendidikan=0x7f060059;
@@ -1426,6 +1427,7 @@ containing a value of this type.
         public static final int reg_pass=0x7f06006a;
         public static final int reg_pass2=0x7f06006b;
         public static final int registrasi_link=0x7f060045;
+        public static final int retrieveAll=0x7f060085;
         public static final int satellite=0x7f060002;
         public static final int scroolView1=0x7f060041;
         public static final int search_badge=0x7f060035;
@@ -1453,7 +1455,7 @@ containing a value of this type.
         public static final int terrain=0x7f060003;
         public static final int thread_img=0x7f060071;
         public static final int thread_tv=0x7f060072;
-        public static final int timelineBar=0x7f060085;
+        public static final int timelineBar=0x7f060086;
         public static final int title=0x7f06002e;
         public static final int top_action_bar=0x7f060023;
         public static final int up=0x7f060024;
@@ -1583,7 +1585,7 @@ containing a value of this type.
         public static final int akun=0x7f070036;
         public static final int alamat=0x7f070043;
         public static final int app_name=0x7f070028;
-        public static final int arah=0x7f070066;
+        public static final int arah=0x7f070067;
         /**   Title for notification shown when GooglePlayServices needs to be
         enabled for a application to work. [CHAR LIMIT=70] 
          */
@@ -1609,11 +1611,11 @@ containing a value of this type.
         public static final int auth_client_using_bad_version_title=0x7f070014;
         public static final int bantuan=0x7f070033;
         public static final int baru_password=0x7f07003d;
-        public static final int beri_koment=0x7f070068;
+        public static final int beri_koment=0x7f070069;
         public static final int biografi=0x7f07004a;
         public static final int bisnis=0x7f070055;
-        public static final int cari=0x7f07005d;
-        public static final int comment=0x7f07006c;
+        public static final int cari=0x7f07005e;
+        public static final int comment=0x7f07006d;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -1685,11 +1687,11 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f070013;
-        public static final int deskripsi=0x7f07006f;
-        public static final int deskripsi_title=0x7f070067;
+        public static final int deskripsi=0x7f070070;
+        public static final int deskripsi_title=0x7f070068;
         public static final int detail=0x7f070034;
-        public static final int drawer_close=0x7f070071;
-        public static final int drawer_open=0x7f070070;
+        public static final int drawer_close=0x7f070072;
+        public static final int drawer_open=0x7f070071;
         public static final int en=0x7f07002e;
         public static final int foto_profil=0x7f070035;
         public static final int hello_world=0x7f070029;
@@ -1700,15 +1702,15 @@ containing a value of this type.
         public static final int in=0x7f07002d;
         public static final int jalan=0x7f070052;
         public static final int jekel=0x7f070040;
-        public static final int judul=0x7f07006b;
+        public static final int judul=0x7f07006c;
         public static final int keluar=0x7f07002f;
         public static final int klasifikasi=0x7f070057;
         public static final int konf_password=0x7f07003e;
-        public static final int kosong=0x7f070059;
+        public static final int kosong=0x7f07005a;
         public static final int kota=0x7f070044;
         public static final int lain=0x7f070056;
         public static final int lainnya=0x7f07004f;
-        public static final int lihat=0x7f070064;
+        public static final int lihat=0x7f070065;
         /**  Location client code resources (prefix with location_client) 
          */
         public static final int location_client_powered_by_google=0x7f07001a;
@@ -1717,37 +1719,38 @@ containing a value of this type.
         public static final int makanan=0x7f070051;
         public static final int masuk=0x7f070030;
         public static final int media_sosial=0x7f07004d;
-        public static final int mytimeline=0x7f07006a;
-        public static final int nama_=0x7f07005b;
+        public static final int mytimeline=0x7f07006b;
+        public static final int nama_=0x7f07005c;
         public static final int nama_lengkap=0x7f07003f;
         public static final int negara=0x7f070046;
         public static final int ok=0x7f07002b;
         public static final int password=0x7f07003c;
         public static final int pekerjaan=0x7f070048;
         public static final int pendidikan=0x7f070047;
-        public static final int penilaian=0x7f07006d;
+        public static final int penilaian=0x7f07006e;
         public static final int post=0x7f07002c;
         public static final int profil=0x7f070031;
         public static final int provinsi=0x7f070045;
         public static final int registrasi=0x7f070038;
         public static final int registrasi_underline=0x7f070039;
-        public static final int review=0x7f070069;
-        public static final int sample_desk=0x7f070060;
-        public static final int sample_lihat=0x7f07005f;
-        public static final int sample_nomor=0x7f070061;
-        public static final int sample_post_time=0x7f070063;
-        public static final int sample_site=0x7f070062;
-        public static final int sample_warung=0x7f07005e;
+        public static final int retrieveAll=0x7f070059;
+        public static final int review=0x7f07006a;
+        public static final int sample_desk=0x7f070061;
+        public static final int sample_lihat=0x7f070060;
+        public static final int sample_nomor=0x7f070062;
+        public static final int sample_post_time=0x7f070064;
+        public static final int sample_site=0x7f070063;
+        public static final int sample_warung=0x7f07005f;
         public static final int situs=0x7f070042;
-        public static final int suka=0x7f070065;
+        public static final int suka=0x7f070066;
         public static final int tahun=0x7f07003a;
         public static final int tanggal_lahir=0x7f070041;
-        public static final int telpon=0x7f07005c;
+        public static final int telpon=0x7f07005d;
         public static final int tempat_tinggal=0x7f07004e;
         public static final int thread=0x7f070032;
         public static final int timeline=0x7f070058;
-        public static final int titik2=0x7f07005a;
-        public static final int tulis=0x7f07006e;
+        public static final int titik2=0x7f07005b;
+        public static final int tulis=0x7f07006f;
         public static final int ubah_password=0x7f07004b;
     }
     public static final class style {

@@ -34,6 +34,8 @@ public class Klasifikasi extends KlikBParent {
 	public static final String TAG_DESC = "desc";
 	public static final String TAG_META_KEYWORD = "meta_keyword";
 	public static final String TAG_IMG = "img";
+	public static final String TAG_LAT = "lat";
+	public static final String TAG_LON = "lon";
 	
 	public Klasifikasi() {
 		// TODO Auto-generated constructor stub
