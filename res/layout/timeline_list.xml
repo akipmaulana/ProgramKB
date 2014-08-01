@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/klasifikasi"
                 android:textSize="18sp" />
-
+            
         </LinearLayout>
 
         <LinearLayout

@@ -9,6 +9,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.annotation.SuppressLint;
@@ -28,7 +29,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -57,7 +57,7 @@ public class MapActivity extends Activity {
 
 	private Boolean isViewAll = false;
 	private Boolean isResume = false;
-	private Boolean isInit = true; 
+	private Boolean isInit = true;
 	private Boolean isShowAlert = false;
 
 	private Timeline timeline;
@@ -147,7 +147,7 @@ public class MapActivity extends Activity {
 						locationGPS.getLongitude());
 				timeline.execute();
 			} else {
-				if (!isShowAlert){
+				if (!isShowAlert) {
 					showSettingsAlert("LOCATION SOURCES");
 				}
 			}
@@ -156,12 +156,12 @@ public class MapActivity extends Activity {
 	}
 
 	private void showSettingsAlert(String provider) {
-		
+
 		isShowAlert = true;
-		
+
 		AlertDialog.Builder alertDialog = new AlertDialog.Builder(
 				MapActivity.this);
-		
+
 		alertDialog.setTitle(provider + " SETTINGS");
 
 		alertDialog.setMessage(provider
@@ -229,16 +229,29 @@ public class MapActivity extends Activity {
 			if (isViewAll) {
 				map.addMarker(new MarkerOptions()
 						.position(timelines[i].getLatLon())
-						.title(timelines[i].getNamaku()).icon(null));
+						.title(timelines[i].getNamaku())
+						.snippet("NILAI : " + timelines[i].getRataku()).anchor(0.5f, 0.5f));
 			} else {
 				if (timelines[i].getId() == id) {
-					map.addMarker(new MarkerOptions().position(
-							timelines[i].getLatLon()).title(
-							timelines[i].getNamaku()));
+					map.addMarker(new MarkerOptions()
+							.position(timelines[i].getLatLon())
+							.title(timelines[i].getNamaku())
+							.snippet("NILAI : " + timelines[i].getRataku()).anchor(0.5f, 0.5f));
 				}
 			}
 		}
 
+		map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+			
+			@Override
+			public void onInfoWindowClick(Marker marker) {
+				String namaku = marker.getTitle();
+				Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
+				intent.putExtra(Klasifikasi.TAG_NAME, namaku);
+				startActivity(intent);
+			}
+		});
+		
 		map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 		map.setMyLocationEnabled(true);
 		CameraUpdate update = CameraUpdateFactory.newLatLngZoom(INIAKU, 11);
@@ -271,6 +284,7 @@ public class MapActivity extends Activity {
 			return true;
 		case R.id.retrieveAll:
 			if (timelines != null) {
+				Toast.makeText(getApplicationContext(), "View All", Toast.LENGTH_SHORT).show();
 				isViewAll = true;
 				initActionBar("View All");
 				initialized();
@@ -342,6 +356,7 @@ public class MapActivity extends Activity {
 
 						for (int i = 0; i < catalogs.length(); i++) {
 							JSONObject c = catalogs.getJSONObject(i);
+							int id_posting = c.getInt(Klasifikasi.TAG_ID_POSTING);
 							String imageku = c
 									.getString(Klasifikasi.TAG_FILLNAME_IMG);
 							String namaku = c.getString(Klasifikasi.TAG_JUDUL);
@@ -353,10 +368,9 @@ public class MapActivity extends Activity {
 									+ " Like";
 							String lat = c.getString(Klasifikasi.TAG_LAT);
 							String lon = c.getString(Klasifikasi.TAG_LON);
-							timelines[index++] = new TimelineList(j, imageku,
-									namaku, deskripsiku, rataku, viewku, lat,
+							timelines[index++] = new TimelineList(j, id_posting, imageku,
+									namaku, deskripsiku, rataku, viewku, true, lat,
 									lon);
-							Log.e("JENATE", j + "");
 						}
 					}
 				} catch (JSONException e) {

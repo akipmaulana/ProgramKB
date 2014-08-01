@@ -1,22 +1,15 @@
 package aprisma.akirah.bingung.timeline;
 
-import java.io.InputStream;
-
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.text.Html;
 import android.text.Spanned;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import aprisma.akirah.bingung.R;
 
 public class TimelineListAdapter extends ArrayAdapter<TimelineList> {
@@ -57,9 +50,7 @@ public class TimelineListAdapter extends ArrayAdapter<TimelineList> {
 
 		TimelineList list = data[position];
 		if (list != null) {
-			Toast.makeText(getContext(), "INIT ULANG " + position,
-					Toast.LENGTH_SHORT).show();
-			new DownloadImageTask(holder.imageku).execute(list.getImageku());
+			holder.imageku.setImageBitmap(list.getBmImage());
 			holder.namaku.setText(list.getNamaku());
 			Spanned deskripsi = (Spanned) Html.fromHtml(list.getDeskripsiku())
 					.subSequence(0, 100);
@@ -77,31 +68,4 @@ public class TimelineListAdapter extends ArrayAdapter<TimelineList> {
 		private TextView rataku;
 		private TextView viewku;
 	}
-
-	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-		ImageView bmImage;
-
-		public DownloadImageTask(ImageView bmImage) {
-			this.bmImage = bmImage;
-		}
-
-		protected Bitmap doInBackground(String... urls) {
-			String urldisplay = urls[0];
-			Bitmap mIcon11 = null;
-			try {
-				InputStream in = new java.net.URL(urldisplay).openStream();
-				mIcon11 = BitmapFactory.decodeStream(in);
-			} catch (Exception e) {
-				Log.e("Error", e.getMessage());
-				e.printStackTrace();
-			}
-			return mIcon11;
-		}
-
-		protected void onPostExecute(Bitmap result) {
-			bmImage.setImageBitmap(result);
-		}
-
-	}
-
 }

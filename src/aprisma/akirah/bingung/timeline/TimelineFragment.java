@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 import aprisma.akirah.bingung.R;
 import aprisma.akirah.bingung.detail.DetailActivity;
 import aprisma.akirah.bingung.detail.MapActivity;
@@ -63,8 +64,10 @@ public class TimelineFragment extends ListFragment {
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-
+		String namaku = ((TextView) v.findViewById(R.id.namaku)).getText()
+				.toString();
 		Intent intent = new Intent(getActivity(), DetailActivity.class);
+		intent.putExtra(Klasifikasi.TAG_NAME, namaku);
 		startActivity(intent);
 		getActivity().overridePendingTransition(R.anim.slide_in,
 				R.anim.slide_in);

@@ -1,43 +1,64 @@
 package aprisma.akirah.bingung.holder;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONObject;
+
 public class Posting extends KlikBParent{
 
 	private String id_posting;
 	private String judul;
+	private String date_create;
+	private String isi_posting;
+	private String keyword;
 	private String nama_merchant;
 	private String alamat;
-	private String isi_posting;
+	private String kota;
+	private String provinsi;
+	private String negara;
+	private String telepon;
+	private String website;
+	private String lat;
+	private String lon;
+	private String counter;
 	private String name_catalog;
-	private String id_catalog;
+	private String fullname;
 	private String rating;
-	private String jum_com;
-	private String filename_image;
-	private String desc;
-	private String meta_keyword;
-	private String img;
+	private String jum_kom;
+	private String id_catalog;
+	private String price;
 	
 	public Posting() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Posting(String id_posting, String judul, String nama_merchant,
-			String alamat, String isi_posting, String name_catalog, String id_catalog, String rating,
-			String jum_com, String filename_image, String desc, String meta_keyword, String img) {
-		
+	public Posting(String id_posting, String judul, String date_create, String isi_posting,
+			String keyword, String nama_merchant, String alamat, String kota, String provinsi,
+			String negara, String telepon, String website, String lat, String lon, String counter,
+			String name_catalog, String fullname, String rating, String jum_kom, String price) {
 		this.id_posting = id_posting;
 		this.judul = judul;
+		this.date_create = date_create;
+		this.isi_posting = isi_posting;
+		this.keyword = keyword;
 		this.nama_merchant = nama_merchant;
 		this.alamat = alamat;
-		this.isi_posting = isi_posting;
-		this.name_catalog = name_catalog;
-		this.id_catalog = id_catalog;
+		this.kota = kota;
+		this.provinsi = provinsi;
+		this.negara = negara;
+		this.telepon = telepon;
+		this.website = website;
+		this.lat = lat;
+		this.lon = lon;
+		this.counter = counter;
+		this.nama_merchant = name_catalog;
+		this.fullname = fullname;
 		this.rating = rating;
-		this.jum_com = jum_com;
-		this.filename_image = filename_image;
-		this.desc = desc;
-		this.meta_keyword = meta_keyword;
-		this.img = img;
-		
+		this.jum_kom = jum_kom;
+		this.price = price;
 	}
 
 	public String getId_posting() {
@@ -48,6 +69,18 @@ public class Posting extends KlikBParent{
 		return judul;
 	}
 
+	public String getDate_create() {
+		return date_create;
+	}
+
+	public String getIsi_posting() {
+		return isi_posting;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
 	public String getNama_merchant() {
 		return nama_merchant;
 	}
@@ -56,41 +89,158 @@ public class Posting extends KlikBParent{
 		return alamat;
 	}
 
-	public String getIsi_posting() {
-		return isi_posting;
+	public String getKota() {
+		return kota;
+	}
+
+	public String getProvinsi() {
+		return provinsi;
+	}
+
+	public String getNegara() {
+		return negara;
+	}
+
+	public String getTelepon() {
+		return telepon;
+	}
+
+	public String getWebsite() {
+		return website;
+	}
+
+	public String getLat() {
+		return lat;
+	}
+
+	public String getLon() {
+		return lon;
+	}
+
+	public String getCounter() {
+		return counter;
 	}
 
 	public String getName_catalog() {
 		return name_catalog;
 	}
-	
+
+	public String getFullname() {
+		return fullname;
+	}
+
+	public String getRating() {
+		if (rating == "null" || rating == ""){
+			rating = "0";
+		}
+		return rating;
+	}
+
+	public String getJum_kom() {
+		return jum_kom;
+	}
+
 	public String getId_catalog() {
 		return id_catalog;
 	}
 
-	public String getRating() {
-		return rating;
+	public String getPrice() {
+		return price;
 	}
 
-	public String getJum_com() {
-		return jum_com;
+	public void setId_posting(String id_posting) {
+		this.id_posting = id_posting;
 	}
 
-	public String getFilename_image() {
-		return filename_image;
+	public void setJudul(String judul) {
+		this.judul = judul;
 	}
 
-	public String getDesc() {
-		return desc;
+	public void setDate_create(String date_create) {
+		this.date_create = date_create;
 	}
 
-	public String getMeta_keyword() {
-		return meta_keyword;
+	public void setIsi_posting(String isi_posting) {
+		this.isi_posting = isi_posting;
 	}
 
-	public String getImg() {
-		return img;
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
+
+	public void setNama_merchant(String nama_merchant) {
+		this.nama_merchant = nama_merchant;
+	}
+
+	public void setAlamat(String alamat) {
+		this.alamat = alamat;
+	}
+
+	public void setKota(String kota) {
+		this.kota = kota;
+	}
+
+	public void setProvinsi(String provinsi) {
+		this.provinsi = provinsi;
+	}
+
+	public void setNegara(String negara) {
+		this.negara = negara;
+	}
+
+	public void setTelepon(String telepon) {
+		this.telepon = telepon;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+
+	public void setLon(String lon) {
+		this.lon = lon;
+	}
+
+	public void setCounter(String counter) {
+		this.counter = counter;
+	}
+
+	public void setName_catalog(String name_catalog) {
+		this.name_catalog = name_catalog;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+
+	public void setRating(String rating) {
+		this.rating = rating;
+	}
+
+	public void setJum_kom(String jum_kom) {
+		this.jum_kom = jum_kom;
+	}
+
+	public void setId_catalog(String id_catalog) {
+		this.id_catalog = id_catalog;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
+	public JSONObject getReviewJSON(String id_posting, String lang){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("tag", REVIEW_TAG));
+		params.add(new BasicNameValuePair("id_posting", id_posting));
+		params.add(new BasicNameValuePair("lang", lang));
+		JSONObject json = JSONPARSER.getJSONFromUrl(URL, params);
+		return json;
+	}
+	
 
 }
 
