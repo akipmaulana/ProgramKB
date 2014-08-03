@@ -30,37 +30,12 @@ public class Posting extends KlikBParent{
 	private String jum_kom;
 	private String id_catalog;
 	private String price;
+	private ArrayList<Komentar> koments;
 	
 	public Posting() {
-		// TODO Auto-generated constructor stub
+		koments = new ArrayList<Komentar>();
 	}
 	
-	public Posting(String id_posting, String judul, String date_create, String isi_posting,
-			String keyword, String nama_merchant, String alamat, String kota, String provinsi,
-			String negara, String telepon, String website, String lat, String lon, String counter,
-			String name_catalog, String fullname, String rating, String jum_kom, String price) {
-		this.id_posting = id_posting;
-		this.judul = judul;
-		this.date_create = date_create;
-		this.isi_posting = isi_posting;
-		this.keyword = keyword;
-		this.nama_merchant = nama_merchant;
-		this.alamat = alamat;
-		this.kota = kota;
-		this.provinsi = provinsi;
-		this.negara = negara;
-		this.telepon = telepon;
-		this.website = website;
-		this.lat = lat;
-		this.lon = lon;
-		this.counter = counter;
-		this.nama_merchant = name_catalog;
-		this.fullname = fullname;
-		this.rating = rating;
-		this.jum_kom = jum_kom;
-		this.price = price;
-	}
-
 	public String getId_posting() {
 		return id_posting;
 	}
@@ -189,11 +164,19 @@ public class Posting extends KlikBParent{
 	}
 
 	public void setTelepon(String telepon) {
-		this.telepon = telepon;
+		if (telepon == "" || telepon == null){
+			this.telepon = "-";
+		} else {
+			this.telepon = telepon;
+		}
 	}
 
 	public void setWebsite(String website) {
-		this.website = website;
+		if (website == "" || website == null){
+			this.website = "-";
+		} else {
+			this.website = website;
+		}
 	}
 
 	public void setLat(String lat) {
@@ -231,6 +214,10 @@ public class Posting extends KlikBParent{
 	public void setPrice(String price) {
 		this.price = price;
 	}
+	
+	public ArrayList<Komentar> getKoments() {
+		return koments;
+	}
 
 	public JSONObject getReviewJSON(String id_posting, String lang){
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -240,6 +227,7 @@ public class Posting extends KlikBParent{
 		JSONObject json = JSONPARSER.getJSONFromUrl(URL, params);
 		return json;
 	}
+	
 	
 
 }

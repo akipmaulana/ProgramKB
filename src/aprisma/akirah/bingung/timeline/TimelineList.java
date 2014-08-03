@@ -40,7 +40,7 @@ public class TimelineList {
 		this.lat = lat;
 		this.lon = lon;
 		this.tagOfLoad = tagOfLoad;
-		setBmImage();
+		//setBmImage();
 	}
 
 	public Boolean getTagOfLoad() {
@@ -123,8 +123,6 @@ public class TimelineList {
 				mIcon11 = Bitmap.createBitmap(mIcon11, 0, 0, width, height,
 						bMatrix, true);
 			} catch (Exception e) {
-				//Log.e("Error", e.getMessage());
-				//e.printStackTrace();
 			}
 			return mIcon11;
 		}

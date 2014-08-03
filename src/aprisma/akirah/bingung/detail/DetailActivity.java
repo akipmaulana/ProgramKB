@@ -2,6 +2,7 @@ package aprisma.akirah.bingung.detail;
 
 import java.io.InputStream;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,11 +19,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
 import aprisma.akirah.bingung.holder.Klasifikasi;
+import aprisma.akirah.bingung.holder.Komentar;
 import aprisma.akirah.bingung.holder.Posting;
 import aprisma.akirah.bingung.holder.User;
 
@@ -111,7 +114,7 @@ public class DetailActivity extends Activity {
 	private void setIdPosting(String namaku) {
 		for (int i = 0; i < MapActivity.timelines.length; i++) {
 			if (MapActivity.timelines[i].getNamaku().equals(namaku)) {
-				id_posting = MapActivity.timelines[i].getIdPosting();
+				id_posting = 39;//MapActivity.timelines[i].getIdPosting();
 				filename_img = MapActivity.timelines[i].getImageku();
 			}
 		}
@@ -139,6 +142,22 @@ public class DetailActivity extends Activity {
 		situs_posting.setText(posting.getWebsite());
 		TextView isi_posting = (TextView) findViewById(R.id.isi_posting);
 		isi_posting.setText(posting.getIsi_posting());
+
+		LinearLayout koment_list = (LinearLayout) findViewById(R.id.koment_list);
+		
+		for (int i = 0; i < posting.getKoments().size(); i++) {
+			Komentar komentar = posting.getKoments().get(i);
+			View item = getLayoutInflater().inflate(R.layout.koment_item,
+					koment_list, false);
+			((TextView) item.findViewById(R.id.nama_comment)).setText(
+					komentar.getFullname());
+			((TextView) item.findViewById(R.id.waktu_comment)).setText(
+					komentar.getDate_create());
+			((TextView) item.findViewById(R.id.isi_comment)).setText(
+					komentar.getIsi_komen());
+			komentar.setIcon(((ImageView) item.findViewById(R.id.img_coment)));
+			koment_list.addView(item, i);
+		}
 	}
 
 	private ProgressDialog pDialog;
@@ -151,15 +170,14 @@ public class DetailActivity extends Activity {
 			super.onPreExecute();
 			pDialog = new ProgressDialog(DetailActivity.this);
 			pDialog.setMessage("Please wait . . .");
-			pDialog.setCancelable(false);
+			pDialog.setCancelable(true);
 			pDialog.show();
 		}
 
 		@Override
 		protected Void doInBackground(Void... params) {
 			posting = new Posting();
-			JSONObject json = posting.getReviewJSON(id_posting + "",
-					"english");
+			JSONObject json = posting.getReviewJSON(id_posting + "", "english");
 			try {
 				if (json.getInt(Klasifikasi.TAG_SUCCESS) == 1) {
 					JSONObject jsonOBJ = json.getJSONObject("posting");
@@ -183,6 +201,19 @@ public class DetailActivity extends Activity {
 					posting.setJum_kom(jsonOBJ.getString("jum_kom"));
 					posting.setPrice(jsonOBJ.getString("price"));
 					image = getImageView(filename_img);
+					JSONArray koments = json.getJSONArray("koments");
+					for (int i = 0; i < koments.length(); i++) {
+						JSONObject j = koments.getJSONObject(i);
+						Komentar komentar = new Komentar(
+								j.getString("id_komentar"),
+								j.getString("rating"),
+								j.getString("judul_komen"),
+								j.getString("isi_komen"),
+								j.getString("date_create"),
+								j.getString("fullname"),
+								j.getString("website"), j.getString("avatar"));
+						posting.getKoments().add(komentar);
+					}
 				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
