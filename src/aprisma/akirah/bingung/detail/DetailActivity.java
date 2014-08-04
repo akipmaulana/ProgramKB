@@ -12,6 +12,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -56,7 +57,7 @@ public class DetailActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.main, menu);
+		inflater.inflate(R.menu.review_menu, menu);
 
 		PengaturanActivity.SetMenu(menu);
 
@@ -70,6 +71,16 @@ public class DetailActivity extends Activity {
 		case android.R.id.home:
 			finish();
 			overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
+			return true;
+		case R.id.koment:
+			if (User.ISLOGIN) {
+				intent = new Intent(this, CommentActivity.class);
+				startActivity(intent);
+				overridePendingTransition(R.anim.slide_bottom, R.anim.slide_bottom);
+			} else {
+				intent = new Intent(this, MainActivity.class);
+				startActivity(intent);
+			}
 			return true;
 		case R.id.action_settings:
 			intent = new Intent(getApplicationContext(),
@@ -114,23 +125,26 @@ public class DetailActivity extends Activity {
 	private void setIdPosting(String namaku) {
 		for (int i = 0; i < MapActivity.timelines.length; i++) {
 			if (MapActivity.timelines[i].getNamaku().equals(namaku)) {
-				id_posting = 39;//MapActivity.timelines[i].getIdPosting();
+				id_posting = MapActivity.timelines[i].getIdPosting();
 				filename_img = MapActivity.timelines[i].getImageku();
 			}
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private void initView() {
 		setContentView(R.layout.detail_activity);
 
 		TextView judul = (TextView) findViewById(R.id.judul);
 		judul.setText(posting.getJudul());
 		ImageView gambar = (ImageView) findViewById(R.id.img_detail);
-		gambar.setImageBitmap(image);
+		gambar.setBackground(new BitmapDrawable(image));
 		TextView views = (TextView) findViewById(R.id.views);
-		views.setText(posting.getRating());
+		views.setText(posting.getCounter());
 		TextView liked = (TextView) findViewById(R.id.liked);
-		liked.setText(posting.getJum_kom());
+		liked.setText(posting.getLike());
+		TextView rate = (TextView) findViewById(R.id.my_rating);
+		rate.setText(Float.parseFloat(posting.getRating())+"");
 		TextView nama = (TextView) findViewById(R.id.nama_posting);
 		nama.setText(posting.getNama_merchant());
 		TextView alamat = (TextView) findViewById(R.id.alamat_post);
@@ -140,6 +154,8 @@ public class DetailActivity extends Activity {
 		telpon.setText(posting.getTelepon());
 		TextView situs_posting = (TextView) findViewById(R.id.situs_posting);
 		situs_posting.setText(posting.getWebsite());
+		TextView harga = (TextView) findViewById(R.id.harga_posting);
+		harga.setText(posting.getPrice());
 		TextView isi_posting = (TextView) findViewById(R.id.isi_posting);
 		isi_posting.setText(posting.getIsi_posting());
 
@@ -200,6 +216,7 @@ public class DetailActivity extends Activity {
 					posting.setRating(jsonOBJ.getString("rating"));
 					posting.setJum_kom(jsonOBJ.getString("jum_kom"));
 					posting.setPrice(jsonOBJ.getString("price"));
+					posting.setLike(jsonOBJ.getString("like"));
 					image = getImageView(filename_img);
 					JSONArray koments = json.getJSONArray("koments");
 					for (int i = 0; i < koments.length(); i++) {

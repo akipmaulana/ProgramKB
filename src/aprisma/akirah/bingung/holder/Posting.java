@@ -23,7 +23,8 @@ public class Posting extends KlikBParent{
 	private String website;
 	private String lat;
 	private String lon;
-	private String counter;
+	private String counter; // view
+	private String like; // like
 	private String name_catalog;
 	private String fullname;
 	private String rating;
@@ -36,6 +37,14 @@ public class Posting extends KlikBParent{
 		koments = new ArrayList<Komentar>();
 	}
 	
+	public String getLike() {
+		return like;
+	}
+
+	public void setLike(String like) {
+		this.like = like;
+	}
+
 	public String getId_posting() {
 		return id_posting;
 	}
@@ -77,10 +86,16 @@ public class Posting extends KlikBParent{
 	}
 
 	public String getTelepon() {
+		if (telepon == ""){
+			telepon = "0";
+		}
 		return telepon;
 	}
 
 	public String getWebsite() {
+		if (website == ""){
+			website = "-";
+		}
 		return website;
 	}
 
@@ -164,19 +179,11 @@ public class Posting extends KlikBParent{
 	}
 
 	public void setTelepon(String telepon) {
-		if (telepon == "" || telepon == null){
-			this.telepon = "-";
-		} else {
-			this.telepon = telepon;
-		}
+		this.telepon = telepon;
 	}
 
 	public void setWebsite(String website) {
-		if (website == "" || website == null){
-			this.website = "-";
-		} else {
-			this.website = website;
-		}
+		this.website = website;
 	}
 
 	public void setLat(String lat) {

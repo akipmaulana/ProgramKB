@@ -26,6 +26,18 @@ public class PengaturanActivity extends Activity {
 			logout.setTitle(R.string.masuk);
 		}
 	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if (!User.ISLOGIN){
+			Intent intent = new Intent(getApplicationContext(),
+					KlasifikasiActivity.class);
+			startActivity(intent);
+			return;
+		}
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

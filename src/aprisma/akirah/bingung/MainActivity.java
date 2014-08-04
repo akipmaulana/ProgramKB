@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import aprisma.akirah.bingung.detail.KlasifikasiActivity;
 import aprisma.akirah.bingung.holder.User;
 
 public class MainActivity extends Activity {
@@ -76,13 +75,6 @@ public class MainActivity extends Activity {
 
 	}
 
-	@Override
-	public void onBackPressed() {
-		Intent intent = new Intent(getApplicationContext(),
-				KlasifikasiActivity.class);
-		startActivity(intent);
-	}
-
 	private class Login extends AsyncTask<Void, Void, Void> {
 
 		private int tag_error;
@@ -124,13 +116,7 @@ public class MainActivity extends Activity {
 			switch (tag_error) {
 			case 0:
 				User.ISLOGIN = true;
-				// Toast.makeText(getApplicationContext(),
-				// "HALLO "+User.fullname, Toast.LENGTH_SHORT).show();
-				Intent intent = new Intent(getApplicationContext(),
-						KlasifikasiActivity.class);
-				intent.putExtra(User.TAG_USER, user);
-				startActivity(intent);
-				overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
+				onBackPressed();
 				break;
 			case 1:
 				Toast.makeText(getApplicationContext(), "Password Salah",

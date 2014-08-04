@@ -52,6 +52,18 @@ public class AkunActivity extends Activity {
 		temp_conf_pass = conf_pass.getText().toString();
 
 	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if (!User.ISLOGIN){
+			Intent intent = new Intent(getApplicationContext(),
+					KlasifikasiActivity.class);
+			startActivity(intent);
+			return;
+		}
+	}
 
 	private void popUpEditText() {
 		alert = new AlertDialog.Builder(this);

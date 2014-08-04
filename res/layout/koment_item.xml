@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/activity_horizontal_margin"
     android:layout_marginRight="@dimen/activity_horizontal_margin"
-    android:background="#50a02065"
     android:orientation="vertical"
     android:padding="@dimen/abc_action_bar_icon_vertical_padding" >
 
@@ -37,7 +36,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/review"
-                android:textColor="#ffffff"
                 android:textSize="16sp" />
 
             <TextView
@@ -45,7 +43,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/sample_post_time"
-                android:textColor="#ffffff"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
@@ -60,8 +57,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/sample_desk"
-            android:textColor="#ffffff"
             android:textSize="12sp" />
     </LinearLayout>
+
+    <View
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#40808080" />
 
 </LinearLayout>

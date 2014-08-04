@@ -24,6 +24,18 @@ public class FotoActivity extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if (!User.ISLOGIN){
+			Intent intent = new Intent(getApplicationContext(),
+					KlasifikasiActivity.class);
+			startActivity(intent);
+			return;
+		}
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

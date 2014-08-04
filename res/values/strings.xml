@@ -52,8 +52,8 @@
     <string name="timeline">Timeline</string>
     <string name="retrieveAll">View All</string>
     <string name="kosong">No Post/Tidak ada kiriman</string>
-    <string name="titik2">:</string>
     <string name="nama_">Nama</string>
+    <string name="harga">Harga</string>
     <string name="telpon">Telepon</string>
     <string name="cari">Cari</string>
     <string name="sample_warung">Warung Pasta - Bandung</string>
@@ -68,6 +68,7 @@
     <string name="deskripsi_title">Dekripsi</string>
     <string name="beri_koment">Beri Komentar</string>
     <string name="review">Review</string>
+    <string name="rate">Rate this app</string>
     <string name="mytimeline">Timeline Ku</string>
     <string name="judul">Judul</string>
     <string name="comment">Isi Komentar</string>

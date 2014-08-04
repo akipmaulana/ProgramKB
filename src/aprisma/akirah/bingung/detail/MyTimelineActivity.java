@@ -31,6 +31,18 @@ public class MyTimelineActivity extends ListActivity {
 
 		setListenerCustom();
 	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if (!User.ISLOGIN){
+			Intent intent = new Intent(getApplicationContext(),
+					KlasifikasiActivity.class);
+			startActivity(intent);
+			return;
+		}
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -93,7 +105,7 @@ public class MyTimelineActivity extends ListActivity {
 				.size()];
 		for (int i = 0; i < Klasifikasi.GET_KLASIFIKASI.size(); i++) {
 			list_line[i] = new TimelineList(0, 0,"", "Akip",
-					MapActivity.timelines[0].getDeskripsiku(), "Akirah",
+					"deskripsi", "Akirah",
 					"Munyu", true,"-6.737246", "108.550656");
 		}
 
