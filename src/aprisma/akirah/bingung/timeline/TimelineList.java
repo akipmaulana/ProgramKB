@@ -2,6 +2,7 @@ package aprisma.akirah.bingung.timeline;
 
 import java.io.InputStream;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -21,6 +22,7 @@ public class TimelineList {
 	private Boolean tagOfLoad; // untuk mengetahui apakah udah di load atau blum
 								// ?
 	private Bitmap bmImage;
+	private Context ctx;
 
 	private String lat;
 	private String lon;
@@ -29,7 +31,7 @@ public class TimelineList {
 
 	public TimelineList(int id, int id_posting, String imageku, String namaku,
 			String deskripsiku, String rataku, String viewku,
-			Boolean tagOfLoad, String lat, String lon) {
+			Boolean tagOfLoad, String lat, String lon, Context ctx) {
 		this.id = id;
 		this.id_posting = id_posting;
 		this.imageku = imageku;
@@ -40,7 +42,11 @@ public class TimelineList {
 		this.lat = lat;
 		this.lon = lon;
 		this.tagOfLoad = tagOfLoad;
-		//setBmImage();
+		this.ctx = ctx;
+	}
+	
+	public Context getCtx() {
+		return ctx;
 	}
 
 	public Boolean getTagOfLoad() {

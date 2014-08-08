@@ -106,7 +106,7 @@ public class MyTimelineActivity extends ListActivity {
 		for (int i = 0; i < Klasifikasi.GET_KLASIFIKASI.size(); i++) {
 			list_line[i] = new TimelineList(0, 0,"", "Akip",
 					"deskripsi", "Akirah",
-					"Munyu", true,"-6.737246", "108.550656");
+					"Munyu", true,"-6.737246", "108.550656", getApplicationContext());
 		}
 
 		TimelineListAdapter adapter = new TimelineListAdapter(this,

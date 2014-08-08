@@ -54,6 +54,7 @@ public class MapActivity extends Activity {
 	private ProgressDialog pDialog;
 
 	public static TimelineList[] timelines;
+	public static Boolean isNew; // untuk mengetahui apakah ada data baru
 
 	private Boolean isViewAll = false;
 	private Boolean isResume = false;
@@ -226,32 +227,37 @@ public class MapActivity extends Activity {
 
 		for (int i = 0; i < timelines.length; i++) {
 			// timelines id == 0 -> Food
+			String rataku = timelines[i].getRataku();
+			String viewku = timelines[i].getViewku();
 			if (isViewAll) {
 				map.addMarker(new MarkerOptions()
 						.position(timelines[i].getLatLon())
 						.title(timelines[i].getNamaku())
-						.snippet("NILAI : " + timelines[i].getRataku()).anchor(0.5f, 0.5f));
+						.snippet(rataku + "   " +viewku)
+						.anchor(0.5f, 0.5f));
 			} else {
 				if (timelines[i].getId() == id) {
 					map.addMarker(new MarkerOptions()
 							.position(timelines[i].getLatLon())
 							.title(timelines[i].getNamaku())
-							.snippet("NILAI : " + timelines[i].getRataku()).anchor(0.5f, 0.5f));
+							.snippet(rataku + "   " +viewku)
+							.anchor(0.5f, 0.5f));
 				}
 			}
 		}
 
 		map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-			
+
 			@Override
 			public void onInfoWindowClick(Marker marker) {
 				String namaku = marker.getTitle();
-				Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
+				Intent intent = new Intent(getApplicationContext(),
+						DetailActivity.class);
 				intent.putExtra(Klasifikasi.TAG_NAME, namaku);
 				startActivity(intent);
 			}
 		});
-		
+
 		map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 		map.setMyLocationEnabled(true);
 		CameraUpdate update = CameraUpdateFactory.newLatLngZoom(INIAKU, 11);
@@ -284,7 +290,8 @@ public class MapActivity extends Activity {
 			return true;
 		case R.id.retrieveAll:
 			if (timelines != null) {
-				Toast.makeText(getApplicationContext(), "View All", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "View All",
+						Toast.LENGTH_SHORT).show();
 				isViewAll = true;
 				initActionBar("View All");
 				initialized();
@@ -294,6 +301,12 @@ public class MapActivity extends Activity {
 			return true;
 		case R.id.timelineBar:
 			if (timelines != null) {
+				if (isNew) {
+					for (int i = 0; i < timelines.length; i++) {
+						timelines[i].setBmImage();
+					}
+					isNew = false;
+				}
 				intent = new Intent(this, TimelineAcitivity.class);
 				intent.putExtra(Klasifikasi.KLASIFIKASI_REQUEST, getKlasifikasi);
 				startActivity(intent);
@@ -356,21 +369,23 @@ public class MapActivity extends Activity {
 
 						for (int i = 0; i < catalogs.length(); i++) {
 							JSONObject c = catalogs.getJSONObject(i);
-							int id_posting = c.getInt(Klasifikasi.TAG_ID_POSTING);
+							int id_posting = c
+									.getInt(Klasifikasi.TAG_ID_POSTING);
 							String imageku = c
 									.getString(Klasifikasi.TAG_FILLNAME_IMG);
 							String namaku = c.getString(Klasifikasi.TAG_JUDUL);
 							String deskripsiku = c
 									.getString(Klasifikasi.TAG_ISI_POSTING);
-							String rataku = "RATING";
-							String viewku = c
+							String rataku = c
 									.getString(Klasifikasi.TAG_COUNTER)
-									+ " Like";
+									+ " View";
+							String viewku = c.getString("like") + " Like";
 							String lat = c.getString(Klasifikasi.TAG_LAT);
 							String lon = c.getString(Klasifikasi.TAG_LON);
-							timelines[index++] = new TimelineList(j, id_posting, imageku,
-									namaku, deskripsiku, rataku, viewku, true, lat,
-									lon);
+							timelines[index++] = new TimelineList(j,
+									id_posting, imageku, namaku, deskripsiku,
+									rataku, viewku, true, lat, lon,
+									getApplicationContext());
 						}
 					}
 				} catch (JSONException e) {
@@ -389,7 +404,9 @@ public class MapActivity extends Activity {
 			if (pDialog.isShowing()) {
 				pDialog.dismiss();
 			}
-
+			
+			isNew = true;
+			
 			initialized();
 
 		}
