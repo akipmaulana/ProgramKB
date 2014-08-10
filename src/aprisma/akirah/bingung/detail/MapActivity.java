@@ -1,5 +1,7 @@
 package aprisma.akirah.bingung.detail;
 
+import java.util.ArrayList;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,6 +17,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
+import android.app.ActionBar.OnNavigationListener;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -31,6 +34,8 @@ import android.provider.Settings;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
@@ -53,15 +58,18 @@ public class MapActivity extends Activity {
 
 	private ProgressDialog pDialog;
 
-	public static TimelineList[] timelines;
+	public static ArrayList<TimelineList> timelines;
 	public static Boolean isNew; // untuk mengetahui apakah ada data baru
 
 	private Boolean isViewAll = false;
 	private Boolean isResume = false;
 	private Boolean isInit = true;
 	private Boolean isShowAlert = false;
+	private Boolean flagOfSpanner = false;
 
 	private Timeline timeline;
+
+	private OnNavigationListener navigation;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -200,10 +208,53 @@ public class MapActivity extends Activity {
 
 		SearchView search = (SearchView) actionBar.getCustomView()
 				.findViewById(R.id.search_view_map);
-		search.setQuery(klasifikasi.toLowerCase(), false);
+		search.setQuery(klasifikasi.toLowerCase(), true);
+
+		makeDropList();
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setTitle(klasifikasi);
+	}
+
+	@SuppressWarnings("unchecked")
+	@SuppressLint("InlinedApi")
+	private void makeDropList() {
+		final ArrayList<String> spinners = (ArrayList<String>) Klasifikasi.GET_KLASIFIKASI
+				.clone();
+		spinners.add(getResources().getString(R.string.retrieveAll));
+
+		SpinnerAdapter adapter = new ArrayAdapter<>(getApplicationContext(),
+				android.R.layout.simple_list_item_1, spinners.toArray());
+
+		navigation = new OnNavigationListener() {
+
+			@Override
+			public boolean onNavigationItemSelected(int itemPosition,
+					long itemId) {
+
+				if (flagOfSpanner) {
+					if (itemPosition == Klasifikasi.GET_KLASIFIKASI.size()) {
+						isViewAll = true;
+						Toast.makeText(getApplicationContext(), "VIEW ALL",
+								Toast.LENGTH_SHORT).show();
+					} else {
+						getKlasifikasi = spinners.get(itemPosition);
+						Toast.makeText(getApplicationContext(), getKlasifikasi,
+								Toast.LENGTH_SHORT).show();
+					}
+
+					initialized();
+				}
+
+				flagOfSpanner = true;
+
+				return false;
+			}
+		};
+
+		getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+		getActionBar().setDisplayShowTitleEnabled(false);
+		getActionBar().setListNavigationCallbacks(adapter, navigation);
+		getActionBar().setSelectedNavigationItem(convertGetKlasifikasi());
 	}
 
 	private int convertGetKlasifikasi() {
@@ -225,26 +276,30 @@ public class MapActivity extends Activity {
 			return;
 		}
 
-		for (int i = 0; i < timelines.length; i++) {
+		map.clear();
+
+		for (int i = 0; i < timelines.size(); i++) {
 			// timelines id == 0 -> Food
-			String rataku = timelines[i].getRataku();
-			String viewku = timelines[i].getViewku();
+			String rataku = timelines.get(i).getRataku();
+			String viewku = timelines.get(i).getViewku();
 			if (isViewAll) {
 				map.addMarker(new MarkerOptions()
-						.position(timelines[i].getLatLon())
-						.title(timelines[i].getNamaku())
-						.snippet(rataku + "   " +viewku)
-						.anchor(0.5f, 0.5f));
+						.position(timelines.get(i).getLatLon())
+						.title(timelines.get(i).getNamaku())
+						.snippet(rataku + "   " + viewku).anchor(0.5f, 0.5f));
+
 			} else {
-				if (timelines[i].getId() == id) {
+				if (timelines.get(i).getId() == id) {
 					map.addMarker(new MarkerOptions()
-							.position(timelines[i].getLatLon())
-							.title(timelines[i].getNamaku())
-							.snippet(rataku + "   " +viewku)
+							.position(timelines.get(i).getLatLon())
+							.title(timelines.get(i).getNamaku())
+							.snippet(rataku + "   " + viewku)
 							.anchor(0.5f, 0.5f));
 				}
 			}
 		}
+
+		isViewAll = false;
 
 		map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
 
@@ -290,10 +345,9 @@ public class MapActivity extends Activity {
 			return true;
 		case R.id.retrieveAll:
 			if (timelines != null) {
-				Toast.makeText(getApplicationContext(), "View All",
-						Toast.LENGTH_SHORT).show();
-				isViewAll = true;
-				initActionBar("View All");
+//				navigation.onNavigationItemSelected(
+//						Klasifikasi.GET_KLASIFIKASI.size(), R.id.retrieveAll);
+//				getActionBar().setSelectedNavigationItem(Klasifikasi.GET_KLASIFIKASI.size());
 				initialized();
 			} else {
 				showSettingsAlert("LOCATION SOURCES");
@@ -301,12 +355,12 @@ public class MapActivity extends Activity {
 			return true;
 		case R.id.timelineBar:
 			if (timelines != null) {
-				if (isNew) {
-					for (int i = 0; i < timelines.length; i++) {
-						timelines[i].setBmImage();
-					}
-					isNew = false;
-				}
+				// if (isNew) {
+				// for (int i = 0; i < timelines.size(); i++) {
+				// timelines.get(i).setBmImage();
+				// }
+				// isNew = false;
+				// }
 				intent = new Intent(this, TimelineAcitivity.class);
 				intent.putExtra(Klasifikasi.KLASIFIKASI_REQUEST, getKlasifikasi);
 				startActivity(intent);
@@ -357,8 +411,7 @@ public class MapActivity extends Activity {
 		@Override
 		protected Void doInBackground(Void... params) {
 			Klasifikasi klasifikasi = new Klasifikasi();
-			timelines = new TimelineList[klasifikasi.getCountTotal()];
-			int index = 0;
+			timelines = new ArrayList<>();
 			for (int j = 0; j < Klasifikasi.GET_KLASIFIKASI.size(); j++) {
 				JSONObject jsonObj = klasifikasi.getTimelineJSON(
 						Klasifikasi.ID_KLASIFIKASI.get(j), "0", "english");
@@ -382,10 +435,10 @@ public class MapActivity extends Activity {
 							String viewku = c.getString("like") + " Like";
 							String lat = c.getString(Klasifikasi.TAG_LAT);
 							String lon = c.getString(Klasifikasi.TAG_LON);
-							timelines[index++] = new TimelineList(j,
-									id_posting, imageku, namaku, deskripsiku,
-									rataku, viewku, true, lat, lon,
-									getApplicationContext());
+							timelines.add(new TimelineList(j, id_posting,
+									imageku, namaku, deskripsiku, rataku,
+									viewku, true, lat, lon,
+									getApplicationContext()));
 						}
 					}
 				} catch (JSONException e) {
@@ -404,9 +457,9 @@ public class MapActivity extends Activity {
 			if (pDialog.isShowing()) {
 				pDialog.dismiss();
 			}
-			
-			isNew = true;
-			
+
+			// isNew = true;
+
 			initialized();
 
 		}

@@ -10,15 +10,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.NavUtils;
-import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
-import aprisma.akirah.bingung.detail.KlasifikasiActivity;
 import aprisma.akirah.bingung.detail.PengaturanActivity;
 import aprisma.akirah.bingung.holder.Klasifikasi;
 import aprisma.akirah.bingung.holder.User;
@@ -129,32 +126,12 @@ public class TimelineAcitivity extends FragmentActivity implements
 		return super.onCreateOptionsMenu(menu);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent intent = null;
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			// This is called when the Home (Up) button is pressed in the action
-			// bar.
-			// Create a simple intent that starts the hierarchical parent
-			// activity and
-			// use NavUtils in the Support Package to ensure proper handling of
-			// Up.
-			Intent upIntent = new Intent(this, KlasifikasiActivity.class);
-			if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
-				// This activity is not part of the application's task, so
-				// create a new task
-				// with a synthesized back stack.
-				TaskStackBuilder.from(this)
-				// If there are ancestor activities, they should be added here.
-						.addNextIntent(upIntent).startActivities();
-				finish();
-			} else {
-				// This activity is part of the application's task, so simply
-				// navigate up to the hierarchical parent activity.
-				NavUtils.navigateUpTo(this, upIntent);
-			}
+			onBackPressed();
 			return true;
 		case R.id.action_settings:
 			intent = new Intent(getApplicationContext(),

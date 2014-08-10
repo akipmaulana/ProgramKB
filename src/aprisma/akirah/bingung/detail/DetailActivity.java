@@ -123,10 +123,10 @@ public class DetailActivity extends Activity {
 	}
 
 	private void setIdPosting(String namaku) {
-		for (int i = 0; i < MapActivity.timelines.length; i++) {
-			if (MapActivity.timelines[i].getNamaku().equals(namaku)) {
-				id_posting = MapActivity.timelines[i].getIdPosting();
-				filename_img = MapActivity.timelines[i].getImageku();
+		for (int i = 0; i < MapActivity.timelines.size(); i++) {
+			if (MapActivity.timelines.get(i).getNamaku().equals(namaku)) {
+				id_posting = MapActivity.timelines.get(i).getIdPosting();
+				filename_img = MapActivity.timelines.get(i).getImageku();
 			}
 		}
 	}

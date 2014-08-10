@@ -47,7 +47,7 @@ public class TimelineListAdapter extends ArrayAdapter<TimelineList> {
 		} else {
 			holder = (TimelineListHolder) row.getTag();
 		}
-
+		
 		TimelineList list = data[position];
 		if (list != null) {
 			holder.imageku.setImageBitmap(list.getBmImage());

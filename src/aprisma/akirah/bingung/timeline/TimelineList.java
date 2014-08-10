@@ -43,6 +43,7 @@ public class TimelineList {
 		this.lon = lon;
 		this.tagOfLoad = tagOfLoad;
 		this.ctx = ctx;
+		setBmImage();
 	}
 	
 	public Context getCtx() {
@@ -118,8 +119,8 @@ public class TimelineList {
 				mIcon11 = BitmapFactory.decodeStream(in);
 				int width = mIcon11.getWidth();
 				int height = mIcon11.getHeight();
-				int newWidth = 110;
-				int newHeight = 110;
+				int newWidth = 100;
+				int newHeight = 100;
 				float scaleWidth = ((float) newWidth) / width;
 				float scaleHeight = ((float) newHeight) / height;
 
