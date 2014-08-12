@@ -41,6 +41,9 @@ public class DetailActivity extends Activity {
 
 	private Bitmap image;
 
+	private Menu menu;
+	private Boolean isReadyMenu = false;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -61,6 +64,9 @@ public class DetailActivity extends Activity {
 
 		PengaturanActivity.SetMenu(menu);
 
+		this.menu = menu;
+		isReadyMenu = true;
+
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -76,7 +82,8 @@ public class DetailActivity extends Activity {
 			if (User.ISLOGIN) {
 				intent = new Intent(this, CommentActivity.class);
 				startActivity(intent);
-				overridePendingTransition(R.anim.slide_bottom, R.anim.slide_bottom);
+				overridePendingTransition(R.anim.slide_bottom,
+						R.anim.slide_bottom);
 			} else {
 				intent = new Intent(this, MainActivity.class);
 				startActivity(intent);
@@ -99,6 +106,16 @@ public class DetailActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if (isReadyMenu) {
+			menu.clear();
+			onCreateOptionsMenu(menu);
+		}
 	}
 
 	@Override
@@ -144,7 +161,7 @@ public class DetailActivity extends Activity {
 		TextView liked = (TextView) findViewById(R.id.liked);
 		liked.setText(posting.getLike());
 		TextView rate = (TextView) findViewById(R.id.my_rating);
-		rate.setText(Float.parseFloat(posting.getRating())+"");
+		rate.setText(Float.parseFloat(posting.getRating()) + "");
 		TextView nama = (TextView) findViewById(R.id.nama_posting);
 		nama.setText(posting.getNama_merchant());
 		TextView alamat = (TextView) findViewById(R.id.alamat_post);
@@ -160,17 +177,17 @@ public class DetailActivity extends Activity {
 		isi_posting.setText(posting.getIsi_posting());
 
 		LinearLayout koment_list = (LinearLayout) findViewById(R.id.koment_list);
-		
+
 		for (int i = 0; i < posting.getKoments().size(); i++) {
 			Komentar komentar = posting.getKoments().get(i);
 			View item = getLayoutInflater().inflate(R.layout.koment_item,
 					koment_list, false);
-			((TextView) item.findViewById(R.id.nama_comment)).setText(
-					komentar.getFullname());
-			((TextView) item.findViewById(R.id.waktu_comment)).setText(
-					komentar.getDate_create());
-			((TextView) item.findViewById(R.id.isi_comment)).setText(
-					komentar.getIsi_komen());
+			((TextView) item.findViewById(R.id.nama_comment)).setText(komentar
+					.getFullname());
+			((TextView) item.findViewById(R.id.waktu_comment)).setText(komentar
+					.getDate_create());
+			((TextView) item.findViewById(R.id.isi_comment)).setText(komentar
+					.getIsi_komen());
 			komentar.setIcon(((ImageView) item.findViewById(R.id.img_coment)));
 			koment_list.addView(item, i);
 		}

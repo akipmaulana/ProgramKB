@@ -52,8 +52,14 @@ public class TimelineListAdapter extends ArrayAdapter<TimelineList> {
 		if (list != null) {
 			holder.imageku.setImageBitmap(list.getBmImage());
 			holder.namaku.setText(list.getNamaku());
-			Spanned deskripsi = (Spanned) Html.fromHtml(list.getDeskripsiku())
-					.subSequence(0, 100);
+			Spanned deskripsi = null;
+			if (list.getDeskripsiku().length()>100){
+				deskripsi = (Spanned) Html.fromHtml(list.getDeskripsiku())
+						.subSequence(0, 100);
+			} else {
+				deskripsi = (Spanned) Html.fromHtml(list.getDeskripsiku());
+			}
+			
 			holder.deskripsiku.setText(deskripsi + ". . .");
 			holder.rataku.setText(list.getRataku());
 			holder.viewku.setText(list.getViewku());

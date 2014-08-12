@@ -39,12 +39,15 @@ public class TimelineAcitivity extends FragmentActivity implements
 	 */
 	ViewPager mViewPager;
 
+	private Menu menu;
+	private Boolean isReadyMenu = false;
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.timeline_layout);
-		
+
 		initialized();
-		
+
 	}
 
 	private void initialized() {
@@ -123,6 +126,9 @@ public class TimelineAcitivity extends FragmentActivity implements
 
 		PengaturanActivity.SetMenu(menu);
 
+		this.menu = menu;
+		isReadyMenu = true;
+
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -150,6 +156,16 @@ public class TimelineAcitivity extends FragmentActivity implements
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if (isReadyMenu) {
+			menu.clear();
+			onCreateOptionsMenu(menu);
+		}
 	}
 
 	@Override

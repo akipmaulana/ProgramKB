@@ -42,6 +42,7 @@ import aprisma.akirah.bingung.R;
 import aprisma.akirah.bingung.holder.Klasifikasi;
 import aprisma.akirah.bingung.holder.User;
 import aprisma.akirah.bingung.timeline.TimelineAcitivity;
+import aprisma.akirah.bingung.timeline.TimelineFragment;
 import aprisma.akirah.bingung.timeline.TimelineList;
 
 public class MapActivity extends Activity {
@@ -70,6 +71,9 @@ public class MapActivity extends Activity {
 	private Timeline timeline;
 
 	private OnNavigationListener navigation;
+
+	private Menu menu;
+	private Boolean isReadyMenu = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +130,11 @@ public class MapActivity extends Activity {
 		if (isResume) {
 			getLocation();
 			isResume = false;
+		}
+
+		if (isReadyMenu) {
+			menu.clear();
+			onCreateOptionsMenu(menu);
 		}
 	}
 
@@ -332,6 +341,9 @@ public class MapActivity extends Activity {
 			logout.setTitle(R.string.masuk);
 		}
 
+		this.menu = menu;
+		isReadyMenu = true;
+
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -345,10 +357,9 @@ public class MapActivity extends Activity {
 			return true;
 		case R.id.retrieveAll:
 			if (timelines != null) {
-//				navigation.onNavigationItemSelected(
-//						Klasifikasi.GET_KLASIFIKASI.size(), R.id.retrieveAll);
-//				getActionBar().setSelectedNavigationItem(Klasifikasi.GET_KLASIFIKASI.size());
-				initialized();
+				if (TimelineFragment.isLoadMore) {
+					initialized();
+				}
 			} else {
 				showSettingsAlert("LOCATION SOURCES");
 			}

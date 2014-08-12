@@ -41,6 +41,9 @@ public class KlasifikasiActivity extends Activity {
 	private ListAdapter adapter;
 	private SearchView searchView;
 
+	private Menu menu;
+	private Boolean isReadyMenu = false;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -60,12 +63,25 @@ public class KlasifikasiActivity extends Activity {
 
 		PengaturanActivity.SetMenu(menu);
 
+		this.menu = menu;
+		isReadyMenu = true;
+
 		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
-	public void onBackPressed() {
+	protected void onResume() {
 		// TODO Auto-generated method stub
+		super.onResume();
+		if (isReadyMenu) {
+			menu.clear();
+			onCreateOptionsMenu(menu);
+		}
+	}
+
+	@Override
+	public void onBackPressed() {
+		finish();
 	}
 
 	@Override

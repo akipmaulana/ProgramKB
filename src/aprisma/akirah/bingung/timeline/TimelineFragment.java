@@ -4,10 +4,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +26,9 @@ import aprisma.akirah.bingung.holder.Klasifikasi;
 
 public class TimelineFragment extends ListFragment {
 
+	public static Boolean isLoadMore = false;// untuk mengetahui apakah sudah
+												// load more
+
 	private TimelineList[] catalogs;
 
 	int mNum;
@@ -35,7 +38,8 @@ public class TimelineFragment extends ListFragment {
 	// footer view
 	private RelativeLayout mFooterView;
 	private ProgressBar progress;
-	private Context ctx;
+	private FragmentActivity ctx;
+	private ListView listView;
 
 	/**
 	 * Create a new instance of CountingFragment, providing "num" as an
@@ -70,7 +74,6 @@ public class TimelineFragment extends ListFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.timeline_fragment, container, false);
-		ctx = getActivity().getApplicationContext();
 		return v;
 	}
 
@@ -78,12 +81,14 @@ public class TimelineFragment extends ListFragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onViewCreated(view, savedInstanceState);
+		ctx = getActivity();
+		listView = getListView();
 		LayoutInflater inflater = getLayoutInflater(savedInstanceState);
 		mFooterView = (RelativeLayout) inflater.inflate(R.layout.progress_bar,
-				getListView(), false);
+				listView, false);
 		progress = (ProgressBar) mFooterView
 				.findViewById(R.id.load_more_progressBar);
-		getListView().addFooterView(mFooterView);
+		listView.addFooterView(mFooterView);
 		setListenerCustom();
 	}
 
@@ -105,12 +110,12 @@ public class TimelineFragment extends ListFragment {
 
 		loadData();
 
-		TimelineListAdapter adapter = new TimelineListAdapter(getActivity(),
+		TimelineListAdapter adapter = new TimelineListAdapter(ctx,
 				R.layout.timeline_list, catalogs);
 
 		setListAdapter(adapter);
 
-		getListView().setOnScrollListener(new OnScrollListener() {
+		listView.setOnScrollListener(new OnScrollListener() {
 
 			@Override
 			public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -174,12 +179,13 @@ public class TimelineFragment extends ListFragment {
 
 	private class LoadMore extends AsyncTask<Void, Void, Void> {
 
-		int isLoadMore = 0;// apakah data yang di load jika > 0 maka ya
+		int isEmptyLoad = 0;// apakah data yang di load jika > 0 maka ya
 
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
+			// isLoadMore = false;
 			progress.setVisibility(View.VISIBLE);
 		}
 
@@ -212,7 +218,8 @@ public class TimelineFragment extends ListFragment {
 								id_posting, imageku, namaku, deskripsiku,
 								rataku, viewku, true, lat, lon, ctx));
 
-						isLoadMore++;
+						isEmptyLoad++;
+						isLoadMore = false;
 					}
 				}
 			} catch (JSONException e) {
@@ -224,12 +231,12 @@ public class TimelineFragment extends ListFragment {
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
-			if (isLoadMore > 0) {
-				Toast.makeText(getActivity(), "Load More", Toast.LENGTH_SHORT)
-						.show();
+			if (isEmptyLoad > 0) {
+				Toast.makeText(ctx, "Load More", Toast.LENGTH_SHORT).show();
 				setListenerCustom();
 			}
 			progress.setVisibility(View.GONE);
+			isLoadMore = true;
 		}
 
 	}
