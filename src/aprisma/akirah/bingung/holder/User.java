@@ -9,11 +9,9 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Context;
 import android.util.Log;
-import aprisma.akirah.bingung.service.DatabaseHandler;
 
-public class User extends KlikBParent implements Serializable{
+public class User extends KlikBParent implements Serializable {
 
 	/**
 	 * 
@@ -21,9 +19,9 @@ public class User extends KlikBParent implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	public static Boolean ISLOGIN = false;
-	
+
 	public static final String TAG_USER = "user";
-	
+
 	private static final String TAG_ID_USER = "id_user";
 	private static final String TAG_FULLNAME = "fullname";
 	private static final String TAG_EMAIL = "email";
@@ -73,7 +71,8 @@ public class User extends KlikBParent implements Serializable{
 		return json;
 	}
 
-	public JSONObject registerUser(String fullname, String email, String userpass) {
+	public JSONObject registerUser(String fullname, String email,
+			String userpass) {
 		// Building Parameters
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("tag", REGISTRASI_TAG));
@@ -86,8 +85,8 @@ public class User extends KlikBParent implements Serializable{
 		// return json
 		return json;
 	}
-	
-	public void fetchDataUser(JSONObject jsonOBJECT) throws JSONException{
+
+	public void fetchDataUser(JSONObject jsonOBJECT) throws JSONException {
 		JSONObject jsonOBJ = jsonOBJECT.getJSONObject(TAG_USER);
 		id_user = jsonOBJ.getString(TAG_ID_USER);
 		fullname = jsonOBJ.getString(TAG_FULLNAME);
@@ -107,10 +106,10 @@ public class User extends KlikBParent implements Serializable{
 		pendidikan = jsonOBJ.getString(TAG_PENDIDIKAN);
 		status = jsonOBJ.getString(TAG_STATUS);
 		users_tgl = jsonOBJ.getString(TAG_USERS_TGL);
-		
+
 	}
 
-	public static JSONObject updateUserPass(String newUserPass){
+	public static JSONObject updateUserPass(String newUserPass) {
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("tag", SETPASS_TAG));
 		params.add(new BasicNameValuePair(TAG_USERPASS, newUserPass));
@@ -121,27 +120,27 @@ public class User extends KlikBParent implements Serializable{
 		// return json
 		return json;
 	}
-	
+
 	/**
 	 * Function get Login status
 	 * */
-	public boolean isUserLoggedIn(Context context) {
-		DatabaseHandler db = new DatabaseHandler(context);
-		int count = db.getRowCount();
-		if (count > 0) {
-			// user logged in
-			return true;
-		}
-		return false;
-	}
+	// public boolean isUserLoggedIn(Context context) {
+	// DatabaseHandler db = new DatabaseHandler(context);
+	// int count = db.getRowCount();
+	// if (count > 0) {
+	// // user logged in
+	// return true;
+	// }
+	// return false;
+	// }
 
 	/**
 	 * Function to logout user Reset Database
 	 * */
-	public boolean logoutUser(Context context) {
-		DatabaseHandler db = new DatabaseHandler(context);
-		db.resetTables();
-		return true;
-	}
+	// public boolean logoutUser(Context context) {
+	// DatabaseHandler db = new DatabaseHandler(context);
+	// db.resetTables();
+	// return true;
+	// }
 
 }

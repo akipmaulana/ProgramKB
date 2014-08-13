@@ -421,40 +421,43 @@ public class MapActivity extends Activity {
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			Klasifikasi klasifikasi = new Klasifikasi();
-			timelines = new ArrayList<>();
-			for (int j = 0; j < Klasifikasi.GET_KLASIFIKASI.size(); j++) {
-				JSONObject jsonObj = klasifikasi.getTimelineJSON(
-						Klasifikasi.ID_KLASIFIKASI.get(j), "0", "english");
-				try {
-					if (jsonObj.getInt(Klasifikasi.TAG_SUCCESS) == 1) {
-						JSONArray catalogs = jsonObj
-								.getJSONArray(Klasifikasi.TAG_CATALOGS);
+			if (timelines == null) {
+				Klasifikasi klasifikasi = new Klasifikasi();
+				timelines = new ArrayList<>();
+				for (int j = 0; j < Klasifikasi.GET_KLASIFIKASI.size(); j++) {
+					JSONObject jsonObj = klasifikasi.getTimelineJSON(
+							Klasifikasi.ID_KLASIFIKASI.get(j), "0", "english");
+					try {
+						if (jsonObj.getInt(Klasifikasi.TAG_SUCCESS) == 1) {
+							JSONArray catalogs = jsonObj
+									.getJSONArray(Klasifikasi.TAG_CATALOGS);
 
-						for (int i = 0; i < catalogs.length(); i++) {
-							JSONObject c = catalogs.getJSONObject(i);
-							int id_posting = c
-									.getInt(Klasifikasi.TAG_ID_POSTING);
-							String imageku = c
-									.getString(Klasifikasi.TAG_FILLNAME_IMG);
-							String namaku = c.getString(Klasifikasi.TAG_JUDUL);
-							String deskripsiku = c
-									.getString(Klasifikasi.TAG_ISI_POSTING);
-							String rataku = c
-									.getString(Klasifikasi.TAG_COUNTER)
-									+ " View";
-							String viewku = c.getString("like") + " Like";
-							String lat = c.getString(Klasifikasi.TAG_LAT);
-							String lon = c.getString(Klasifikasi.TAG_LON);
-							timelines.add(new TimelineList(j, id_posting,
-									imageku, namaku, deskripsiku, rataku,
-									viewku, true, lat, lon,
-									getApplicationContext()));
+							for (int i = 0; i < catalogs.length(); i++) {
+								JSONObject c = catalogs.getJSONObject(i);
+								int id_posting = c
+										.getInt(Klasifikasi.TAG_ID_POSTING);
+								String imageku = c
+										.getString(Klasifikasi.TAG_FILLNAME_IMG);
+								String namaku = c
+										.getString(Klasifikasi.TAG_JUDUL);
+								String deskripsiku = c
+										.getString(Klasifikasi.TAG_ISI_POSTING);
+								String rataku = c
+										.getString(Klasifikasi.TAG_COUNTER)
+										+ " View";
+								String viewku = c.getString("like") + " Like";
+								String lat = c.getString(Klasifikasi.TAG_LAT);
+								String lon = c.getString(Klasifikasi.TAG_LON);
+								timelines.add(new TimelineList(j, id_posting,
+										imageku, namaku, deskripsiku, rataku,
+										viewku, true, lat, lon,
+										getApplicationContext()));
+							}
 						}
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 			}
 			return null;

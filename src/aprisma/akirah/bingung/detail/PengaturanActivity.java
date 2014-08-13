@@ -26,12 +26,12 @@ public class PengaturanActivity extends Activity {
 			logout.setTitle(R.string.masuk);
 		}
 	}
-	
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		if (!User.ISLOGIN){
+		if (!User.ISLOGIN) {
 			Intent intent = new Intent(getApplicationContext(),
 					KlasifikasiActivity.class);
 			startActivity(intent);
@@ -53,7 +53,7 @@ public class PengaturanActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main, menu);
-		
+
 		MenuItem itemSetting = menu.findItem(R.id.action_settings);
 		itemSetting.setVisible(false);
 		itemSetting.setEnabled(false);
@@ -65,8 +65,7 @@ public class PengaturanActivity extends Activity {
 		Intent intent = null;
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			finish();
-			overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
+			backToSetting();
 			break;
 		case R.id.setlang:
 			Toast.makeText(getApplicationContext(), "SET LANG",
@@ -105,7 +104,13 @@ public class PengaturanActivity extends Activity {
 	@Override
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
-		super.onBackPressed();
+		backToSetting();
+	}
+
+	private void backToSetting() {
+		Intent intent = new Intent(getApplicationContext(),
+				KlasifikasiActivity.class);
+		startActivity(intent);
 		overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
 	}
 

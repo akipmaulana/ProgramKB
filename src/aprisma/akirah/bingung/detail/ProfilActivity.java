@@ -49,14 +49,10 @@ public class ProfilActivity extends Activity {
 		Intent intent = null;
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			finish();
-			overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
+			backToSetting();
 			return true;
 		case R.id.action_settings:
-			intent = new Intent(getApplicationContext(),
-					PengaturanActivity.class);
-			startActivity(intent);
-			overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
+			backToSetting();
 			return true;
 		case R.id.setlang:
 			Toast.makeText(getApplicationContext(), "SET LANG",
@@ -73,8 +69,12 @@ public class ProfilActivity extends Activity {
 
 	@Override
 	public void onBackPressed() {
-		// TODO Auto-generated method stub
-		super.onBackPressed();
+		backToSetting();
+	}
+	
+	private void backToSetting(){
+		Intent intent = new Intent(getApplicationContext(), PengaturanActivity.class);
+		startActivity(intent);
 		overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
 	}
 	

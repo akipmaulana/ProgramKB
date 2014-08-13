@@ -26,7 +26,7 @@ import aprisma.akirah.bingung.holder.Klasifikasi;
 
 public class TimelineFragment extends ListFragment {
 
-	public static Boolean isLoadMore = false;// untuk mengetahui apakah sudah
+	public static Boolean isLoadMore = true;// untuk mengetahui apakah sudah
 												// load more
 
 	private TimelineList[] catalogs;
