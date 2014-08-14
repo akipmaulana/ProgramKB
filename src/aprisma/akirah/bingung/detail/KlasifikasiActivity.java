@@ -6,15 +6,16 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
@@ -33,6 +34,7 @@ import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
 import aprisma.akirah.bingung.holder.Klasifikasi;
 import aprisma.akirah.bingung.holder.User;
+import aprisma.akirah.bingung.service.CheckConnection;
 
 @SuppressLint("NewApi")
 public class KlasifikasiActivity extends Activity {
@@ -44,14 +46,24 @@ public class KlasifikasiActivity extends Activity {
 	private Menu menu;
 	private Boolean isReadyMenu = false;
 
+	private ProgressDialog pDialog;
+
+	private TextView connectLay;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.klasifikasi_activity);
 
+		connectLay = (TextView) findViewById(R.id.connect);
+
 		new Getcatalog().execute();
 
+		new CheckConnection(
+				connectLay,
+				(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE),
+				this);
 	}
 
 	@Override
@@ -152,7 +164,7 @@ public class KlasifikasiActivity extends Activity {
 	public void setToList() {
 		adapter = new ListAdapter(this, Klasifikasi.GET_KLASIFIKASI);
 
-		final ListView listView = (ListView) findViewById(R.id.list_klasifikasi);
+		ListView listView = (ListView) findViewById(R.id.list_klasifikasi);
 		listView.setAdapter(adapter);
 
 		listView.setOnItemClickListener(new OnItemClickListener() {
@@ -178,19 +190,23 @@ public class KlasifikasiActivity extends Activity {
 		// clicked(v, android.R.id.text1);
 		// }
 		// });
-
 	}
 
 	/*
 	 * When Clicked clasification
 	 */
 	private void clicked(View v, int id) {
+		//checkConnection.Destroy();
 		TextView tv = (TextView) v.findViewById(id);
 		String hasil = tv.getText().toString();
 		Intent intent = new Intent(this, MapActivity.class);
 		intent.putExtra(Klasifikasi.KLASIFIKASI_REQUEST, hasil);
 		startActivity(intent);
 		overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
+	}
+
+	public void reload(View v) {
+		new Getcatalog().execute();
 	}
 
 	/*
@@ -257,6 +273,10 @@ public class KlasifikasiActivity extends Activity {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
+			pDialog = new ProgressDialog(KlasifikasiActivity.this);
+			pDialog.setMessage("Please wait . . .");
+			pDialog.setCancelable(false);
+			pDialog.show();
 		}
 
 		@Override
@@ -283,8 +303,7 @@ public class KlasifikasiActivity extends Activity {
 					Klasifikasi.ID_KLASIFIKASI.add(id_item);
 				}
 
-			} catch (JSONException e) {
-				e.printStackTrace();
+			} catch (Exception e) {
 			}
 			return null;
 		}
@@ -294,6 +313,9 @@ public class KlasifikasiActivity extends Activity {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			setToList();
+			if (pDialog.isShowing()) {
+				pDialog.dismiss();
+			}
 		}
 	}
 

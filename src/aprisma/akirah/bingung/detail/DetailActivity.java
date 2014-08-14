@@ -3,16 +3,17 @@ package aprisma.akirah.bingung.detail;
 import java.io.InputStream;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -29,6 +30,7 @@ import aprisma.akirah.bingung.holder.Klasifikasi;
 import aprisma.akirah.bingung.holder.Komentar;
 import aprisma.akirah.bingung.holder.Posting;
 import aprisma.akirah.bingung.holder.User;
+import aprisma.akirah.bingung.service.CheckConnection;
 
 @SuppressLint("NewApi")
 public class DetailActivity extends Activity {
@@ -43,6 +45,8 @@ public class DetailActivity extends Activity {
 
 	private Menu menu;
 	private Boolean isReadyMenu = false;
+
+	private TextView connectLay;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -148,14 +152,18 @@ public class DetailActivity extends Activity {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	private void initView() {
 		setContentView(R.layout.detail_activity);
 
+		connectLay = (TextView) findViewById(R.id.connect);
+
+		new CheckConnection(
+				connectLay,
+				(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE),
+				this);
+
 		TextView judul = (TextView) findViewById(R.id.judul);
 		judul.setText(posting.getJudul());
-		ImageView gambar = (ImageView) findViewById(R.id.img_detail);
-		gambar.setBackground(new BitmapDrawable(image));
 		TextView views = (TextView) findViewById(R.id.views);
 		views.setText(posting.getCounter());
 		TextView liked = (TextView) findViewById(R.id.liked);
@@ -234,7 +242,7 @@ public class DetailActivity extends Activity {
 					posting.setJum_kom(jsonOBJ.getString("jum_kom"));
 					posting.setPrice(jsonOBJ.getString("price"));
 					posting.setLike(jsonOBJ.getString("like"));
-					image = getImageView(filename_img);
+					new DownloadImageTask().execute(filename_img);
 					JSONArray koments = json.getJSONArray("koments");
 					for (int i = 0; i < koments.length(); i++) {
 						JSONObject j = koments.getJSONObject(i);
@@ -249,9 +257,7 @@ public class DetailActivity extends Activity {
 						posting.getKoments().add(komentar);
 					}
 				}
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (Exception e) {
 			}
 			return null;
 		}
@@ -266,10 +272,15 @@ public class DetailActivity extends Activity {
 
 			initView();
 		}
+	}
 
-		private Bitmap getImageView(String... urls) {
+	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+
+		public Bitmap mIcon11 = null;
+
+		protected Bitmap doInBackground(String... urls) {
 			String urldisplay = urls[0];
-			Bitmap mIcon11 = null;
+			mIcon11 = null;
 			try {
 				InputStream in = new java.net.URL(urldisplay).openStream();
 				mIcon11 = BitmapFactory.decodeStream(in);
@@ -278,6 +289,12 @@ public class DetailActivity extends Activity {
 			return mIcon11;
 		}
 
-	}
+		@SuppressWarnings("deprecation")
+		protected void onPostExecute(Bitmap result) {
+			image = result;
+			ImageView gambar = (ImageView) findViewById(R.id.img_detail);
+			gambar.setBackground(new BitmapDrawable(image));
+		}
 
+	}
 }

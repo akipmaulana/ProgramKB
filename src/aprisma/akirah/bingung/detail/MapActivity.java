@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,11 +37,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
 import aprisma.akirah.bingung.holder.Klasifikasi;
 import aprisma.akirah.bingung.holder.User;
+import aprisma.akirah.bingung.service.CheckConnection;
 import aprisma.akirah.bingung.timeline.TimelineAcitivity;
 import aprisma.akirah.bingung.timeline.TimelineFragment;
 import aprisma.akirah.bingung.timeline.TimelineList;
@@ -75,11 +78,20 @@ public class MapActivity extends Activity {
 	private Menu menu;
 	private Boolean isReadyMenu = false;
 
+	private TextView connectLay;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.map_activity);
+
+		connectLay = (TextView) findViewById(R.id.connect);
+
+		new CheckConnection(
+				connectLay,
+				(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE),
+				this);
 
 		getKlasifikasi = getIntent().getStringExtra(
 				Klasifikasi.KLASIFIKASI_REQUEST).toString();
@@ -372,6 +384,7 @@ public class MapActivity extends Activity {
 				// }
 				// isNew = false;
 				// }
+//				checkConnection.Destroy();
 				intent = new Intent(this, TimelineAcitivity.class);
 				intent.putExtra(Klasifikasi.KLASIFIKASI_REQUEST, getKlasifikasi);
 				startActivity(intent);

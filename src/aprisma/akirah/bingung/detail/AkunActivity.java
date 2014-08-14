@@ -6,8 +6,10 @@ import org.json.JSONObject;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,6 +23,7 @@ import android.widget.Toast;
 import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
 import aprisma.akirah.bingung.holder.User;
+import aprisma.akirah.bingung.service.CheckConnection;
 
 public class AkunActivity extends Activity {
 
@@ -35,6 +38,8 @@ public class AkunActivity extends Activity {
 	private static String TITLE = "";
 
 	private MenuItem ok_done;
+	
+	private TextView connectLay;
 
 	@SuppressLint("NewApi")
 	@Override
@@ -44,6 +49,13 @@ public class AkunActivity extends Activity {
 		setContentView(R.layout.akun_layout);
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+		
+		connectLay = (TextView) findViewById(R.id.connect);
+
+		new CheckConnection(
+				connectLay,
+				(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE),
+				this);
 
 		new_pass = (TextView) findViewById(R.id.new_pass);
 		conf_pass = (TextView) findViewById(R.id.conf_pass);

@@ -3,8 +3,10 @@ package aprisma.akirah.bingung.detail;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
 import aprisma.akirah.bingung.holder.User;
+import aprisma.akirah.bingung.service.CheckConnection;
 
 public class DetailProfilActivity extends Activity {
 
@@ -32,6 +35,13 @@ public class DetailProfilActivity extends Activity {
 		setContentView(R.layout.detail_layout);
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+		
+		TextView connectLay = (TextView) findViewById(R.id.connect);
+
+		new CheckConnection(
+				connectLay,
+				(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE),
+				this);
 		
 		((TextView) findViewById(R.id.nama_lengkap)).setText(User.fullname);
 		((TextView) findViewById(R.id.jekel)).setText(User.sex);

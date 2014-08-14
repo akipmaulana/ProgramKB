@@ -7,8 +7,11 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -35,7 +38,7 @@ public class MainActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		// Hide Header action bar
 		getActionBar().hide();
 
@@ -70,7 +73,14 @@ public class MainActivity extends Activity {
 					"Masukan Email dan Password Anda", Toast.LENGTH_SHORT)
 					.show();
 		} else {
-			new Login().execute();
+			ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo nf = cm.getActiveNetworkInfo();
+			if (nf != null && nf.isConnected() == true) {
+				new Login().execute();
+			} else {
+				Toast.makeText(getApplicationContext(),
+						"No Internet Connection", Toast.LENGTH_SHORT).show();
+			}
 		}
 
 	}

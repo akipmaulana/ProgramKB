@@ -1,33 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/padding_login"
-    android:paddingRight="@dimen/padding_login"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:scrollbarThumbVertical="@drawable/scroll_style" >
 
     <LinearLayout
-        android:id="@+id/klasi_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:orientation="horizontal" >
+        android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/logo_klasifikasi"
+        <LinearLayout
+            android:id="@+id/klasi_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/header"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:contentDescription="@string/klasifikasi"
-            android:gravity="left|center_vertical" />
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/padding_login"
+            android:layout_marginRight="@dimen/padding_login"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="horizontal" >
 
-        <!-- Editext for Search -->
-		<!--  
+            <TextView
+                android:id="@+id/logo_klasifikasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:background="@drawable/header"
+                android:contentDescription="@string/klasifikasi"
+                android:gravity="left|center_vertical" />
+
+            <!-- Editext for Search -->
+            <!--
         <AutoCompleteTextView
             android:id="@+id/inputSearch"
             android:layout_width="match_parent"
@@ -35,36 +40,52 @@
             android:gravity="right|center_vertical"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:drawableLeft="@drawable/ic_action_search"
-            android:hint="@string/cari" /> -->
-    </LinearLayout>
+            android:hint="@string/cari" />            -->
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-        <Button
-            android:id="@+id/button_header"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#F36B27"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="@string/klasifikasi"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#FFFFFF" />
+            android:layout_marginLeft="@dimen/padding_login"
+            android:layout_marginRight="@dimen/padding_login"
+            android:orientation="vertical" >
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dip"
-            android:layout_weight="1" >
-
-            <ListView
-                android:id="@+id/list_klasifikasi"
+            <Button
+                android:id="@+id/button_header"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:drawSelectorOnTop="true"
-                android:textAlignment="center" />
-        </FrameLayout>
+                android:layout_height="wrap_content"
+                android:background="#F36B27"
+                android:gravity="center_vertical|center_horizontal"
+                android:onClick="reload"
+                android:text="@string/klasifikasi"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#FFFFFF" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dip"
+                android:layout_weight="1" >
+
+                <ListView
+                    android:id="@+id/list_klasifikasi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawSelectorOnTop="true"
+                    android:textAlignment="center" />
+            </FrameLayout>
+        </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/connect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#50000000"
+        android:gravity="center"
+        android:padding="@dimen/radius_scroll"
+        android:text="@string/no_connect"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        android:visibility="invisible" />
+
+</RelativeLayout>

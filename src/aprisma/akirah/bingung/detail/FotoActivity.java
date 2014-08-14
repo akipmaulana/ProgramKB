@@ -2,15 +2,19 @@ package aprisma.akirah.bingung.detail;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
 import aprisma.akirah.bingung.holder.User;
+import aprisma.akirah.bingung.service.CheckConnection;
 
 @SuppressLint("NewApi")
 public class FotoActivity extends Activity {
@@ -22,6 +26,13 @@ public class FotoActivity extends Activity {
 		setContentView(R.layout.foto_profil_layout);
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+		
+		TextView connectLay = (TextView) findViewById(R.id.connect);
+
+		new CheckConnection(
+				connectLay,
+				(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE),
+				this);
 
 	}
 	

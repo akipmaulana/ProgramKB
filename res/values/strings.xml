@@ -51,7 +51,7 @@
     <string name="klasifikasi">Klasifikasi</string>
     <string name="timeline">Timeline</string>
     <string name="retrieveAll">View All</string>
-    <string name="kosong">No Post/Tidak ada kiriman</string>
+    <string name="kosong">No Post</string>
     <string name="nama_">Nama</string>
     <string name="harga">Harga</string>
     <string name="telpon">Telepon</string>
@@ -75,6 +75,7 @@
     <string name="penilaian">Penilaian</string>
     <string name="tulis">Tulis . . .</string>
     <string name="deskripsi">Deskripsi</string>
+    <string name="no_connect">No Internet Connection</string>
     
     <string name="drawer_open">Slider Menu Opened</string>
     <string name="drawer_close">Slider Menu Closed</string>

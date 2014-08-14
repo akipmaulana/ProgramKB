@@ -1,50 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/kuliner"
-    android:gravity="bottom|right"
-    android:orientation="vertical" >
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="" />
-    </LinearLayout>
+    android:layout_height="match_parent" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#80000000"
-        android:gravity="right"
-        android:orientation="horizontal"
-        android:padding="@dimen/activity_horizontal_margin" >
+        android:layout_height="match_parent"
+        android:background="@drawable/kuliner"
+        android:gravity="bottom|right"
+        android:orientation="vertical" >
 
-        <ImageButton
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:contentDescription="@string/foto_profil"
-            android:src="@drawable/ic_action_edit" />
+            android:orientation="horizontal" >
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:background="#FFFFFF" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" />
+        </LinearLayout>
 
-        <ImageButton
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:contentDescription="@string/foto_profil"
-            android:src="@drawable/ic_action_share" />
+            android:background="#80000000"
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:padding="@dimen/activity_horizontal_margin" >
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:contentDescription="@string/foto_profil"
+                android:src="@drawable/ic_action_edit" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:background="#FFFFFF" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:contentDescription="@string/foto_profil"
+                android:src="@drawable/ic_action_share" />
+        </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/connect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#50000000"
+        android:gravity="center"
+        android:padding="@dimen/radius_scroll"
+        android:text="@string/no_connect"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        android:visibility="invisible" />
+
+</RelativeLayout>

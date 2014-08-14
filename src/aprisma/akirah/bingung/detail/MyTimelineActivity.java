@@ -1,42 +1,58 @@
 package aprisma.akirah.bingung.detail;
 
 import android.annotation.SuppressLint;
-import android.app.ListActivity;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import aprisma.akirah.bingung.MainActivity;
+import android.widget.AdapterView.OnItemClickListener;
 import aprisma.akirah.bingung.R;
 import aprisma.akirah.bingung.holder.Klasifikasi;
 import aprisma.akirah.bingung.holder.User;
+import aprisma.akirah.bingung.service.CheckConnection;
 import aprisma.akirah.bingung.timeline.TimelineList;
 import aprisma.akirah.bingung.timeline.TimelineListAdapter;
 
-public class MyTimelineActivity extends ListActivity {
+public class MyTimelineActivity extends Activity {
+
+	private ListView listView;
 
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.timeline_fragment);
+		setContentView(R.layout.my_timeline);
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
+		TextView connectLay = (TextView) findViewById(R.id.connect);
+
+		new CheckConnection(
+				connectLay,
+				(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE),
+				this);
+
+		listView = (ListView) findViewById(R.id.my_time_list);
+
 		setListenerCustom();
 	}
-	
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		if (!User.ISLOGIN){
+		if (!User.ISLOGIN) {
 			Intent intent = new Intent(getApplicationContext(),
 					KlasifikasiActivity.class);
 			startActivity(intent);
@@ -85,17 +101,6 @@ public class MyTimelineActivity extends ListActivity {
 		overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
 	}
 
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		String namaku = ((TextView) v.findViewById(R.id.namaku)).getText()
-				.toString();
-		Toast.makeText(this, "Item clicked: " + namaku, Toast.LENGTH_SHORT)
-				.show();
-		Intent intent = new Intent(this, DetailActivity.class);
-		startActivity(intent);
-		this.overridePendingTransition(R.anim.slide_in, R.anim.slide_in);
-	}
-
 	/*
 	 * Method untuk set listener pada view custom yang clickable atau editable
 	 */
@@ -104,15 +109,44 @@ public class MyTimelineActivity extends ListActivity {
 		TimelineList[] list_line = new TimelineList[Klasifikasi.GET_KLASIFIKASI
 				.size()];
 		for (int i = 0; i < Klasifikasi.GET_KLASIFIKASI.size(); i++) {
-			list_line[i] = new TimelineList(0, 0,"", "Akip",
-					"akip_farahakip_farahakip_farahakip_farahakip_farahakip_farahakip_farahakip_farahakip_farahakip_fara", "Akirah",
-					"Munyu", true,"-6.737246", "108.550656", getApplicationContext());
+			list_line[i] = new TimelineList(
+					0,
+					0,
+					"",
+					"Akip",
+					"akip_farahakip_farahakip_farahakip_farahakip_farahakip_farahakip_farahakip_farahakip_farahakip_fara",
+					"Akirah", "Munyu", true, "-6.737246", "108.550656",
+					getApplicationContext());
 		}
 
-		TimelineListAdapter adapter = new TimelineListAdapter(this,
-				R.layout.timeline_list, list_line);
+		if (list_line[0] == null) {
+			((TextView) findViewById(R.id.kosong)).setVisibility(View.VISIBLE);
+		} else {
 
-		setListAdapter(adapter);
+			TimelineListAdapter adapter = new TimelineListAdapter(this,
+					R.layout.timeline_list, list_line);
+
+			listView.setAdapter(adapter);
+
+			listView.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					String namaku = ((TextView) view.findViewById(R.id.namaku))
+							.getText().toString();
+					Toast.makeText(getApplicationContext(),
+							"Item clicked: " + namaku, Toast.LENGTH_SHORT)
+							.show();
+					// Intent intent = new Intent(getApplicationContext(),
+					// DetailActivity.class);
+					// intent.putExtra(Klasifikasi.TAG_NAME, namaku);
+					// startActivity(intent);
+					// overridePendingTransition(R.anim.slide_in,
+					// R.anim.slide_in);
+				}
+			});
+		}
 	}
 
 }
