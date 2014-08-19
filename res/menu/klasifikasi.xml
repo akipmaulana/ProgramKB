@@ -1,0 +1,27 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="aprisma.akirah.bingung.MainActivity" >
+
+    <item
+        android:id="@+id/katalogBar"
+        android:showAsAction="always|withText"
+        android:title="@string/katalog"/>
+    
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="2"
+        android:title="@string/action_settings"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/setlang"
+        android:orderInCategory="1"
+        android:showAsAction="never"
+        android:title="@string/en"/>
+    <item
+        android:id="@+id/logout"
+        android:orderInCategory="3"
+        android:showAsAction="never"
+        android:title="@string/keluar"/>
+
+</menu>

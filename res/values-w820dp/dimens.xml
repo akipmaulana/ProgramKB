@@ -10,7 +10,7 @@
     <dimen name="padding_login">128dp</dimen>
     <dimen name="margin_tahun">384dp</dimen>
     <dimen name="photo_regist">96dp</dimen>
-    <dimen name="divider_list">4dp</dimen>
+    <dimen name="divider_list">8dp</dimen>
     <dimen name="radius_scroll">32dp</dimen>
     <dimen name="width_scroll">16dp</dimen>
     <dimen name="padding_scroll">2dp</dimen>

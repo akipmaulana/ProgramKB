@@ -50,6 +50,7 @@
     <string name="lain">Lain</string>
     <string name="klasifikasi">Klasifikasi</string>
     <string name="timeline">Timeline</string>
+    <string name="katalog">Katalog</string>
     <string name="retrieveAll">View All</string>
     <string name="kosong">No Post</string>
     <string name="nama_">Nama</string>
@@ -80,6 +81,5 @@
     <string name="drawer_open">Slider Menu Opened</string>
     <string name="drawer_close">Slider Menu Closed</string>
      
-
 </resources>
 

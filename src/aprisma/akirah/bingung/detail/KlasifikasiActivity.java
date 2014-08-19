@@ -9,12 +9,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,7 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.ListView;
+import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
@@ -50,6 +52,9 @@ public class KlasifikasiActivity extends Activity {
 
 	private TextView connectLay;
 
+	String[] colors = { "#A4C400", "#AA00FF", "#E51400", "#E3C800", "#1BA1E2",
+			"#D80073" };
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -68,10 +73,17 @@ public class KlasifikasiActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main, menu);
-		MenuItem searchitem = menu.findItem(R.id.grid_default_search);
-		searchView = (SearchView) searchitem.getActionView();
-		setupSearchView(searchitem);
+		getMenuInflater().inflate(R.menu.klasifikasi, menu);
+
+		ActionBar actionBar = getActionBar();
+		actionBar.setCustomView(R.layout.action_bar_klasifikasi); // load your
+																	// layout
+		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM); // show it
+
+		searchView = (SearchView) actionBar.getCustomView().findViewById(
+				R.id.search_klasifikasi);
+
+		setupSearchView();
 
 		PengaturanActivity.SetMenu(menu);
 
@@ -100,6 +112,9 @@ public class KlasifikasiActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent intent = null;
 		switch (item.getItemId()) {
+		case R.id.katalogBar:
+			new Getcatalog().execute();
+			break;
 		case R.id.action_settings:
 			intent = new Intent(getApplicationContext(),
 					PengaturanActivity.class);
@@ -121,7 +136,7 @@ public class KlasifikasiActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void setupSearchView(MenuItem searchItem) {
+	private void setupSearchView() {
 
 		searchView.setIconifiedByDefault(true);
 
@@ -162,17 +177,24 @@ public class KlasifikasiActivity extends Activity {
 	 * set klasifikasi ke dalam list view
 	 */
 	public void setToList() {
-		adapter = new ListAdapter(this, Klasifikasi.GET_KLASIFIKASI);
+		int j = 0;
+		ArrayList<Item> temp1 = new ArrayList<Item>();
+		for (int i = 0; i < Klasifikasi.GET_KLASIFIKASI.size(); i++) {
+			temp1.add(new Item(Klasifikasi.GET_KLASIFIKASI.get(i), colors[j++]));
+			if (j > 5) {
+				j = 0;
+			}
+		}
 
-		ListView listView = (ListView) findViewById(R.id.list_klasifikasi);
-		listView.setAdapter(adapter);
+		adapter = new ListAdapter(this, temp1);
 
-		listView.setOnItemClickListener(new OnItemClickListener() {
+		GridView gridview = (GridView) findViewById(R.id.gridview);
+		gridview.setAdapter(adapter);
 
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
+		gridview.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View v,
 					int position, long id) {
-				clicked(view, R.id.iniAkuTv);
+				clicked(v, R.id.texKlas);
 			}
 		});
 
@@ -196,7 +218,7 @@ public class KlasifikasiActivity extends Activity {
 	 * When Clicked clasification
 	 */
 	private void clicked(View v, int id) {
-		//checkConnection.Destroy();
+		// checkConnection.Destroy();
 		TextView tv = (TextView) v.findViewById(id);
 		String hasil = tv.getText().toString();
 		Intent intent = new Intent(this, MapActivity.class);
@@ -217,9 +239,9 @@ public class KlasifikasiActivity extends Activity {
 
 		Context ctx;
 		LayoutInflater lInflater;
-		List<String> data;
+		List<Item> data;
 
-		ListAdapter(Context context, List<String> data) {
+		ListAdapter(Context context, List<Item> data) {
 			ctx = context;
 			this.data = data;
 			lInflater = (LayoutInflater) ctx
@@ -245,18 +267,26 @@ public class KlasifikasiActivity extends Activity {
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View view = convertView;
 			if (view == null) {
-				view = lInflater
-						.inflate(R.layout.tv_klasifikasi, parent, false);
+				view = lInflater.inflate(R.layout.klasifikasi_item, parent,
+						false);
 			}
 
-			if (position % 2 == 0) {
-				view.setBackgroundColor(0xFFFFFFFF);
-			} else {
-				view.setBackgroundColor(0xFFF3F3F3);
-			}
+			view.getBackground().setColorFilter(data.get(position).getColor(),
+					android.graphics.PorterDuff.Mode.MULTIPLY);
 
-			TextView tv = (TextView) view.findViewById(R.id.iniAkuTv);
-			tv.setText(data.get(position));
+			// view.setBackgroundColor(data.get(position).getColor());
+
+			// if (position % 2 == 0) {
+			// view.setBackgroundColor(0xFFFFFFFF);
+			// } else {
+			// view.setBackgroundColor(0xFFF3F3F3);
+			// }
+
+			((TextView) view.findViewById(R.id.loKlas)).setText(data.get(
+					position).getLogo());
+
+			((TextView) view.findViewById(R.id.texKlas)).setText(data.get(
+					position).getText());
 
 			return view;
 		}
@@ -319,4 +349,25 @@ public class KlasifikasiActivity extends Activity {
 		}
 	}
 
+	private class Item {
+		private String text;
+		private String color;
+
+		public Item(String text, String color) {
+			this.text = text;
+			this.color = color;
+		}
+
+		public String getText() {
+			return text;
+		}
+
+		public int getColor() {
+			return Color.parseColor(color);
+		}
+
+		public String getLogo() {
+			return text.substring(0, 1);
+		}
+	}
 }

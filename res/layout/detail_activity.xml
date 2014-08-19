@@ -40,9 +40,8 @@
 
                     <ImageView
                         android:id="@+id/img_detail"
-                        android:layout_width="0dip"
+                        android:layout_width="match_parent"
                         android:layout_height="200dip"
-                        android:layout_weight="0.5"
                         android:contentDescription="@string/sample_warung" />
                 </LinearLayout>
 

@@ -289,11 +289,10 @@ public class DetailActivity extends Activity {
 			return mIcon11;
 		}
 
-		@SuppressWarnings("deprecation")
 		protected void onPostExecute(Bitmap result) {
 			image = result;
 			ImageView gambar = (ImageView) findViewById(R.id.img_detail);
-			gambar.setBackground(new BitmapDrawable(image));
+			gambar.setBackground(new BitmapDrawable(getResources(), image));
 		}
 
 	}
