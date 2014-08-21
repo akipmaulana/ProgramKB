@@ -1351,7 +1351,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f060019;
         public static final int action_menu_presenter=0x7f06001a;
         public static final int action_mode_close_button=0x7f060027;
-        public static final int action_settings=0x7f060094;
+        public static final int action_settings=0x7f060093;
         public static final int activity_chooser_view_content=0x7f060028;
         public static final int akun_img=0x7f060076;
         public static final int akun_tv=0x7f060077;
@@ -1390,7 +1390,7 @@ containing a value of this type.
         public static final int foto_profil=0x7f060072;
         public static final int foto_profil_tv=0x7f060073;
         public static final int getMap=0x7f06004f;
-        public static final int grid_default_search=0x7f060098;
+        public static final int grid_default_search=0x7f060097;
         public static final int gridview=0x7f060068;
         public static final int harga_posting=0x7f060056;
         public static final int hobi=0x7f060065;
@@ -1403,13 +1403,12 @@ containing a value of this type.
         public static final int imageku=0x7f060089;
         public static final int img_coment=0x7f06006b;
         public static final int img_detail=0x7f06004b;
-        public static final int iniAkuTv=0x7f060092;
         public static final int isi_comment=0x7f06006e;
         public static final int isi_posting=0x7f060057;
         public static final int jekel=0x7f06005b;
         public static final int judul=0x7f06004a;
-        public static final int katalogBar=0x7f060093;
-        public static final int koment=0x7f06009d;
+        public static final int katalogBar=0x7f060092;
+        public static final int koment=0x7f06009c;
         public static final int koment_list=0x7f060059;
         public static final int kosong=0x7f060071;
         public static final int kota=0x7f060060;
@@ -1420,8 +1419,8 @@ containing a value of this type.
         public static final int loKlas=0x7f060069;
         public static final int load_more_footer=0x7f060078;
         public static final int load_more_progressBar=0x7f06007a;
-        public static final int logout=0x7f060096;
-        public static final int logout_map=0x7f06009b;
+        public static final int logout=0x7f060095;
+        public static final int logout_map=0x7f06009a;
         public static final int mail=0x7f06005d;
         public static final int map=0x7f06006f;
         public static final int map1=0x7f060067;
@@ -1438,11 +1437,11 @@ containing a value of this type.
         public static final int new_pass=0x7f060047;
         public static final int none=0x7f060000;
         public static final int normal=0x7f060001;
-        public static final int ok_done=0x7f06009c;
+        public static final int ok_done=0x7f06009b;
         public static final int pager=0x7f060086;
         public static final int pekerjaan=0x7f060064;
         public static final int pendidikan=0x7f060063;
-        public static final int post=0x7f060097;
+        public static final int post=0x7f060096;
         public static final int profil_img=0x7f060082;
         public static final int profil_tv=0x7f060083;
         public static final int progress_circular=0x7f06001b;
@@ -1456,7 +1455,7 @@ containing a value of this type.
         public static final int reg_pass=0x7f06007d;
         public static final int reg_pass2=0x7f06007e;
         public static final int registrasi_link=0x7f060046;
-        public static final int retrieveAll=0x7f060099;
+        public static final int retrieveAll=0x7f060098;
         public static final int satellite=0x7f060002;
         public static final int scroolView1=0x7f060042;
         public static final int search_badge=0x7f060035;
@@ -1472,7 +1471,7 @@ containing a value of this type.
         public static final int search_view_map=0x7f060041;
         public static final int search_voice_btn=0x7f06003e;
         public static final int setLike=0x7f060050;
-        public static final int setlang=0x7f060095;
+        public static final int setlang=0x7f060094;
         public static final int shortcut=0x7f060031;
         public static final int showCustom=0x7f06000b;
         public static final int showHome=0x7f060008;
@@ -1488,7 +1487,7 @@ containing a value of this type.
         public static final int texKlas=0x7f06006a;
         public static final int thread_img=0x7f060084;
         public static final int thread_tv=0x7f060085;
-        public static final int timelineBar=0x7f06009a;
+        public static final int timelineBar=0x7f060099;
         public static final int title=0x7f06002e;
         public static final int top_action_bar=0x7f060023;
         public static final int top_line=0x7f060079;
@@ -1572,7 +1571,6 @@ containing a value of this type.
         public static final int timeline_fragment=0x7f03002b;
         public static final int timeline_layout=0x7f03002c;
         public static final int timeline_list=0x7f03002d;
-        public static final int tv_klasifikasi=0x7f03002e;
     }
     public static final class menu {
         public static final int klasifikasi=0x7f0c0000;
@@ -1623,7 +1621,7 @@ containing a value of this type.
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f070026;
         public static final int action_settings=0x7f07002a;
-        public static final int add_photo=0x7f070050;
+        public static final int add_photo=0x7f07004f;
         public static final int akun=0x7f070036;
         public static final int alamat=0x7f070043;
         public static final int app_name=0x7f070028;
@@ -1753,7 +1751,7 @@ containing a value of this type.
         public static final int kosong=0x7f07005b;
         public static final int kota=0x7f070044;
         public static final int lain=0x7f070056;
-        public static final int lainnya=0x7f07004f;
+        public static final int lainnya=0x7f070050;
         public static final int lihat=0x7f070066;
         /**  Location client code resources (prefix with location_client) 
          */

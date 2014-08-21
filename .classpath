@@ -5,5 +5,10 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="lib" path="D:/Project/program1/ECLIPSE/adt-bundle-windows-x86_64-20130917/android-sdk-windows/add-ons/addon-google_apis-google-18/libs/maps.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/D:/Project/program1/ECLIPSE/adt-bundle-windows-x86_64-20130917/android-sdk-windows/add-ons/addon-google_apis-google-18/docs/reference"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

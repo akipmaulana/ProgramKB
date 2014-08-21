@@ -368,7 +368,7 @@ int id action_context_bar 0x7f060020
 int id action_menu_divider 0x7f060019
 int id action_menu_presenter 0x7f06001a
 int id action_mode_close_button 0x7f060027
-int id action_settings 0x7f060094
+int id action_settings 0x7f060093
 int id activity_chooser_view_content 0x7f060028
 int id akun_img 0x7f060076
 int id akun_tv 0x7f060077
@@ -407,7 +407,7 @@ int id expanded_menu 0x7f06002f
 int id foto_profil 0x7f060072
 int id foto_profil_tv 0x7f060073
 int id getMap 0x7f06004f
-int id grid_default_search 0x7f060098
+int id grid_default_search 0x7f060097
 int id gridview 0x7f060068
 int id harga_posting 0x7f060056
 int id hobi 0x7f060065
@@ -420,13 +420,12 @@ int id image 0x7f06002a
 int id imageku 0x7f060089
 int id img_coment 0x7f06006b
 int id img_detail 0x7f06004b
-int id iniAkuTv 0x7f060092
 int id isi_comment 0x7f06006e
 int id isi_posting 0x7f060057
 int id jekel 0x7f06005b
 int id judul 0x7f06004a
-int id katalogBar 0x7f060093
-int id koment 0x7f06009d
+int id katalogBar 0x7f060092
+int id koment 0x7f06009c
 int id koment_list 0x7f060059
 int id kosong 0x7f060071
 int id kota 0x7f060060
@@ -437,8 +436,8 @@ int id list_item 0x7f06002c
 int id loKlas 0x7f060069
 int id load_more_footer 0x7f060078
 int id load_more_progressBar 0x7f06007a
-int id logout 0x7f060096
-int id logout_map 0x7f06009b
+int id logout 0x7f060095
+int id logout_map 0x7f06009a
 int id mail 0x7f06005d
 int id map 0x7f06006f
 int id map1 0x7f060067
@@ -455,11 +454,11 @@ int id never 0x7f06000d
 int id new_pass 0x7f060047
 int id none 0x7f060000
 int id normal 0x7f060001
-int id ok_done 0x7f06009c
+int id ok_done 0x7f06009b
 int id pager 0x7f060086
 int id pekerjaan 0x7f060064
 int id pendidikan 0x7f060063
-int id post 0x7f060097
+int id post 0x7f060096
 int id profil_img 0x7f060082
 int id profil_tv 0x7f060083
 int id progress_circular 0x7f06001b
@@ -473,7 +472,7 @@ int id reg_mail 0x7f06007c
 int id reg_pass 0x7f06007d
 int id reg_pass2 0x7f06007e
 int id registrasi_link 0x7f060046
-int id retrieveAll 0x7f060099
+int id retrieveAll 0x7f060098
 int id satellite 0x7f060002
 int id scroolView1 0x7f060042
 int id search_badge 0x7f060035
@@ -489,7 +488,7 @@ int id search_src_text 0x7f06003a
 int id search_view_map 0x7f060041
 int id search_voice_btn 0x7f06003e
 int id setLike 0x7f060050
-int id setlang 0x7f060095
+int id setlang 0x7f060094
 int id shortcut 0x7f060031
 int id showCustom 0x7f06000b
 int id showHome 0x7f060008
@@ -505,7 +504,7 @@ int id terrain 0x7f060003
 int id texKlas 0x7f06006a
 int id thread_img 0x7f060084
 int id thread_tv 0x7f060085
-int id timelineBar 0x7f06009a
+int id timelineBar 0x7f060099
 int id title 0x7f06002e
 int id top_action_bar 0x7f060023
 int id top_line 0x7f060079
@@ -563,7 +562,6 @@ int layout support_simple_spinner_dropdown_item 0x7f03002a
 int layout timeline_fragment 0x7f03002b
 int layout timeline_layout 0x7f03002c
 int layout timeline_list 0x7f03002d
-int layout tv_klasifikasi 0x7f03002e
 int menu klasifikasi 0x7f0c0000
 int menu main 0x7f0c0001
 int menu map_menu 0x7f0c0002
@@ -583,7 +581,7 @@ int string abc_searchview_description_voice 0x7f070023
 int string abc_shareactionprovider_share_with 0x7f070027
 int string abc_shareactionprovider_share_with_application 0x7f070026
 int string action_settings 0x7f07002a
-int string add_photo 0x7f070050
+int string add_photo 0x7f07004f
 int string akun 0x7f070036
 int string alamat 0x7f070043
 int string app_name 0x7f070028
@@ -645,7 +643,7 @@ int string konf_password 0x7f07003e
 int string kosong 0x7f07005b
 int string kota 0x7f070044
 int string lain 0x7f070056
-int string lainnya 0x7f07004f
+int string lainnya 0x7f070050
 int string lihat 0x7f070066
 int string location_client_powered_by_google 0x7f07001a
 int string login 0x7f070037
