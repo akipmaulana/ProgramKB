@@ -154,8 +154,7 @@ public class KlasifikasiActivity extends Activity {
 				}
 			}
 			searchView.setSearchableInfo(info);
-		} else {
-		}
+		} 
 
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 

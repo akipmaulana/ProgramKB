@@ -17,6 +17,7 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.Toast;
 
 public class PlacesAutoCompleteAdapter extends ArrayAdapter<String> implements
 		Filterable {
@@ -28,7 +29,7 @@ public class PlacesAutoCompleteAdapter extends ArrayAdapter<String> implements
 	private static final String TYPE_AUTOCOMPLETE = "/autocomplete";
 	private static final String OUT_JSON = "/json";
 
-	private static final String API_KEY = "YOUR_API_KEY";
+	private static final String API_KEY = "AIzaSyATMBKHBn3w6NXmtuTgFMwJNKV3j6pxIss";
 
 	public PlacesAutoCompleteAdapter(Context context, int textViewResourceId) {
 		super(context, textViewResourceId);
@@ -81,16 +82,24 @@ public class PlacesAutoCompleteAdapter extends ArrayAdapter<String> implements
 		HttpURLConnection conn = null;
 		StringBuilder jsonResults = new StringBuilder();
 		try {
-			StringBuilder sb = new StringBuilder(PLACES_API_BASE
-					+ TYPE_AUTOCOMPLETE + OUT_JSON);
-			sb.append("?key=" + API_KEY);
-			sb.append("&components=country:uk");
-			sb.append("&input=" + URLEncoder.encode(input, "utf8"));
+			 StringBuilder sb = new StringBuilder(PLACES_API_BASE
+			 + TYPE_AUTOCOMPLETE + OUT_JSON);
+			 sb.append("?key=" + API_KEY);
+			 sb.append("&components=country:fr");
+			 sb.append("&input=" + URLEncoder.encode(input, "utf8"));
+
+//			StringBuilder sb = new StringBuilder(
+//					"https://maps.googleapis.com/maps/api/place/autocomplete/json?input="
+//							+ URLEncoder.encode(input.toString(), "UTF-8")
+//							+ "&types=geocode&language=en&sensor=true&key="
+//							+ API_KEY);
 
 			URL url = new URL(sb.toString());
 			conn = (HttpURLConnection) url.openConnection();
 			InputStreamReader in = new InputStreamReader(conn.getInputStream());
 
+			Toast.makeText(getContext(), sb.toString(), Toast.LENGTH_SHORT).show();
+			
 			// Load the results into a StringBuilder
 			int read;
 			char[] buff = new char[1024];

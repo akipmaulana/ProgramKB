@@ -10,6 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <AutoCompleteTextView
+        android:id="@+id/inputSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_action_search"
+        android:background="#25000000"
+        android:gravity="left|center_vertical"
+		android:textColor="#ffffff"        
+        android:hint="@string/cari"
+        android:inputType="textVisiblePassword" />
+
     <TextView
         android:id="@+id/connect"
         android:layout_width="match_parent"

@@ -32,10 +32,12 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.v7.widget.SearchView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +45,7 @@ import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
 import aprisma.akirah.bingung.holder.Klasifikasi;
 import aprisma.akirah.bingung.holder.User;
+import aprisma.akirah.bingung.maps.GetPlaces;
 import aprisma.akirah.bingung.service.CheckConnection;
 import aprisma.akirah.bingung.timeline.TimelineAcitivity;
 import aprisma.akirah.bingung.timeline.TimelineFragment;
@@ -79,6 +82,10 @@ public class MapActivity extends Activity {
 	private Boolean isReadyMenu = false;
 
 	private TextView connectLay;
+	
+	private ArrayAdapter<String> adapter;
+	
+	private AutoCompleteTextView autoCompView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -221,15 +228,41 @@ public class MapActivity extends Activity {
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@SuppressLint("InlinedApi")
 	private void initActionBar(String klasifikasi) {
-		ActionBar actionBar = getActionBar();
-		actionBar.setCustomView(R.layout.actionbar_top_search); // load your
-																// layout
-		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME
-				| ActionBar.DISPLAY_SHOW_CUSTOM); // show it
 
-		SearchView search = (SearchView) actionBar.getCustomView()
-				.findViewById(R.id.search_view_map);
-		search.setQuery(klasifikasi.toLowerCase(), true);
+		adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1);
+		adapter.setNotifyOnChange(true);
+
+		autoCompView = (AutoCompleteTextView) findViewById(R.id.inputSearch);
+		// autoCompView.setAdapter(new PlacesAutoCompleteAdapter(this,
+		// android.R.layout.simple_list_item_1));
+		autoCompView.setAdapter(adapter);
+		autoCompView.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				if (count % 3 == 1) {
+					adapter.clear();
+					GetPlaces task = new GetPlaces(getApplicationContext(), adapter, autoCompView);
+					// now pass the argument in the textview to the task
+					task.execute(autoCompView.getText().toString());
+				}
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 
 		makeDropList();
 
@@ -384,7 +417,7 @@ public class MapActivity extends Activity {
 				// }
 				// isNew = false;
 				// }
-//				checkConnection.Destroy();
+				// checkConnection.Destroy();
 				intent = new Intent(this, TimelineAcitivity.class);
 				intent.putExtra(Klasifikasi.KLASIFIKASI_REQUEST, getKlasifikasi);
 				startActivity(intent);
