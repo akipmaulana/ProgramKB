@@ -12,15 +12,12 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.app.SearchManager;
-import android.app.SearchableInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,7 +40,6 @@ public class KlasifikasiActivity extends Activity {
 
 	// private AutoCompleteTextView inputSearch;
 	private ListAdapter adapter;
-	private SearchView searchView;
 
 	private Menu menu;
 	private Boolean isReadyMenu = false;
@@ -79,11 +75,6 @@ public class KlasifikasiActivity extends Activity {
 		actionBar.setCustomView(R.layout.action_bar_klasifikasi); // load your
 																	// layout
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM); // show it
-
-		searchView = (SearchView) actionBar.getCustomView().findViewById(
-				R.id.search_klasifikasi);
-
-		setupSearchView();
 
 		PengaturanActivity.SetMenu(menu);
 
@@ -136,42 +127,6 @@ public class KlasifikasiActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void setupSearchView() {
-
-		searchView.setIconifiedByDefault(true);
-
-		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-		if (searchManager != null) {
-			List<SearchableInfo> searchables = searchManager
-					.getSearchablesInGlobalSearch();
-
-			SearchableInfo info = searchManager
-					.getSearchableInfo(getComponentName());
-			for (SearchableInfo inf : searchables) {
-				if (inf.getSuggestAuthority() != null
-						&& inf.getSuggestAuthority().startsWith("applications")) {
-					info = inf;
-				}
-			}
-			searchView.setSearchableInfo(info);
-		} 
-
-		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-			@Override
-			public boolean onQueryTextSubmit(String arg0) {
-				// TODO Auto-generated method stub
-				return false;
-			}
-
-			@Override
-			public boolean onQueryTextChange(String arg0) {
-				// TODO Auto-generated method stub
-				return false;
-			}
-		});
-	}
-
 	/*
 	 * set klasifikasi ke dalam list view
 	 */
@@ -196,21 +151,6 @@ public class KlasifikasiActivity extends Activity {
 				clicked(v, R.id.texKlas);
 			}
 		});
-
-		// inputSearch = (AutoCompleteTextView) this.findViewById(
-		// R.id.inputSearch);
-		//
-		// ArrayAdapter<String> adapterAuto = new ArrayAdapter<String>(this,
-		// android.R.layout.simple_list_item_1, GET_KLASIFIKASI);
-		//
-		// inputSearch.setAdapter(adapterAuto);
-		//
-		// inputSearch.setOnItemClickListener(new OnItemClickListener() {
-		// @Override
-		// public void onItemClick(AdapterView<?> p, View v, int pos, long id) {
-		// clicked(v, android.R.id.text1);
-		// }
-		// });
 	}
 
 	/*
@@ -221,6 +161,7 @@ public class KlasifikasiActivity extends Activity {
 		TextView tv = (TextView) v.findViewById(id);
 		String hasil = tv.getText().toString();
 		Intent intent = new Intent(this, MapActivity.class);
+		// intent.setAction(Intent.ACTION_SEARCH);
 		intent.putExtra(Klasifikasi.KLASIFIKASI_REQUEST, hasil);
 		startActivity(intent);
 		overridePendingTransition(R.anim.slide_in, R.anim.slide_in);

@@ -18,12 +18,13 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -32,12 +33,15 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
+import android.widget.ImageView;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,13 +49,14 @@ import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
 import aprisma.akirah.bingung.holder.Klasifikasi;
 import aprisma.akirah.bingung.holder.User;
-import aprisma.akirah.bingung.maps.GetPlaces;
+import aprisma.akirah.bingung.PlaceProvider;
 import aprisma.akirah.bingung.service.CheckConnection;
 import aprisma.akirah.bingung.timeline.TimelineAcitivity;
 import aprisma.akirah.bingung.timeline.TimelineFragment;
 import aprisma.akirah.bingung.timeline.TimelineList;
 
-public class MapActivity extends Activity {
+public class MapActivity extends FragmentActivity implements
+		LoaderCallbacks<Cursor> {
 
 	private LatLng INIAKU = new LatLng(-6.737246, 108.550656);
 	private static final long MIN_DISTANCE_FOR_UPDATE = 10;
@@ -82,14 +87,9 @@ public class MapActivity extends Activity {
 	private Boolean isReadyMenu = false;
 
 	private TextView connectLay;
-	
-	private ArrayAdapter<String> adapter;
-	
-	private AutoCompleteTextView autoCompView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.map_activity);
 
@@ -139,6 +139,8 @@ public class MapActivity extends Activity {
 		getLocation();
 
 		initActionBar(getKlasifikasi);
+		
+		handleIntent(getIntent());
 
 	}
 
@@ -228,39 +230,20 @@ public class MapActivity extends Activity {
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@SuppressLint("InlinedApi")
 	private void initActionBar(String klasifikasi) {
+		ActionBar actionBar = getActionBar();
+		actionBar.setCustomView(R.layout.actionbar_top_search); // load your
+		// layout
+		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME
+				| ActionBar.DISPLAY_SHOW_CUSTOM); // show it
 
-		adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1);
-		adapter.setNotifyOnChange(true);
-
-		autoCompView = (AutoCompleteTextView) findViewById(R.id.inputSearch);
-		// autoCompView.setAdapter(new PlacesAutoCompleteAdapter(this,
-		// android.R.layout.simple_list_item_1));
-		autoCompView.setAdapter(adapter);
-		autoCompView.addTextChangedListener(new TextWatcher() {
+		ImageView search = (ImageView) actionBar.getCustomView().findViewById(
+				R.id.search_view_map);
+		search.setOnClickListener(new View.OnClickListener() {
 
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
+			public void onClick(View v) {
 				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				if (count % 3 == 1) {
-					adapter.clear();
-					GetPlaces task = new GetPlaces(getApplicationContext(), adapter, autoCompView);
-					// now pass the argument in the textview to the task
-					task.execute(autoCompView.getText().toString());
-				}
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-
+				onSearchRequested();
 			}
 		});
 
@@ -456,7 +439,6 @@ public class MapActivity extends Activity {
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 			isInit = false;
 			pDialog = new ProgressDialog(MapActivity.this);
@@ -501,7 +483,6 @@ public class MapActivity extends Activity {
 							}
 						}
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -524,6 +505,80 @@ public class MapActivity extends Activity {
 
 		}
 
+	}
+
+	@Override
+	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
+		CursorLoader cLoader = null;
+		if (arg0 == 0)
+			cLoader = new CursorLoader(getBaseContext(),
+					PlaceProvider.SEARCH_URI, null, null,
+					new String[] { arg1.getString("query") }, null);
+		else if (arg0 == 1)
+			cLoader = new CursorLoader(getBaseContext(),
+					PlaceProvider.DETAILS_URI, null, null,
+					new String[] { arg1.getString("query") }, null);
+		return cLoader;
+	}
+
+	@Override
+	public void onLoadFinished(Loader<Cursor> arg0, Cursor arg1) {
+		showLocations(arg1);
+	}
+
+	@Override
+	public void onLoaderReset(Loader<Cursor> arg0) {
+	}
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		// TODO Auto-generated method stub
+		super.onNewIntent(intent);
+		setIntent(intent);
+		handleIntent(intent);
+	}
+
+	private void handleIntent(Intent intent) {
+		try {
+			if (intent.getAction().equals(Intent.ACTION_SEARCH)) {
+				doSearch(intent.getStringExtra(SearchManager.QUERY));
+			} else if (intent.getAction().equals(Intent.ACTION_VIEW)) {
+				getPlace(intent.getStringExtra(SearchManager.EXTRA_DATA_KEY));
+			}
+		} catch (Exception e) {
+		} finally {
+		}
+	}
+
+	private void doSearch(String query) {
+		Bundle data = new Bundle();
+		data.putString("query", query);
+		getSupportLoaderManager().restartLoader(0, data, this);
+	}
+
+	private void getPlace(String query) {
+		Bundle data = new Bundle();
+		data.putString("query", query);
+		getSupportLoaderManager().restartLoader(1, data, this);
+	}
+
+	private void showLocations(Cursor c) {
+		MarkerOptions markerOptions = null;
+		LatLng position = null;
+//		map.clear();
+		while (c.moveToNext()) {
+			markerOptions = new MarkerOptions();
+			position = new LatLng(Double.parseDouble(c.getString(1)),
+					Double.parseDouble(c.getString(2)));
+			markerOptions.position(position);
+			markerOptions.title(c.getString(0));
+			map.addMarker(markerOptions);
+		}
+		if (position != null) {
+			CameraUpdate cameraPosition = CameraUpdateFactory
+					.newLatLng(position);
+			map.animateCamera(cameraPosition);
+		}
 	}
 
 }

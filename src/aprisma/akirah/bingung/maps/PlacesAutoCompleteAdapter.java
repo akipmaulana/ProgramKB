@@ -14,9 +14,12 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class PlacesAutoCompleteAdapter extends ArrayAdapter<String> implements
@@ -45,6 +48,13 @@ public class PlacesAutoCompleteAdapter extends ArrayAdapter<String> implements
 		return resultList.get(index);
 	}
 
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		TextView text = (TextView) convertView;
+		text.setText(resultList.get(position));
+		return super.getView(position, convertView, parent);
+	}
+	
 	@Override
 	public Filter getFilter() {
 		Filter filter = new Filter() {
@@ -98,14 +108,14 @@ public class PlacesAutoCompleteAdapter extends ArrayAdapter<String> implements
 			conn = (HttpURLConnection) url.openConnection();
 			InputStreamReader in = new InputStreamReader(conn.getInputStream());
 
-			Toast.makeText(getContext(), sb.toString(), Toast.LENGTH_SHORT).show();
-			
 			// Load the results into a StringBuilder
 			int read;
 			char[] buff = new char[1024];
 			while ((read = in.read(buff)) != -1) {
+				Toast.makeText(getContext(), sb.toString(), Toast.LENGTH_SHORT).show();
 				jsonResults.append(buff, 0, read);
 			}
+			Toast.makeText(getContext(), jsonResults.toString()+"ioio", Toast.LENGTH_SHORT).show();
 		} catch (MalformedURLException e) {
 			Log.e(LOG_TAG, "Error processing Places API URL", e);
 			return resultList;
@@ -129,6 +139,7 @@ public class PlacesAutoCompleteAdapter extends ArrayAdapter<String> implements
 				resultList.add(predsJsonArray.getJSONObject(i).getString(
 						"description"));
 			}
+			addAll(resultList);
 		} catch (JSONException e) {
 			Log.e(LOG_TAG, "Cannot process JSON results", e);
 		}

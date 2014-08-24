@@ -31,10 +31,8 @@ public class Posting extends KlikBParent{
 	private String jum_kom;
 	private String id_catalog;
 	private String price;
-	private ArrayList<Komentar> koments;
 	
 	public Posting() {
-		koments = new ArrayList<Komentar>();
 	}
 	
 	public String getLike() {
@@ -222,10 +220,6 @@ public class Posting extends KlikBParent{
 		this.price = price;
 	}
 	
-	public ArrayList<Komentar> getKoments() {
-		return koments;
-	}
-
 	public JSONObject getReviewJSON(String id_posting, String lang){
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("tag", REVIEW_TAG));

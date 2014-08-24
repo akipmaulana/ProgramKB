@@ -1,6 +1,12 @@
 package aprisma.akirah.bingung.holder;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONObject;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,7 +14,7 @@ import android.graphics.Matrix;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
-public class Komentar {
+public class Komentar extends KlikBParent{
 
 	private String id_komentar;
 	private String rating;
@@ -64,6 +70,14 @@ public class Komentar {
 	public void setIcon(ImageView image){
 		icon = image;
 		new DownloadImageTask().execute(this.avatar);
+	}
+	
+	public static JSONObject getCommentJSON(int id_posting){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("tag", COMMENT_TAG));
+		params.add(new BasicNameValuePair("id_posting", id_posting+""));
+		JSONObject json = JSONPARSER.getJSONFromUrl(URL, params);
+		return json;
 	}
 	
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {

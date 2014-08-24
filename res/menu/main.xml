@@ -14,14 +14,6 @@
         android:showAsAction="always"
         android:title="@string/post"/>
     <item
-        android:id="@+id/grid_default_search"
-        android:actionViewClass="android.support.v7.widget.SearchView"
-        android:icon="@android:drawable/ic_menu_search"
-        android:searchSuggestAuthority="com.example.MyCustomSuggestionProvider"
-        android:searchSuggestSelection="word MATCH ?"
-        android:showAsAction="always"
-        android:title="@string/cari"/>
-    <item
         android:id="@+id/setlang"
         android:orderInCategory="1"
         android:showAsAction="never"

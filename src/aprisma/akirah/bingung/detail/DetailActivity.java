@@ -2,7 +2,6 @@ package aprisma.akirah.bingung.detail;
 
 import java.io.InputStream;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
@@ -14,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,13 +21,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
 import aprisma.akirah.bingung.holder.Klasifikasi;
-import aprisma.akirah.bingung.holder.Komentar;
 import aprisma.akirah.bingung.holder.Posting;
 import aprisma.akirah.bingung.holder.User;
 import aprisma.akirah.bingung.service.CheckConnection;
@@ -47,7 +45,7 @@ public class DetailActivity extends Activity {
 	private Boolean isReadyMenu = false;
 
 	private TextView connectLay;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -83,15 +81,7 @@ public class DetailActivity extends Activity {
 			overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
 			return true;
 		case R.id.koment:
-			if (User.ISLOGIN) {
-				intent = new Intent(this, CommentActivity.class);
-				startActivity(intent);
-				overridePendingTransition(R.anim.slide_bottom,
-						R.anim.slide_bottom);
-			} else {
-				intent = new Intent(this, MainActivity.class);
-				startActivity(intent);
-			}
+			comment();
 			return true;
 		case R.id.action_settings:
 			intent = new Intent(getApplicationContext(),
@@ -129,24 +119,10 @@ public class DetailActivity extends Activity {
 		overridePendingTransition(R.anim.slide_out, R.anim.slide_out);
 	}
 
-	public void comment(View view) {
-
-		Intent intent = null;
-		if (User.ISLOGIN) {
-			intent = new Intent(this, CommentActivity.class);
-			startActivity(intent);
-			overridePendingTransition(R.anim.slide_bottom, R.anim.slide_bottom);
-		} else {
-			intent = new Intent(this, MainActivity.class);
-			startActivity(intent);
-		}
-
-	}
-
 	private void setIdPosting(String namaku) {
 		for (int i = 0; i < MapActivity.timelines.size(); i++) {
 			if (MapActivity.timelines.get(i).getNamaku().equals(namaku)) {
-				id_posting = MapActivity.timelines.get(i).getIdPosting();
+				id_posting = 39;//MapActivity.timelines.get(i).getIdPosting();
 				filename_img = MapActivity.timelines.get(i).getImageku();
 			}
 		}
@@ -179,26 +155,9 @@ public class DetailActivity extends Activity {
 		telpon.setText(posting.getTelepon());
 		TextView situs_posting = (TextView) findViewById(R.id.situs_posting);
 		situs_posting.setText(posting.getWebsite());
-		TextView harga = (TextView) findViewById(R.id.harga_posting);
-		harga.setText(posting.getPrice());
 		TextView isi_posting = (TextView) findViewById(R.id.isi_posting);
 		isi_posting.setText(posting.getIsi_posting());
 
-		LinearLayout koment_list = (LinearLayout) findViewById(R.id.koment_list);
-
-		for (int i = 0; i < posting.getKoments().size(); i++) {
-			Komentar komentar = posting.getKoments().get(i);
-			View item = getLayoutInflater().inflate(R.layout.koment_item,
-					koment_list, false);
-			((TextView) item.findViewById(R.id.nama_comment)).setText(komentar
-					.getFullname());
-			((TextView) item.findViewById(R.id.waktu_comment)).setText(komentar
-					.getDate_create());
-			((TextView) item.findViewById(R.id.isi_comment)).setText(komentar
-					.getIsi_komen());
-			komentar.setIcon(((ImageView) item.findViewById(R.id.img_coment)));
-			koment_list.addView(item, i);
-		}
 	}
 
 	private ProgressDialog pDialog;
@@ -243,19 +202,6 @@ public class DetailActivity extends Activity {
 					posting.setPrice(jsonOBJ.getString("price"));
 					posting.setLike(jsonOBJ.getString("like"));
 					new DownloadImageTask().execute(filename_img);
-					JSONArray koments = json.getJSONArray("koments");
-					for (int i = 0; i < koments.length(); i++) {
-						JSONObject j = koments.getJSONObject(i);
-						Komentar komentar = new Komentar(
-								j.getString("id_komentar"),
-								j.getString("rating"),
-								j.getString("judul_komen"),
-								j.getString("isi_komen"),
-								j.getString("date_create"),
-								j.getString("fullname"),
-								j.getString("website"), j.getString("avatar"));
-						posting.getKoments().add(komentar);
-					}
 				}
 			} catch (Exception e) {
 			}
@@ -295,5 +241,25 @@ public class DetailActivity extends Activity {
 			gambar.setBackground(new BitmapDrawable(getResources(), image));
 		}
 
+	}
+
+	private void comment() {
+		Intent intent = null;
+		if (User.ISLOGIN) {
+			intent = new Intent(this, CommentActivity.class);
+			intent.putExtra("id_posting", id_posting);
+			startActivity(intent);
+			overridePendingTransition(R.anim.slide_bottom, R.anim.slide_bottom);
+		} else {
+			intent = new Intent(this, MainActivity.class);
+			startActivity(intent);
+		}
+	}
+	
+	public void browsing(View view){
+		String url = ((TextView) view.findViewById(R.id.situs_posting)).getText().toString();
+		Intent i = new Intent(Intent.ACTION_VIEW);
+		i.setData(Uri.parse(url));
+		startActivity(i);
 	}
 }

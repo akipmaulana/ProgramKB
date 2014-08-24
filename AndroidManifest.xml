@@ -75,13 +75,34 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="aprisma.akirah.bingung.detail.MapActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/CustomActionBarTheme"
             android:uiOptions="splitActionBarWhenNarrow" >
             <meta-data
                 android:name="android.support.UI_OPTIONS"
                 android:value="splitActionBarWhenNarrow" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <!-- Points to searchable activity -->
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".MapActivity" />
+
+            <!-- Points to searchable meta data -->
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
+
+        <provider
+            android:name=".PlaceProvider"
+            android:authorities="aprisma.akirah.bingung.PlaceProvider"
+            android:exported="false" />
+
         <activity
             android:name="aprisma.akirah.bingung.detail.PengaturanActivity"
             android:label="@string/action_settings"
