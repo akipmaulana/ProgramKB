@@ -155,6 +155,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/radius_scroll"
                         android:background="#A4C400"
+                        android:onClick="getDirection"
                         android:drawableBottom="@drawable/ic_action_directions"
                         android:text="@string/arah"
                         android:textColor="#ffffff" />
@@ -164,6 +165,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#E3C800"
+                        android:onClick="liked"
                         android:drawableBottom="@drawable/ic_action_good"
                         android:text="@string/suka"
                         android:textColor="#ffffff" />

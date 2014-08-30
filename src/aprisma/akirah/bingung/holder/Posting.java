@@ -9,6 +9,8 @@ import org.json.JSONObject;
 
 public class Posting extends KlikBParent{
 
+	public static boolean isLike = true;
+	
 	private String id_posting;
 	private String judul;
 	private String date_create;

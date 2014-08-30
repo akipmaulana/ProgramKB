@@ -64,7 +64,8 @@
     <string name="sample_site">www.warungpasta.com</string>
     <string name="sample_post_time">1 menit yang lalu</string>
     <string name="lihat">View</string>
-    <string name="suka">Liked</string>
+    <string name="suka">Like</string>
+    <string name="unlike">Unlike</string>
     <string name="arah">Get Direction</string>
     <string name="deskripsi_title">Description</string>
     <string name="beri_koment">Comment</string>

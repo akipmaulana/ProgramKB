@@ -19,8 +19,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import aprisma.akirah.bingung.MainActivity;
@@ -45,7 +48,9 @@ public class DetailActivity extends Activity {
 	private Boolean isReadyMenu = false;
 
 	private TextView connectLay;
-	
+
+	private RatingBar rate_me;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -122,7 +127,7 @@ public class DetailActivity extends Activity {
 	private void setIdPosting(String namaku) {
 		for (int i = 0; i < MapActivity.timelines.size(); i++) {
 			if (MapActivity.timelines.get(i).getNamaku().equals(namaku)) {
-				id_posting = 39;//MapActivity.timelines.get(i).getIdPosting();
+				id_posting = MapActivity.timelines.get(i).getIdPosting();
 				filename_img = MapActivity.timelines.get(i).getImageku();
 			}
 		}
@@ -157,6 +162,30 @@ public class DetailActivity extends Activity {
 		situs_posting.setText(posting.getWebsite());
 		TextView isi_posting = (TextView) findViewById(R.id.isi_posting);
 		isi_posting.setText(posting.getIsi_posting());
+
+		rate_me = (RatingBar) findViewById(R.id.rate_me);
+		rate_me.setOnTouchListener(new View.OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				Intent intent = null;
+				if (User.ISLOGIN) {
+					float touchPositionX = event.getX();
+					float width = rate_me.getWidth();
+					float starsf = (touchPositionX / width) * 5.0f;
+					int stars = (int) starsf + 1;
+					rate_me.setRating(stars);
+					Toast.makeText(getApplicationContext(),
+							"Rating : " + rate_me.getRating(),
+							Toast.LENGTH_SHORT).show();
+				} else {
+					intent = new Intent(getApplicationContext(),
+							MainActivity.class);
+					startActivity(intent);
+				}
+				return false;
+			}
+		});
 
 	}
 
@@ -255,11 +284,41 @@ public class DetailActivity extends Activity {
 			startActivity(intent);
 		}
 	}
-	
-	public void browsing(View view){
-		String url = ((TextView) view.findViewById(R.id.situs_posting)).getText().toString();
+
+	public void browsing(View view) {
+		String url = ((TextView) view.findViewById(R.id.situs_posting))
+				.getText().toString();
 		Intent i = new Intent(Intent.ACTION_VIEW);
 		i.setData(Uri.parse(url));
 		startActivity(i);
+	}
+
+	public void liked(View view) {
+		TextView liked;
+		Button setLike;
+		liked = (TextView) findViewById(R.id.liked);
+		setLike = (Button) findViewById(R.id.setLike);
+		if (Posting.isLike) {
+			setLike.setText("Unlike");
+			liked.setText(Integer.parseInt(liked.getText().toString()) + 1 + "");
+			Posting.isLike = false;
+		} else {
+			Posting.isLike = true;
+			setLike.setText("Like");
+			liked.setText(Integer.parseInt(liked.getText().toString()) - 1 + "");
+		}
+	}
+
+	public void getDirection(View v) {
+		String url = "http://maps.google.com/maps?saddr=" + MapActivity.lat
+				+ "," + MapActivity.lon + "&daddr=" + posting.getLat() + ","
+				+ posting.getLon();
+
+		Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+				Uri.parse(url));
+		// par1 : nama package ; par2 : nama kelas
+		intent.setClassName("com.google.android.apps.maps",
+				"com.google.android.maps.MapsActivity");
+		startActivity(intent);
 	}
 }

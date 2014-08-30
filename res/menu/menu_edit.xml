@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" >
+
+    <item
+        android:id="@+id/ok_done"
+        android:icon="@drawable/ic_action_accept"
+        android:showAsAction="withText|always"
+        android:title="@string/ok"/>
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="2"
+        android:title="@string/action_settings"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/setlang"
+        android:orderInCategory="1"
+        android:showAsAction="never"
+        android:title="@string/en"/>
+    <item
+        android:id="@+id/logout"
+        android:orderInCategory="3"
+        android:showAsAction="never"
+        android:title="@string/keluar"/>
+
+</menu>

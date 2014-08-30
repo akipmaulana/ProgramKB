@@ -61,6 +61,9 @@ public class MapActivity extends FragmentActivity implements
 	private LatLng INIAKU = new LatLng(-6.737246, 108.550656);
 	private static final long MIN_DISTANCE_FOR_UPDATE = 10;
 	private static final long MIN_TIME_FOR_UPDATE = 1000 * 60 * 2;
+	
+	public static double lat = 0;
+	public static double lon = 0;
 
 	private GoogleMap map;
 
@@ -176,6 +179,8 @@ public class MapActivity extends FragmentActivity implements
 
 		if (location != null) {
 			INIAKU = new LatLng(location.getLatitude(), location.getLongitude());
+			lat = location.getLatitude();
+			lon = location.getLongitude();
 			timeline.execute();
 		} else {
 			Location locationGPS = locationManager
@@ -184,6 +189,8 @@ public class MapActivity extends FragmentActivity implements
 			if (locationGPS != null) {
 				INIAKU = new LatLng(locationGPS.getLatitude(),
 						locationGPS.getLongitude());
+				lat = locationGPS.getLatitude();
+				lon = locationGPS.getLongitude();
 				timeline.execute();
 			} else {
 				if (!isShowAlert) {
