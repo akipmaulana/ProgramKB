@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:visibility="gone" />
     </FrameLayout>
+
     <TextView
         android:id="@+id/connect"
         android:layout_width="match_parent"
@@ -47,15 +48,17 @@
             android:id="@+id/image_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#0050EF"
             android:contentDescription="@string/comment"
-            android:src="@android:drawable/ic_menu_send" 
-            android:background="#0050EF"/>
+            android:onClick="sent_comment"
+            android:src="@android:drawable/ic_menu_send" />
 
         <EditText
+            android:id="@+id/isi_koment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/editbox_background_normal"
             android:layout_toRightOf="@id/image_comment"
+            android:background="@android:drawable/editbox_background_normal"
             android:hint="@string/comment" >
 
             <requestFocus />

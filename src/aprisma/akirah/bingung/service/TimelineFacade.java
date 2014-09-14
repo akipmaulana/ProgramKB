@@ -12,7 +12,7 @@ public class TimelineFacade {
 	public static final String TABLE_NAME = "timeline";
 
 	public static final String KEY_ID_POSTING = "id_posting";
-	public static final String KEY_ID_CATEGORY = "id_category";
+	public static final String KEY_ID_CATALOG = "id_catalog";
 	public static final String KEY_JUDUL = "judul";
 	public static final String KEY_COUNTER = "counter";
 	public static final String KEY_ISI_POSTING = "isi_posting";
@@ -24,7 +24,7 @@ public class TimelineFacade {
 	public static final String KEY_META_KEYWORD = "meta_keyword";
 
 	public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME
-			+ "(" + KEY_ID_POSTING + " INTEGER PRIMARY KEY," + KEY_ID_CATEGORY
+			+ "(" + KEY_ID_POSTING + " INTEGER PRIMARY KEY," + KEY_ID_CATALOG
 			+ " INTEGER," + KEY_JUDUL + " TEXT," + KEY_COUNTER + " INTEGER,"
 			+ KEY_ISI_POSTING + " TEXT," + KEY_FILENAME_IMAGE + " TEXT,"
 			+ KEY_LAT + " TEXT," + KEY_LON + " TEXT," + KEY_LIKE + " INTEGER,"
@@ -41,7 +41,7 @@ public class TimelineFacade {
 			String lon, int like, String rating, String meta_keyword) {
 		ContentValues values = new ContentValues();
 		values.put(KEY_ID_POSTING, id_posting);
-		values.put(KEY_ID_CATEGORY, id_category);
+		values.put(KEY_ID_CATALOG, id_category);
 		values.put(KEY_JUDUL, judul);
 		values.put(KEY_COUNTER, counter);
 		values.put(KEY_ISI_POSTING, isi_posting);
@@ -73,8 +73,8 @@ public class TimelineFacade {
 			while (!cursor.isAfterLast()) {
 				item.put(KEY_ID_POSTING,
 						cursor.getString(cursor.getColumnIndex(KEY_ID_POSTING)));
-				item.put(KEY_ID_CATEGORY,
-						cursor.getString(cursor.getColumnIndex(KEY_ID_CATEGORY)));
+				item.put(KEY_ID_CATALOG,
+						cursor.getString(cursor.getColumnIndex(KEY_ID_CATALOG)));
 				item.put(KEY_JUDUL, cursor.getString(cursor
 						.getColumnIndex(KEY_JUDUL)));
 				item.put(KEY_COUNTER,

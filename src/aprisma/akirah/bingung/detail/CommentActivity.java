@@ -14,9 +14,11 @@ import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import aprisma.akirah.bingung.R;
 import aprisma.akirah.bingung.holder.Klasifikasi;
 import aprisma.akirah.bingung.holder.Komentar;
@@ -68,6 +70,15 @@ public class CommentActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onBackPressed();
 		overridePendingTransition(R.anim.slide_up, R.anim.slide_up);
+	}
+	
+	public void sent_comment(View view){
+		EditText konten = (EditText) findViewById(R.id.isi_koment);
+		if (konten.getText().equals("")){
+			Toast.makeText(getApplicationContext(), "Please type a comment", Toast.LENGTH_SHORT).show();
+		} else {
+			Toast.makeText(getApplicationContext(), konten.getText().toString(), Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	private void initView() {
