@@ -19,11 +19,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import aprisma.akirah.bingung.MainActivity;
@@ -48,8 +46,6 @@ public class DetailActivity extends Activity {
 	private Boolean isReadyMenu = false;
 
 	private TextView connectLay;
-
-	private RatingBar rate_me;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -163,30 +159,18 @@ public class DetailActivity extends Activity {
 		TextView isi_posting = (TextView) findViewById(R.id.isi_posting);
 		isi_posting.setText(posting.getIsi_posting());
 
-		rate_me = (RatingBar) findViewById(R.id.rate_me);
-		rate_me.setOnTouchListener(new View.OnTouchListener() {
-
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				Intent intent = null;
-				if (User.ISLOGIN) {
-					float touchPositionX = event.getX();
-					float width = rate_me.getWidth();
-					float starsf = (touchPositionX / width) * 5.0f;
-					int stars = (int) starsf + 1;
-					rate_me.setRating(stars);
-					Toast.makeText(getApplicationContext(),
-							"Rating : " + rate_me.getRating(),
-							Toast.LENGTH_SHORT).show();
-				} else {
-					intent = new Intent(getApplicationContext(),
-							MainActivity.class);
-					startActivity(intent);
-				}
-				return false;
-			}
-		});
-
+	}
+	
+	public void rateLayout(View view){
+		Intent intent = null;
+		if (User.ISLOGIN) {
+			RatingActivity rateShow = new RatingActivity(this);
+			rateShow.show();
+		} else {
+			intent = new Intent(getApplicationContext(),
+					MainActivity.class);
+			startActivity(intent);
+		}
 	}
 
 	private ProgressDialog pDialog;
@@ -277,6 +261,7 @@ public class DetailActivity extends Activity {
 		if (User.ISLOGIN) {
 			intent = new Intent(this, CommentActivity.class);
 			intent.putExtra("id_posting", id_posting);
+			intent.putExtra("id_user", Integer.parseInt(User.id_user));
 			startActivity(intent);
 			overridePendingTransition(R.anim.slide_bottom, R.anim.slide_bottom);
 		} else {
@@ -286,11 +271,18 @@ public class DetailActivity extends Activity {
 	}
 
 	public void browsing(View view) {
-		String url = ((TextView) view.findViewById(R.id.situs_posting))
-				.getText().toString();
-		Intent i = new Intent(Intent.ACTION_VIEW);
-		i.setData(Uri.parse(url));
-		startActivity(i);
+		try {
+			String url = ((TextView) view.findViewById(R.id.situs_posting))
+					.getText().toString();
+			if (url != "") {
+				url = "http://"+url;
+				Intent i = new Intent(Intent.ACTION_VIEW);
+				i.setData(Uri.parse(url));
+				startActivity(i);
+			}
+		} catch (Exception ex) {
+			
+		}
 	}
 
 	public void liked(View view) {

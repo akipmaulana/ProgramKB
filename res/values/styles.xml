@@ -20,5 +20,9 @@
     <style name="rateMe" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/rating_bar_full</item>
     </style>
+    
+    <style name="rateMe_show" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/rate__</item>
+    </style>
 
 </resources>

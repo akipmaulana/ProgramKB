@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/header_rating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:background="#80fd7038"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/rate"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:id="@+id/text_rating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textColor="#fff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RatingBar
+            android:id="@+id/rate_me"
+            style="@style/rateMe_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/image_width"
+            android:layout_marginRight="@dimen/image_width"
+            android:rating="0" />
+        
+        <View 
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_list"
+            android:layout_margin="@dimen/radius_scroll"
+            android:background="#F472D0"/>
+        
+        <Button 
+            android:id="@+id/button_rate"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#F472D0"
+            android:text="@string/rate"/>
+        
+    </LinearLayout>
+
+</LinearLayout>

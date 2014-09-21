@@ -29,8 +29,11 @@ import aprisma.akirah.bingung.service.CheckConnection;
 public class CommentActivity extends Activity {
 
 	private int id_posting;
+	private int id_user;
 
 	private ArrayList<Komentar> comments = new ArrayList<Komentar>();
+	
+	private EditText konten;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,7 @@ public class CommentActivity extends Activity {
 				this);
 
 		id_posting = getIntent().getIntExtra("id_posting", 0);
+		id_user = getIntent().getIntExtra("id_user", 0);
 
 		new CommentServer().execute();
 	}
@@ -71,18 +75,20 @@ public class CommentActivity extends Activity {
 		super.onBackPressed();
 		overridePendingTransition(R.anim.slide_up, R.anim.slide_up);
 	}
-	
-	public void sent_comment(View view){
-		EditText konten = (EditText) findViewById(R.id.isi_koment);
-		if (konten.getText().equals("")){
-			Toast.makeText(getApplicationContext(), "Please type a comment", Toast.LENGTH_SHORT).show();
+
+	public void sent_comment(View view) {
+		konten = (EditText) findViewById(R.id.isi_koment);
+		if (konten.getText().toString().equals("")) {
+			Toast.makeText(getApplicationContext(), "Please type a comment",
+					Toast.LENGTH_SHORT).show();
 		} else {
-			Toast.makeText(getApplicationContext(), konten.getText().toString(), Toast.LENGTH_SHORT).show();
+			new SentComment().execute();
 		}
 	}
 
 	private void initView() {
 		LinearLayout koment_list = (LinearLayout) findViewById(R.id.list_comment);
+		koment_list.removeAllViews();
 
 		for (int i = 0; i < comments.size(); i++) {
 			Komentar komentar = comments.get(i);
@@ -97,6 +103,7 @@ public class CommentActivity extends Activity {
 			komentar.setIcon(((ImageView) item.findViewById(R.id.img_coment)));
 			koment_list.addView(item, i);
 		}
+		comments.clear();
 	}
 
 	private ProgressDialog pDialog;
@@ -107,10 +114,10 @@ public class CommentActivity extends Activity {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			pDialog = new ProgressDialog(CommentActivity.this);
-			pDialog.setMessage("Please wait . . .");
-			pDialog.setCancelable(true);
-			pDialog.show();
+//			pDialog = new ProgressDialog(CommentActivity.this);
+//			pDialog.setMessage("Please wait . . .");
+//			pDialog.setCancelable(true);
+//			pDialog.show();
 		}
 
 		@Override
@@ -120,19 +127,16 @@ public class CommentActivity extends Activity {
 				if (json.getInt(Klasifikasi.TAG_SUCCESS) == 1) {
 					JSONArray koments = json.getJSONArray("koments");
 					for (int i = 0; i < koments.length(); i++) {
-						for (int z = 0; z < 3; z++) {
-							JSONObject j = koments.getJSONObject(i);
-							Komentar komentar = new Komentar(
-									j.getString("id_komentar"),
-									j.getString("rating"),
-									j.getString("judul_komen"),
-									j.getString("isi_komen"),
-									j.getString("date_create"),
-									j.getString("fullname"),
-									j.getString("website"),
-									j.getString("avatar"));
-							comments.add(komentar);
-						}
+						JSONObject j = koments.getJSONObject(i);
+						Komentar komentar = new Komentar(
+								j.getString("id_komentar"),
+								j.getString("rating"),
+								j.getString("judul_komen"),
+								j.getString("isi_komen"),
+								j.getString("date_create"),
+								j.getString("fullname"),
+								j.getString("website"), j.getString("avatar"));
+						comments.add(komentar);
 					}
 				}
 			} catch (Exception ex) {
@@ -144,13 +148,44 @@ public class CommentActivity extends Activity {
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
 			// Dismiss the progress dialog
-			if (pDialog.isShowing()) {
-				pDialog.dismiss();
-			}
+//			if (pDialog.isShowing()) {
+//				pDialog.dismiss();
+//			}
 
 			initView();
 		}
 
 	}
 
+	private class SentComment extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			pDialog = new ProgressDialog(CommentActivity.this);
+			pDialog.setMessage("Sent Comment. . .");
+			pDialog.setCancelable(true);
+			pDialog.show();
+		}
+		
+		@Override
+		protected Void doInBackground(Void... params) {
+			Komentar.savecomment(konten.getText().toString(), id_posting + "",
+					id_user + "");
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+			// Dismiss the progress dialog
+			if (pDialog.isShowing()) {
+				pDialog.dismiss();
+			}
+			konten.setText("");
+			new CommentServer().execute();
+		}
+		
+	}
 }
