@@ -18,6 +18,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import aprisma.akirah.bingung.detail.DetailActivity;
+import aprisma.akirah.bingung.holder.Klasifikasi;
 import aprisma.akirah.bingung.holder.User;
 
 public class MainActivity extends Activity {
@@ -31,6 +33,8 @@ public class MainActivity extends Activity {
 	private ProgressDialog pDialog;
 
 	private User user;
+	
+	private int isBackDetail;
 
 	@SuppressLint("NewApi")
 	@Override
@@ -44,6 +48,10 @@ public class MainActivity extends Activity {
 
 		etmail = (EditText) findViewById(R.id.etmail);
 		etpass = (EditText) findViewById(R.id.etpass);
+		
+		if (getIntent().getIntExtra("detail", 0) != 0) {
+			isBackDetail = getIntent().getIntExtra("detail", 0);
+		}
 
 		user = new User();
 
@@ -83,6 +91,14 @@ public class MainActivity extends Activity {
 			}
 		}
 
+	}
+	
+	private void backDetail(){
+		Intent intent = new Intent(
+				this,
+				DetailActivity.class);
+		intent.putExtra(Klasifikasi.TAG_NAME, DetailActivity.namaku);
+		startActivity(intent);
 	}
 
 	private class Login extends AsyncTask<Void, Void, Void> {
@@ -126,7 +142,11 @@ public class MainActivity extends Activity {
 			switch (tag_error) {
 			case 0:
 				User.ISLOGIN = true;
-				onBackPressed();
+				if (isBackDetail != 0){
+					backDetail();
+				} else {
+					onBackPressed();
+				}
 				break;
 			case 1:
 				Toast.makeText(getApplicationContext(), "Password Salah",

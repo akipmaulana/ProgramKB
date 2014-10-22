@@ -227,6 +227,7 @@ public class Posting extends KlikBParent{
 		params.add(new BasicNameValuePair("tag", REVIEW_TAG));
 		params.add(new BasicNameValuePair("id_posting", id_posting));
 		params.add(new BasicNameValuePair("lang", lang));
+		params.add(new BasicNameValuePair("id_user", User.id_user));
 		JSONObject json = JSONPARSER.getJSONFromUrl(URL, params);
 		return json;
 	}

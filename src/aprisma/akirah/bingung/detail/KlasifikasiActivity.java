@@ -15,6 +15,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
@@ -222,11 +224,13 @@ public class KlasifikasiActivity extends Activity {
 			// view.setBackgroundColor(0xFFF3F3F3);
 			// }
 
-			((TextView) view.findViewById(R.id.loKlas)).setText(data.get(
-					position).getLogo());
-
-			((TextView) view.findViewById(R.id.texKlas)).setText(data.get(
+			TextView tv = (TextView) view.findViewById(R.id.texKlas);
+			tv.setText(data.get(
 					position).getText());
+			tv.setBackgroundColor(data.get(position).getColor());
+			
+			((ImageView) view.findViewById(R.id.loKlas)).setImageDrawable(data.get(
+					position).getLogo());
 
 			return view;
 		}
@@ -306,8 +310,12 @@ public class KlasifikasiActivity extends Activity {
 			return Color.parseColor(color);
 		}
 
-		public String getLogo() {
-			return text.substring(0, 1);
+//		public String getLogo() {
+//			return text.substring(0, 1);
+//		}
+		
+		public Drawable getLogo(){
+			return getResources().getDrawable(R.drawable.entertainment);
 		}
 	}
 }

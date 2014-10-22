@@ -95,6 +95,32 @@ public class Komentar extends KlikBParent{
 		return json;
 	}
 	
+	public static JSONObject sentRating(String id_user, String id_posting,
+			String nilai) {
+		// Building Parameters
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("tag", "rating"));
+		params.add(new BasicNameValuePair("id_user", id_user));
+		params.add(new BasicNameValuePair("id_posting", id_posting));
+		params.add(new BasicNameValuePair("nilai", nilai));
+		JSONObject json = JSONPARSER.getJSONFromUrl(
+				URL, params);
+		Log.e("JSON", json.toString());
+		return json;
+	}
+	
+	public static JSONObject sentLike(String id_user, String id_posting) {
+		// Building Parameters
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("tag", "like"));
+		params.add(new BasicNameValuePair("id_user", id_user));
+		params.add(new BasicNameValuePair("id_posting", id_posting));
+		JSONObject json = JSONPARSER.getJSONFromUrl(
+				URL, params);
+		Log.e("JSON", json.toString());
+		return json;
+	}
+	
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 
 		public Bitmap mIcon11 = null;

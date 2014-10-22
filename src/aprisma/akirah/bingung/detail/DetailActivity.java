@@ -22,11 +22,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import aprisma.akirah.bingung.MainActivity;
 import aprisma.akirah.bingung.R;
 import aprisma.akirah.bingung.holder.Klasifikasi;
+import aprisma.akirah.bingung.holder.Komentar;
 import aprisma.akirah.bingung.holder.Posting;
 import aprisma.akirah.bingung.holder.User;
 import aprisma.akirah.bingung.service.CheckConnection;
@@ -34,7 +36,7 @@ import aprisma.akirah.bingung.service.CheckConnection;
 @SuppressLint("NewApi")
 public class DetailActivity extends Activity {
 
-	private String namaku;
+	public static String namaku;
 	private int id_posting;
 	private String filename_img;
 
@@ -46,12 +48,19 @@ public class DetailActivity extends Activity {
 	private Boolean isReadyMenu = false;
 
 	private TextView connectLay;
+	
+	private float nilai;
+	private int isLike;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+		
+		if (getIntent().getFloatExtra("rating", 0f) != 0f) {
+			nilai = getIntent().getFloatExtra("rating", 0f);
+		}
 
 		namaku = getIntent().getStringExtra(Klasifikasi.TAG_NAME);
 
@@ -97,6 +106,8 @@ public class DetailActivity extends Activity {
 		case R.id.logout:
 			User.ISLOGIN = false;
 			intent = new Intent(getApplicationContext(), MainActivity.class);
+			//ksh ini gk ya ? 
+			intent.putExtra("detail", 1);
 			startActivity(intent);
 			return true;
 		}
@@ -139,12 +150,19 @@ public class DetailActivity extends Activity {
 				(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE),
 				this);
 
+		RatingBar reting_res = (RatingBar) findViewById(R.id.reting_res);
+		if (nilai != 0f){
+			reting_res.setRating(nilai);
+		}
 		TextView judul = (TextView) findViewById(R.id.judul);
 		judul.setText(posting.getJudul());
 		TextView views = (TextView) findViewById(R.id.views);
 		views.setText(posting.getCounter());
 		TextView liked = (TextView) findViewById(R.id.liked);
 		liked.setText(posting.getLike());
+		if (isLike != 0) {
+			((Button) findViewById(R.id.setLike)).setText("Unlike");
+		}
 		TextView rate = (TextView) findViewById(R.id.my_rating);
 		rate.setText(Float.parseFloat(posting.getRating()) + "");
 		TextView nama = (TextView) findViewById(R.id.nama_posting);
@@ -164,11 +182,17 @@ public class DetailActivity extends Activity {
 	public void rateLayout(View view){
 		Intent intent = null;
 		if (User.ISLOGIN) {
-			RatingActivity rateShow = new RatingActivity(this);
+			RatingActivity rateShow;
+			if (nilai == 0.f){
+				rateShow = new RatingActivity(this, id_posting+"");
+			} else {
+				rateShow = new RatingActivity(this, nilai, id_posting+"");
+			}
 			rateShow.show();
 		} else {
 			intent = new Intent(getApplicationContext(),
 					MainActivity.class);
+			intent.putExtra("detail", 1);
 			startActivity(intent);
 		}
 	}
@@ -216,6 +240,15 @@ public class DetailActivity extends Activity {
 					posting.setLike(jsonOBJ.getString("like"));
 					new DownloadImageTask().execute(filename_img);
 				}
+				
+				if (json.getString("tag_rate") != null) {
+					nilai = Float.parseFloat(json.getString("tag_rate"));
+				}
+				
+				if (json.getString("tag_like") != null) {
+					isLike = Integer.parseInt(json.getString("tag_like"));
+				}
+				
 			} catch (Exception e) {
 			}
 			return null;
@@ -256,6 +289,52 @@ public class DetailActivity extends Activity {
 
 	}
 
+	private class SentLike extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			pDialog = new ProgressDialog(DetailActivity.this);
+			pDialog.setMessage("Please Wait . . .");
+			pDialog.setCancelable(true);
+			pDialog.show();
+		}
+		
+		@Override
+		protected Void doInBackground(Void... params) {
+			Komentar.sentLike(User.id_user, id_posting+"");
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+			// Dismiss the progress dialog
+			if (pDialog.isShowing()) {
+				pDialog.dismiss();
+			}
+			
+			TextView liked;
+			Button setLike;
+			liked = (TextView) findViewById(R.id.liked);
+			setLike = (Button) findViewById(R.id.setLike);
+			if (isLike == 0) {
+				setLike.setText("Unlike");
+				liked.setText(Integer.parseInt(liked.getText().toString()) + 1 + "");
+				Posting.isLike = false;
+				isLike = 1;
+			} else {
+				isLike = 0;
+				Posting.isLike = true;
+				setLike.setText("Like");
+				liked.setText(Integer.parseInt(liked.getText().toString()) - 1 + "");
+			}
+			
+		}
+		
+	}
+	
 	private void comment() {
 		Intent intent = null;
 		if (User.ISLOGIN) {
@@ -266,6 +345,7 @@ public class DetailActivity extends Activity {
 			overridePendingTransition(R.anim.slide_bottom, R.anim.slide_bottom);
 		} else {
 			intent = new Intent(this, MainActivity.class);
+			intent.putExtra("detail", 1);
 			startActivity(intent);
 		}
 	}
@@ -286,18 +366,14 @@ public class DetailActivity extends Activity {
 	}
 
 	public void liked(View view) {
-		TextView liked;
-		Button setLike;
-		liked = (TextView) findViewById(R.id.liked);
-		setLike = (Button) findViewById(R.id.setLike);
-		if (Posting.isLike) {
-			setLike.setText("Unlike");
-			liked.setText(Integer.parseInt(liked.getText().toString()) + 1 + "");
-			Posting.isLike = false;
+		Intent intent = null;
+		if (User.ISLOGIN) {
+			new SentLike().execute();
 		} else {
-			Posting.isLike = true;
-			setLike.setText("Like");
-			liked.setText(Integer.parseInt(liked.getText().toString()) - 1 + "");
+			intent = new Intent(getApplicationContext(),
+					MainActivity.class);
+			intent.putExtra("detail", 1);
+			startActivity(intent);
 		}
 	}
 

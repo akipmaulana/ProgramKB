@@ -191,7 +191,8 @@
                         android:textSize="18sp" />
 
                     <RatingBar
-                        style="@style/rateMe"
+                        android:id="@+id/reting_res"
+                        style="@style/rateMe_show"
                         android:isIndicator="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
