@@ -6,6 +6,7 @@ import java.util.HashMap;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class KlasifikasiFacade {
 
@@ -23,6 +24,7 @@ public class KlasifikasiFacade {
 
 	public KlasifikasiFacade(SQLiteDatabase db) {
 		this.db = db;
+		Log.e(TABLE_NAME, CREATE_TABLE);
 	}
 
 	/**
@@ -30,13 +32,12 @@ public class KlasifikasiFacade {
 	 * */
 	public void insert(String id_catalog, String id_lang, String name_catalog) {
 		ContentValues values = new ContentValues();
-		values.put(KEY_ID_CATALOG, id_catalog);
-		values.put(KEY_ID_LANG, id_lang);
+		values.put(KEY_ID_CATALOG, Integer.parseInt(id_catalog));
+		values.put(KEY_ID_LANG, Integer.parseInt(id_lang));
 		values.put(KEY_NAME_CATALOG, name_catalog);
-
+		
 		// Inserting Row
 		db.insert(TABLE_NAME, null, values);
-		db.close(); // Closing database connection
 	}
 
 	/**
@@ -63,8 +64,7 @@ public class KlasifikasiFacade {
 			}
 		}
 		cursor.close();
-		db.close();
 		return catalogs;
 	}
-
+	
 }

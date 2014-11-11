@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 
 public class Klasifikasi extends KlikBParent {
@@ -16,6 +17,7 @@ public class Klasifikasi extends KlikBParent {
 	public final static String KLASIFIKASI_REQUEST = "klasifikasi_request";
 	public static ArrayList<String> GET_KLASIFIKASI = new ArrayList<String>();
 	public static ArrayList<String> ID_KLASIFIKASI = new ArrayList<String>();
+	public static ArrayList<Bitmap> IMAGE_KLASIFIKASI = new ArrayList<Bitmap>();
 
 	// JSON Node names
 	public static final String TAG_CATALOGS = "catalogs";

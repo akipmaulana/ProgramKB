@@ -1,6 +1,8 @@
 package aprisma.akirah.bingung.detail;
 
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -14,8 +16,11 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -36,6 +41,8 @@ import aprisma.akirah.bingung.R;
 import aprisma.akirah.bingung.holder.Klasifikasi;
 import aprisma.akirah.bingung.holder.User;
 import aprisma.akirah.bingung.service.CheckConnection;
+import aprisma.akirah.bingung.service.DatabaseHandler;
+import aprisma.akirah.bingung.service.KlasifikasiFacade;
 
 @SuppressLint("NewApi")
 public class KlasifikasiActivity extends Activity {
@@ -47,8 +54,12 @@ public class KlasifikasiActivity extends Activity {
 	private Boolean isReadyMenu = false;
 
 	private ProgressDialog pDialog;
-
+	
+	public static DatabaseHandler dbHandler;
+	
 	private TextView connectLay;
+	
+	private static Resources res;
 
 	String[] colors = { "#A4C400", "#AA00FF", "#E51400", "#E3C800", "#1BA1E2",
 			"#D80073" };
@@ -60,6 +71,10 @@ public class KlasifikasiActivity extends Activity {
 		setContentView(R.layout.klasifikasi_activity);
 
 		connectLay = (TextView) findViewById(R.id.connect);
+		
+		res = getResources();
+		
+		dbHandler = new DatabaseHandler(getApplicationContext());//DatabaseHandler.getInstance(getApplicationContext());
 
 		new Getcatalog().execute();
 
@@ -97,7 +112,15 @@ public class KlasifikasiActivity extends Activity {
 	}
 
 	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		pDialog.cancel();
+	}
+	
+	@Override
 	public void onBackPressed() {
+		dbHandler.closeDB();
 		finish();
 	}
 
@@ -136,7 +159,10 @@ public class KlasifikasiActivity extends Activity {
 		int j = 0;
 		ArrayList<Item> temp1 = new ArrayList<Item>();
 		for (int i = 0; i < Klasifikasi.GET_KLASIFIKASI.size(); i++) {
-			temp1.add(new Item(Klasifikasi.GET_KLASIFIKASI.get(i), colors[j++]));
+			String id_catalog = Klasifikasi.ID_KLASIFIKASI.get(i);
+			String name_catalog = Klasifikasi.GET_KLASIFIKASI.get(i);
+			temp1.add(new Item(name_catalog, colors[j++]));
+			dbHandler.getKlasifikasiFacade().insert(id_catalog, "1", name_catalog);
 			if (j > 5) {
 				j = 0;
 			}
@@ -154,7 +180,7 @@ public class KlasifikasiActivity extends Activity {
 			}
 		});
 	}
-
+	
 	/*
 	 * When Clicked clasification
 	 */
@@ -216,21 +242,13 @@ public class KlasifikasiActivity extends Activity {
 			view.getBackground().setColorFilter(data.get(position).getColor(),
 					android.graphics.PorterDuff.Mode.MULTIPLY);
 
-			// view.setBackgroundColor(data.get(position).getColor());
-
-			// if (position % 2 == 0) {
-			// view.setBackgroundColor(0xFFFFFFFF);
-			// } else {
-			// view.setBackgroundColor(0xFFF3F3F3);
-			// }
-
 			TextView tv = (TextView) view.findViewById(R.id.texKlas);
 			tv.setText(data.get(
 					position).getText());
 			tv.setBackgroundColor(data.get(position).getColor());
 			
-			((ImageView) view.findViewById(R.id.loKlas)).setImageDrawable(data.get(
-					position).getLogo());
+			((ImageView) view.findViewById(R.id.loKlas))
+				.setBackground(new BitmapDrawable(res,Klasifikasi.IMAGE_KLASIFIKASI.get(position)));
 
 			return view;
 		}
@@ -273,15 +291,42 @@ public class KlasifikasiActivity extends Activity {
 					JSONObject c = klasifications.getJSONObject(i);
 					String name_item = c.getString(Klasifikasi.TAG_NAME);
 					String id_item = c.getString(Klasifikasi.TAG_ID_CATALOG);
+					String img_item = "http://klikbingung.com/data/category/"+c.getString(Klasifikasi.TAG_IMG);
 					Klasifikasi.GET_KLASIFIKASI.add(name_item);
 					Klasifikasi.ID_KLASIFIKASI.add(id_item);
+					Klasifikasi.IMAGE_KLASIFIKASI.add(get_bitmap(img_item));
 				}
 
 			} catch (Exception e) {
+				ArrayList<HashMap<String, String>> classifications = dbHandler.getKlasifikasiFacade().viewAll();
+				Klasifikasi.GET_KLASIFIKASI.clear();
+				Klasifikasi.ID_KLASIFIKASI.clear();
+				for (int i = 0;i<classifications.size();i++){
+					String id_catalog = classifications.get(i).
+							get(KlasifikasiFacade.KEY_ID_CATALOG);
+//					String id_lang = classifications.get(i).
+//							get(KlasifikasiFacade.KEY_ID_LANG);
+					String name_catalog = classifications.get(i).
+							get(KlasifikasiFacade.KEY_NAME_CATALOG);
+					Klasifikasi.GET_KLASIFIKASI.add(name_catalog);
+					Klasifikasi.ID_KLASIFIKASI.add(id_catalog);
+				}
 			}
 			return null;
 		}
-
+		
+		protected Bitmap get_bitmap(String urls) {
+			String urldisplay = urls;
+			Bitmap mIcon11 = null;
+			try {
+				InputStream in = new java.net.URL(urldisplay).openStream();
+				mIcon11 = BitmapFactory.decodeStream(in);
+			} catch (Exception e) {
+				return null;
+			}
+			return mIcon11;
+		}
+		
 		@Override
 		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub
@@ -292,7 +337,7 @@ public class KlasifikasiActivity extends Activity {
 			}
 		}
 	}
-
+	
 	private class Item {
 		private String text;
 		private String color;
@@ -310,12 +355,5 @@ public class KlasifikasiActivity extends Activity {
 			return Color.parseColor(color);
 		}
 
-//		public String getLogo() {
-//			return text.substring(0, 1);
-//		}
-		
-		public Drawable getLogo(){
-			return getResources().getDrawable(R.drawable.entertainment);
-		}
 	}
 }

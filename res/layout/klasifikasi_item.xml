@@ -23,7 +23,7 @@
 	    android:layout_height="85dp"
 	    android:layout_gravity="center_horizontal"
 	    android:contentDescription="@string/klasifikasi"
-	    android:src="@drawable/entertainment" />
+	    android:background="@drawable/food" />
 
     <TextView
         android:id="@+id/texKlas"

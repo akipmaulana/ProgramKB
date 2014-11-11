@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
-
+	
 	// All Static variables
 	// Database Version
 	private static final int DATABASE_VERSION = 1;
@@ -32,6 +32,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(KlasifikasiFacade.CREATE_TABLE);
 		db.execSQL(TimelineFacade.CREATE_TABLE);
+		
 	}
 
 	// Upgrading database
@@ -63,5 +64,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	public TimelineFacade getTimelineFacade() {
 		return timelineFacade;
 	}
+	
+	// closing database
+    public void closeDB() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        if (db != null && db.isOpen())
+            db.close();
+    }
 
 }
